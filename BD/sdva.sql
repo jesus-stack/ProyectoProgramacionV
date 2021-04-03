@@ -104,6 +104,7 @@ create table tipoUsuario(
 id int primary key,
 descripcion varchar (20)
 )
+
 --creacion de tabla producto--
 create table producto(
 id int identity (1,1)primary key,
@@ -246,6 +247,8 @@ Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) v
 go
 
 
+
+
 ----Store procedure Usuario
 --insert
 create procedure [dbo].[InsertarUsuario]
@@ -295,9 +298,16 @@ go
 create procedure [dbo].[SeleccionaUsuarioXIdentificacion] @id bigint
 as
 begin
-
-select id,convert(varchar,decryptbypassphrase('password',usuario.contrasenna)) 
-as contrasenna,usuario.tipoUsuario,usuario.estado from usuario where usuario.id=@id
+declare @tipoUsuario int
+select @tipoUsuario=tipoUsuario from usuario where id=@id
+if(@tipoUsuario=2)begin
+select usuario.id,convert(varchar,decryptbypassphrase('password',usuario.contrasenna)) 
+as contrasenna,usuario.tipoUsuario,usuario.estado,Cliente.* from usuario inner join  on usuario.id=@id and cliente.id=@id
+end
+else begin
+select usuario.id,convert(varchar,decryptbypassphrase('password',usuario.contrasenna)) 
+as contrasenna,usuario.tipoUsuario,usuario.estado,Funcionario.* from usuario inner join funcionario on usuario.id=@id and funcionario.id=@id
+end
 end
 go
 
@@ -440,7 +450,34 @@ end
 go
 
 --procedure Transaccion--
+create procedure CrearTransaccion
+@idcliente bigint
+as
+begin
+Insert into Transaccion (idCliente,estado) values(@idcliente,1);
+end
+go
 
+create procedure seleccionarTransaccion
+@idcliente bigint,
+@estado int
+as
+begin
+declare @pedido int
+select @pedido= id from Transaccion where idCliente=@idcliente and estado=@estado;
+select transaccionProducto.*,producto.* from transaccionProducto inner join Producto on Producto.id=transaccionProducto.idProducto and transaccionProducto.idTransaccion=@pedido
+end 
+go
+
+create Procedure AgregarProductoaCarrito
+@idTransaccion int,
+@idProducto int,
+@cantidad int
+as 
+begin
+insert into TransaccionProducto values(@idTransaccion,@idProducto,@cantidad);
+end
+go
 
 
 --insert de provincia,cantones,distritos,barrios

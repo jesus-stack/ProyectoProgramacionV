@@ -23,8 +23,9 @@ import javax.faces.context.FacesContext;
 @Named(value = "beanLogin")
 @SessionScoped
 public class beanLogin implements Serializable {
-private static Usuario usuario=new Usuario(1, "admin", true, new TipoUsuario(1, "administrador"));
+private  Usuario usuario=new Usuario();
 private boolean mantenimiento,facturacion,pedidos,reportes;
+private String nombre;
 
 
     public beanLogin() {
@@ -35,8 +36,10 @@ private boolean mantenimiento,facturacion,pedidos,reportes;
     }
 
     public void setUsuario(Usuario usuario) {
-        beanLogin.usuario = usuario;
+        this.usuario = usuario;
     }
+
+   
 
     public boolean isMantenimiento() {
           boolean resultado=false;
@@ -102,6 +105,14 @@ private boolean mantenimiento,facturacion,pedidos,reportes;
     public void setReportes(boolean reportes) {
         this.reportes = reportes;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
     
     
     
@@ -114,8 +125,10 @@ private boolean mantenimiento,facturacion,pedidos,reportes;
      
         try {
              Usuario usuario1=UsuarioDLL.UsuarioXidentificacion(this.getUsuario().getId());
+             this.nombre=UsuarioDLL.NombreUsuarioXidentificacion(this.getUsuario().getId());
             if(usuario1.isEstado()==true&&usuario1.getContrasenna().equals(this.getUsuario().getContrasenna())){
                 this.setUsuario(usuario1);
+                context.getExternalContext().getSessionMap().put("user", this.getUsuario());
                context.addMessage(null, mensajeB);
              
               

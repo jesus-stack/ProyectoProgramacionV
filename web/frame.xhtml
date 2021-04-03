@@ -136,7 +136,7 @@
                          <p:outputLabel class="labelc" value="2"></p:outputLabel>
                     </p:menuitem>
                    
-                    <p:menuitem rendered="#{!(beanLogin.reportes)}"  class="login" onclick="PF('log').show()">
+                    <p:menuitem rendered="#{beanLogin.usuario.tipo==null}"  class="login" onclick="PF('log').show()">
                         <p:graphicImage class="icon"  library="img" name="login.png"></p:graphicImage>
                         <h:outputLabel class="itemlabel" value="Ingresar"></h:outputLabel>
                     </p:menuitem> 
@@ -145,11 +145,11 @@
                         <h:outputLabel class="itemlabel" value="Registrar"></h:outputLabel>
                     </p:menuitem> 
                 </p:tabMenu>
-                <p:panel rendered="#{beanLogin.reportes}" class="log-container">
+                <p:panel rendered="#{beanLogin.usuario.tipo!=null}" class="log-container">
              
                     <h:outputLabel class="itemlabel fas fa-user fa-3x"></h:outputLabel>
                     <div class="log-subcontainer">
-                        <h:outputLabel class="itemlabellog" value="Jesus Castilla"></h:outputLabel>
+                        <h:outputLabel class="itemlabellog" value="#{beanLogin.nombre}"></h:outputLabel>
                         <p:commandButton icon="fas fa-sign-out-alt" ajax="false" update="menu" immediate="true" actionListener="#{beanLogin.cerrarSesion()}" value="Cerrar Sesión">
                            
                         </p:commandButton>
