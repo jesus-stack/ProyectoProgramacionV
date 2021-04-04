@@ -25,7 +25,7 @@ public class Pedido {
     private String tipoDspacho;
     private float subTotal;
     private float total;
-    private LinkedList<Producto> productos=new LinkedList<>();
+    private LinkedList<TransaccionProducto> productos=new LinkedList<>();
     private String Estado;
 
     public Pedido() {
@@ -112,11 +112,11 @@ public class Pedido {
         this.total = total;
     }
 
-    public LinkedList<Producto> getProductos() {
+    public LinkedList<TransaccionProducto> getProductos() {
         return productos;
     }
 
-    public void setProductos(LinkedList<Producto> productos) {
+    public void setProductos(LinkedList<TransaccionProducto> productos) {
         this.productos = productos;
     }
 

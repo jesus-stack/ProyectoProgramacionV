@@ -302,7 +302,7 @@ declare @tipoUsuario int
 select @tipoUsuario=tipoUsuario from usuario where id=@id
 if(@tipoUsuario=2)begin
 select usuario.id,convert(varchar,decryptbypassphrase('password',usuario.contrasenna)) 
-as contrasenna,usuario.tipoUsuario,usuario.estado,Cliente.* from usuario inner join  on usuario.id=@id and cliente.id=@id
+as contrasenna,usuario.tipoUsuario,usuario.estado,Cliente.* from usuario inner join cliente  on usuario.id=@id and cliente.id=@id
 end
 else begin
 select usuario.id,convert(varchar,decryptbypassphrase('password',usuario.contrasenna)) 
