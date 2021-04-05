@@ -41,15 +41,32 @@
                             <f:convertNumber currencySymbol="" type="currency"/>
                         </h:outputText>
                     
-                        <p:commandButton style="float:right;margin-top:10vh" ajax="false" actionListener="#{beanTransaccion.AgregarProducto(product)}" 
+                        <p:commandButton onclick="PF('cantidad').show()" type="button" style="float:right;margin-top:10vh"  
                                             value="Añadir al Carrito"
                                             icon="pi pi-shopping-cart">
                                           
                         </p:commandButton>
                     </div>
                 </div>
+                      <p:dialog class="log" header="Ingresar" widgetVar="log"  showEffect="fade" modal="true">
+                <div class="logleft">
+                    <p:graphicImage library="img" class="logo" name="login_1.png"></p:graphicImage>
+                </div>
+                <div class="logright">
+                    <h:form>
+                       
+                        <p:outputLabel class="label" value="Cantidad"></p:outputLabel><br/>
+                            <p:inputText value="#{beanLogin.usuario.id}"></p:inputText><br/>
+                       
+                             <p:commandButton value="Cancelar"  type="reset"></p:commandButton>
+                             <p:commandButton value="Registrar" ajax="false" action="#{beanTransaccion.AgregarProducto(product)}"> </p:commandButton>
+                          
+                    </h:form>
+                </div>
+            </p:dialog>
             </p:dataViewGridItem>
         </p:dataView>
+               
                   
               </h:form>
               
