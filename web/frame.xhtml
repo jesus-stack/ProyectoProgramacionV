@@ -131,10 +131,11 @@
                         <h:outputLabel class="itemlabel" value="Reportes"></h:outputLabel>
                     </p:menuitem> 
                 
-                    <p:menuitem outcome="/carrito" class="shopcart">
+                    <p:menuitem rendered="#{beanLogin.mostrarCarrito()}" outcome="/carrito" class="shopcart">
                         <i class="fa fa-cart-plus fa-3x" style="color: black"></i>
                         <p:outputLabel class="labelc" value="#{beanTransaccion.cantidadProducto()}"></p:outputLabel>
                     </p:menuitem>
+                    
                    
                     <p:menuitem rendered="#{beanLogin.usuario.tipo==null}"  class="login" onclick="PF('log').show()">
                         <p:graphicImage class="icon"  library="img" name="login.png"></p:graphicImage>

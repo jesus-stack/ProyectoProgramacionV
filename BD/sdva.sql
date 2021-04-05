@@ -222,10 +222,10 @@ add constraint FK_clienteDirecccion_DiaI foreign key ( diaFinal)references dia(i
 go
 
 --Insert tipo Transaccion--
-insert into tipoTransaccion values (1,'Pendiente')
-insert into tipoTransaccion values (2,'Solicitado')
-insert into tipoTransaccion values (3,'Facturado')
-insert into tipoTransaccion values (4,'Procesado')
+insert into estadoTransaccion values (1,'Pendiente')
+insert into estadoTransaccion values (2,'Solicitado')
+insert into estadoTransaccion values (3,'Facturado')
+insert into estadoTransaccion values (4,'Procesado')
 
 
 ---Insert Tipos de usuarios
@@ -463,11 +463,18 @@ create procedure seleccionarTransaccion
 @estado int
 as
 begin
-declare @pedido int
-select @pedido= id from Transaccion where idCliente=@idcliente and estado=@estado;
-select transaccionProducto.*,producto.* from transaccionProducto inner join Producto on Producto.id=transaccionProducto.idProducto and transaccionProducto.idTransaccion=@pedido
+select * from Transaccion where idCliente=@idcliente and estado=@estado;
 end 
 go
+
+create procedure seleccionarProductosCarrito
+
+@idTransaccion int
+as
+begin
+select * from TransaccionProducto where idTransaccion=@idTransaccion 
+end
+GO
 
 create Procedure AgregarProductoaCarrito
 @idTransaccion int,

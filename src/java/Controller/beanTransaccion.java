@@ -5,12 +5,20 @@
  */
 package Controller;
 
+import DAO.Conexion.SNMPExceptions;
+import DAO.TransaccionDB;
 import Model.Pedido;
 import Model.Producto;
+import Model.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.Map;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.naming.NamingException;
 
 /**
  *
@@ -23,7 +31,8 @@ public class beanTransaccion implements Serializable {
  Pedido pedido=new Pedido();
 
     public Pedido getPedido() {
-        return pedido;
+        return pedido
+                ;
     }
 
     public void setPedido(Pedido pedido) {
@@ -35,15 +44,35 @@ public class beanTransaccion implements Serializable {
     
     }
     
-    public int cantidadProducto(){
-     int cantidad;
+    public int cantidadProducto() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+         ExternalContext context=FacesContext.getCurrentInstance().getExternalContext();
+        Map<String,Object> sesion=context.getSessionMap();
+        Usuario user=(Usuario) sesion.get("user");
+      if(user!=null){
+        pedido =TransaccionDB.seleccionarTransaccion(user.getId(), 1);
+      }
+     int cantidad=0;
        
-    
-    return cantidad=pedido.getProductos().size();
+    if(pedido.getProductos()!=null){
+     cantidad=pedido.getProductos().size();
+    }
+    return cantidad;
     
     }
     
-    
+    public void AgregarProducto(Producto pro) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+        ExternalContext context=FacesContext.getCurrentInstance().getExternalContext();
+        Map<String,Object> sesion=context.getSessionMap();
+        Usuario user=(Usuario) sesion.get("user");
+      
+        pedido =TransaccionDB.seleccionarTransaccion(user.getId(), 1);
+        if(pedido.getProductos().isEmpty()){
+            TransaccionDB.crearTransaccion(user.getId());
+            pedido=TransaccionDB.seleccionarTransaccion(user.getId(), 1);
+        }
+        TransaccionDB.AgregarProducto(user.getId(), pro.getId(), 1);
+        
+    }
     
     
 }

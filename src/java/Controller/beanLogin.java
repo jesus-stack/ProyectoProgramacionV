@@ -10,6 +10,7 @@ import DAO.Conexion.SNMPExceptions;
 import DAO.UsuarioDLL;
 import Model.Tipo.TipoUsuario;
 import Model.Usuario;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -116,7 +117,7 @@ private String nombre;
     
     
     
-    public void validarUsuario() throws SNMPExceptions{
+    public void validarUsuario() throws SNMPExceptions, IOException{
        
        
         FacesMessage mensajeM=new FacesMessage(FacesMessage.SEVERITY_ERROR,"!DATOS INVALIDOS","!DATOS INVALIDOS");
@@ -143,13 +144,21 @@ private String nombre;
         }
         finally{
           
-        
+        context.getExternalContext().redirect("index.xhtml");
             
         }
   }
     
-   public void cerrarSesion(){
-       this.setUsuario(new Usuario());
+   public void cerrarSesion() throws IOException{
+      FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+       FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+   }
+   public boolean mostrarCarrito(){
+       boolean res=false;
+       if(usuario.getTipo()!=null){
+       res=usuario.getTipo().getId()==2;
+   }
+       return res;
    }
 }
 
