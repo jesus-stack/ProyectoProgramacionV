@@ -37,7 +37,9 @@ public class TransaccionDB {
         AccesoDatos datos = new AccesoDatos();
 
         rs = datos.ejecutaSQLRetornaRS(select);
-        LinkedList<TransaccionProducto> productos = new LinkedList<>();
+      while(rs.next()){
+          pedido.setId(rs.getInt("id"));
+        rs=datos.ejecutaSQLRetornaRS("exec seleccionarProductosCarrito "+pedido.getId());
         while (rs.next()) {
             Producto pro = new Producto();
             pro.setEstado(rs.getInt("estado") == 1);
@@ -51,25 +53,40 @@ public class TransaccionDB {
            transaccion.setProducto(pro);
            transaccion.setCantidad(rs.getInt("cantidad"));
            tp.add(transaccion);
-           
-
         }
-        if(rs.first()){
-        rs.absolute(1);
         pedido.setProductos(tp);
-        pedido.setId(rs.getInt("idTransaccion"));
-    }
+        
+      }
+      
+        
+        
+    
 return pedido;
     }
 
-    public static void AgregarProducto(long idcliente,int productoid,int idpedido,int cantidad) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
-        String insert="exec AgregarProductoaCarrito "+idpedido+","+productoid+","+cantidad;
+    public static void AgregarProducto(long idcliente,int productoid,int cantidad) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+       
         
         Pedido pedido=seleccionarTransaccion(idcliente, 1);
         if(pedido.getProductos()==null){
             crearTransaccion(idcliente);
+            pedido=seleccionarTransaccion(idcliente, 1);
         }
+        String store="AgregarProductoaCarrito";
+        
         AccesoDatos datos=new AccesoDatos();
+        if(existeProductoTransaccion(pedido.getId(), productoid)){
+            store="ActualizarProductoCarrito";
+        }
+         String insert="exec "+store+" "+pedido.getId()+","+productoid+","+cantidad;
         datos.ejecutaSQL(insert);
+    }
+    private static boolean existeProductoTransaccion(int trans,int pro) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+        String select="exec SeleccionarProductoCarritoXid "+trans+","+pro;
+        ResultSet rs=null;
+        AccesoDatos datos=new AccesoDatos();
+        rs=datos.ejecutaSQLRetornaRS(select);
+        return rs.next();
+        
     }
 }

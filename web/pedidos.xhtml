@@ -39,10 +39,10 @@
                             <f:convertNumber currencySymbol="" type="currency"/>
                         </h:outputText>
                     
-                        <p:commandButton style="float:right;margin-top:10vh" type="button"
+                        <p:commandButton style="float:right;margin-top:10vh" ajax="false" actionListener="#{beanTransaccion.AgregarProducto(product)}" 
                                             value="Añadir al Carrito"
-                                            icon="pi pi-shopping-cart"
-                                            disabled="#{product.nombre == 'OUTOFSTOCK'}">
+                                            icon="pi pi-shopping-cart">
+                                          
                         </p:commandButton>
                     </div>
                 </div>
