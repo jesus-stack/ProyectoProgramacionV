@@ -11,7 +11,9 @@
         <ui:composition template="./frame.xhtml">
 
             <ui:define name="content">
+            
               <h:form id="form">
+                  
                   <p:dataView var="product" value="#{beanProducto.lista}" rows="12" paginator="true"
                     rowsPerPageTemplate="6,12,16" layout="grid"
                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -48,7 +50,9 @@
                 </div>
             </p:dataViewGridItem>
         </p:dataView>
+                  
               </h:form>
+              
             </ui:define>
 
         </ui:composition>

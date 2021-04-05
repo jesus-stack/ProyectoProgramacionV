@@ -92,7 +92,7 @@
             </p:dialog>
 
             <h:form>
-                <p:tabMenu  activeIndex="#{param.i}">
+                <p:tabMenu class="tabmenu" activeIndex="#{param.i}">
 
                     <p:menuitem  id="menu" outcome="/index">
                         <f:param name="i" value="0"/>
@@ -141,14 +141,16 @@
                         <p:graphicImage class="icon"  library="img" name="login.png"></p:graphicImage>
                         <h:outputLabel class="itemlabel" value="Ingresar"></h:outputLabel>
                     </p:menuitem> 
-                    <p:menuitem class="signin" onclick="PF('sign').show()">
+                    <p:menuitem class="signin" rendered="#{beanLogin.usuario.tipo==null}" onclick="PF('sign').show()">
                         <p:graphicImage class="icon"  library="img" name="signin.png"></p:graphicImage>
                         <h:outputLabel class="itemlabel" value="Registrar"></h:outputLabel>
                     </p:menuitem> 
                 </p:tabMenu>
                 <p:panel rendered="#{beanLogin.usuario.tipo!=null}" class="log-container">
-             
-                    <h:outputLabel class="itemlabel fas fa-user fa-3x"></h:outputLabel>
+           
+                    <h:outputLabel class="icon-log fas fa-user fa-2x "></h:outputLabel>
+                   
+                  
                     <div class="log-subcontainer">
                         <h:outputLabel class="itemlabellog" value="#{beanLogin.nombre}"></h:outputLabel>
                         <p:commandButton icon="fas fa-sign-out-alt" ajax="false" update="menu" immediate="true" actionListener="#{beanLogin.cerrarSesion()}" value="Cerrar Sesión">

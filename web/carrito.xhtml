@@ -28,20 +28,23 @@
                     <p:commandButton class="btnconfirmarpedido" value="Confirmar Pedido">
                     
                 </p:commandButton>
-                    <p:dataView var="product" value="#{beanProducto.lista}" layout="list" 
+                    <center>
+                    <p:dataView class="carrito" var="trans" value="#{beanTransaccion.pedido.productos}" layout="list" 
                    
                    >
                        
               <p:dataViewListItem>
                   <div class="product-list-item producto">
-                    <p:graphicImage library="img" class="logo" name="#{product.foto}"/>
+                      <p:graphicImage library="img" class="logo" name="#{trans.producto.foto}"/>
                     <div class="product-list-detail">
-                        <div class="product-name">#{product.nombre}</div>
-                        <div class="product-description">#{product.descripcion}</div>
+                        <div class="product-name carlabel">Producto: #{trans.producto.nombre}</div>
+                      
+                   
+                        <div class="product-description carlabel">Precio: ₡#{trans.producto.precio}         Cantidad: #{trans.cantidad}</div>
                        
                     </div>
                     <div class="product-list-action">
-                        <h:outputText value="₡  #{product.precio}" styleClass="product-price">
+                        <h:outputText value="₡  #{trans.producto.precio*trans.cantidad}" styleClass="product-price">
                             <f:convertNumber  type="currency"/>
                         </h:outputText>
                         <p:commandButton class="btnEliminar" type="button"
@@ -55,6 +58,7 @@
             </p:dataViewListItem>
               
               </p:dataView>
+                    </center>
                 </h:form>
 
             </ui:define>
