@@ -1,3 +1,7 @@
+.tabmenu{
+
+}
+
 .logo{
    border-radius: 50%;
    width: 100px;
@@ -12,6 +16,7 @@
     to{width:200px;}
     
 }
+
 .tabitem{
     width: 18px;
     overflow: hidden;
@@ -65,8 +70,8 @@ width: 200px;
 
 .shopcart{
   position: fixed;
-    right: 0vw;
-    top: 7vh;
+    right: 10vw;
+    top: 0vh;
 
 }
 .labelc{
@@ -76,7 +81,7 @@ width: 200px;
 .login{
     position: fixed;
     overflow: hidden;
-    right: 5vw;
+    right: 0vw;
     top: 0vh;
     width: 18px;
     background-color: #2E90BD;
@@ -91,7 +96,7 @@ width: 200px;
     position: fixed;
     overflow: hidden;
     right: 0vw;
-    top: 0vh;
+    top: 8vh;
      width: 18px;
     background-color: #2E90BD;
 }
@@ -109,25 +114,43 @@ width: 200px;
     .itemlabelM:hover{
     color: black;
     text-decoration: underline;
-}
+    }
+    .icon-log{
+        
+        margin-right: 5px;
+        color: #7FB645;
+        background-color: #2E90BD;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+   
+       
+    }
 .log-container{
+    align-items:center;
     position: absolute !important;
-    width: 80px !important;
-    height: 60px;
+    width: 30px !important;
+    height: 30px;
+    border: none;
     text-align: center;
-      right: 40vw;
-    top: 0vh;
-    border-radius: 20%;
-    background-color:#2191C0 ;
+      right: 3vw;
+    top: 1vh;
+
+    border-radius: 50%;
+    background-color:transparent ;
     background-image: none;
 }
 .log-container:hover .log-subcontainer{
     display: block;
+    position: fixed;
+    right: 2vw;
+ 
 }
 .log-subcontainer{
    display: none;
       background-color:#2191C0 ;
     background-image: none ;
+ 
       width: 150px;
     height: 100px;
     border-radius: 20%;

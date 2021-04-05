@@ -472,7 +472,7 @@ create procedure seleccionarProductosCarrito
 @idTransaccion int
 as
 begin
-select * from TransaccionProducto where idTransaccion=@idTransaccion 
+select producto.*,TransaccionProducto.cantidad from TransaccionProducto inner join producto on producto.id=transaccionProducto.idproducto and idTransaccion=@idTransaccion 
 end
 GO
 
@@ -486,6 +486,24 @@ insert into TransaccionProducto values(@idTransaccion,@idProducto,@cantidad);
 end
 go
 
+create procedure SeleccionarProductoCarritoXid
+@idTransaccion int,
+@idProducto int
+as
+begin
+select * from TransaccionProducto where idTransaccion=@idTransaccion and idProducto=@idProducto
+end
+go
+
+create procedure ActualizarProductoCarrito
+@idTransaccion int,
+@idProducto int,
+@cantidad int
+as 
+begin
+update TransaccionProducto set cantidad=cantidad+@cantidad  where idtransaccion=@idTransaccion and idproducto=@idProducto
+end
+go
 
 --insert de provincia,cantones,distritos,barrios
 
