@@ -6,7 +6,10 @@
 package Controller;
 
 import DAO.Conexion.SNMPExceptions;
+import DAO.DireccionDLL;
 import DAO.TransaccionDB;
+import Model.Cliente;
+import Model.Direccion;
 import Model.Pedido;
 import Model.Producto;
 import Model.Usuario;
@@ -30,9 +33,15 @@ public class beanTransaccion implements Serializable {
 
  Pedido pedido=new Pedido();
 
-    public Pedido getPedido() {
-        return pedido
-                ;
+    public Pedido getPedido() throws SNMPExceptions {
+         ExternalContext context=FacesContext.getCurrentInstance().getExternalContext();
+        Map<String,Object> sesion=context.getSessionMap();
+        Usuario user=(Usuario) sesion.get("user");
+        pedido.setCliente((Cliente) user);
+        pedido.getCliente().setDireccione(DireccionDLL.listaTodasDireccionCliente(user.getId()));
+        
+        return pedido;
+                
     }
 
     public void setPedido(Pedido pedido) {
@@ -73,6 +82,14 @@ public class beanTransaccion implements Serializable {
         TransaccionDB.AgregarProducto(user.getId(), pro.getId(), 1);
         
     }
+    
+    
+    
+    public LinkedList<Direccion> ListaDirecciones() throws SNMPExceptions{     
+    return DireccionDLL.listaTodasDireccionCliente(pedido.getCliente().getId());
+   
+    }
+    
     
     
 }

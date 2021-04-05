@@ -3,16 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/web/carrito.xhtml</file>
             <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/src/java/DAO/TransaccionDB.java</file>
             <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/web/frame.xhtml</file>
             <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/src/java/Controller/beanTransaccion.java</file>
-=======
-            <file>file:/C:/Users/Jesus/Desktop/proyect/SDVAP/src/java/Controller/beanLogin.java</file>
-            <file>file:/C:/Users/Jesus/Desktop/proyect/SDVAP/src/java/DAO/TransaccionDB.java</file>
-            <file>file:/C:/Users/Jesus/Desktop/proyect/SDVAP/src/java/Model/Pedido.java</file>
->>>>>>> 208ff217d0a040dc316e3ffe8e5bba99c0ea2ca3
+            <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/web/Mantenimiento.xhtml</file>
         </group>
     </open-files>
 </project-private>

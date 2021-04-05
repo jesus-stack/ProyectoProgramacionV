@@ -9,6 +9,7 @@ package DAO;
 import DAO.Conexion.AccesoDatos;
 import DAO.Conexion.SNMPExceptions;
 import Model.Cliente;
+import Model.Funcionario;
 import Model.Tipo.TipoUsuario;
 import Model.Usuario;
 import java.sql.ResultSet;
@@ -132,7 +133,7 @@ public class UsuarioDLL {
  
      public static Usuario UsuarioXidentificacion(long id) throws SNMPExceptions{
     String select = "exec SeleccionaUsuarioXIdentificacion "+id;
-        Usuario usuario = new Usuario();
+        Usuario usuario =null;
 
         try {
         
@@ -145,9 +146,30 @@ public class UsuarioDLL {
             ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
             //Se llena el arryaList con los proyectos 
              while (rsPA.next()) {
-            usuario.setId(rsPA.getLong("id"));
+           
+            if(TraerTipoUsuarioPorId(rsPA.getInt("tipoUsuario")).getId()==2){
+                usuario=new Cliente();
+                
+            ((Cliente)usuario).setNombre(rsPA.getString("nombre"));
+            ((Cliente)usuario).setSegundoNombre(rsPA.getString("sNombre"));
+            ((Cliente)usuario).setApellido(rsPA.getString("apellido"));
+            ((Cliente)usuario).setSegundoApellido(rsPA.getString("sApellido"));
+            ((Cliente)usuario).setCorreo(rsPA.getString("correo"));
+            ((Cliente)usuario).setTelefono(rsPA.getInt("telefono"));
+            }
+            else{
+                usuario=new Funcionario();
+            ((Funcionario)usuario).setNombre(rsPA.getString("nombre"));
+            ((Funcionario)usuario).setsNombre(rsPA.getString("sNombre"));
+            ((Funcionario)usuario).setApellido(rsPA.getString("apellido"));
+            ((Funcionario)usuario).setsApellido(rsPA.getString("sApellido"));
+            ((Funcionario)usuario).setCorreo(rsPA.getString("correo"));
+            ((Funcionario)usuario).setTelefono(rsPA.getInt("telefono"));
+            
+            }
+             usuario.setId(rsPA.getLong("id"));
             usuario.setContrasenna(rsPA.getString("contrasenna"));
-            usuario.setTipo(new TipoUsuario(rsPA.getInt("tipoUsuario"),"usuario"));
+            usuario.setTipo(TraerTipoUsuarioPorId(rsPA.getInt("tipoUsuario")));
             usuario.setEstado((rsPA.getInt("estado")==1));
                  
              }
@@ -198,9 +220,55 @@ public class UsuarioDLL {
      
      
      
-     
  
- } 
+       
+       
+       
+       public static TipoUsuario TraerTipoUsuarioPorId(int id) throws SNMPExceptions{
+       
+       String select = "exec TraerTipoUsuarioPorId "+id;
+       TipoUsuario tipo=null;
+
+        try {
+        
+            //Se instancia la clase de acceso a datos
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+          
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+            
+             while (rsPA.next()) {
+           tipo=new TipoUsuario();
+           tipo.setId(rsPA.getInt("id"));
+           tipo.setDescripcion(rsPA.getString("descripcion"));
+                 
+             }
+            rsPA.close();
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage());
+        } finally {
+
+        }
+        return tipo;
+    } 
+       
+       
+       
+       
+       }
+       
+       
+       
+       
+       
+       
+ 
+  
  
  
     

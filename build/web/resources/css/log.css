@@ -18,3 +18,42 @@
     background-color: red;
 }
 
+
+
+.producto{
+    border: solid 3px #41A1C9;
+    min-height: 30vh;
+    padding: 2%;line-height: 5vh
+}
+.product-price{
+    font-size: 20px;color: goldenrod;float:left;
+    font-weight: bold;
+}
+.product-price-pedido{
+    margin-top: 10vh;
+}
+.btnEliminar{
+    width: 150px;
+    font-size: 18px !important;
+    float: right;
+    transform: translateY(-15%) !important;
+}
+.btnconfirmarpedido{
+   margin-left: 22vw;
+   font-size: 2vw;
+   width: 30vw;
+    height: 8vh;
+    
+}
+.btnconfirmarpedido:hover{
+    background-color: #7FB645 !important;
+    background-image: none !important;
+    color: black !important;
+}
+
+.carrito{
+    width:50vw;
+}
+.carlabel{
+    font-size: 20px;
+}

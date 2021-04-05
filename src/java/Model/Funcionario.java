@@ -38,6 +38,62 @@ public class Funcionario extends Usuario {
         this.correo="";
         this.telefono=0;   
     }
+
+    public long getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(long identificacion) {
+        this.identificacion = identificacion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getsNombre() {
+        return sNombre;
+    }
+
+    public void setsNombre(String sNombre) {
+        this.sNombre = sNombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getsApellido() {
+        return sApellido;
+    }
+
+    public void setsApellido(String sApellido) {
+        this.sApellido = sApellido;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
     
     
     
