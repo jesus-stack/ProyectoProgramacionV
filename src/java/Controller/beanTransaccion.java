@@ -9,6 +9,7 @@ import DAO.Conexion.SNMPExceptions;
 import DAO.TransaccionDB;
 import Model.Pedido;
 import Model.Producto;
+import Model.TransaccionProducto;
 import Model.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -29,6 +30,19 @@ import javax.naming.NamingException;
 public class beanTransaccion implements Serializable {
 
  Pedido pedido=new Pedido();
+    TransaccionProducto transaccionProducto;
+
+    public TransaccionProducto getTransaccionProducto() {
+        return transaccionProducto;
+    }
+
+    public void setTransaccionProducto(TransaccionProducto transaccionProducto) {
+        this.transaccionProducto = transaccionProducto;
+    }
+    
+
+    
+ 
 
     public Pedido getPedido() {
         return pedido
@@ -41,7 +55,7 @@ public class beanTransaccion implements Serializable {
  
     
     public beanTransaccion() {
-    
+    transaccionProducto=new TransaccionProducto();
     }
     
     public int cantidadProducto() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
@@ -60,17 +74,19 @@ public class beanTransaccion implements Serializable {
     
     }
     
-    public void AgregarProducto(Producto pro) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+    public void AgregarProducto() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
         ExternalContext context=FacesContext.getCurrentInstance().getExternalContext();
         Map<String,Object> sesion=context.getSessionMap();
         Usuario user=(Usuario) sesion.get("user");
       
-        pedido =TransaccionDB.seleccionarTransaccion(user.getId(), 1);
+        
         if(pedido.getProductos().isEmpty()){
             TransaccionDB.crearTransaccion(user.getId());
             pedido=TransaccionDB.seleccionarTransaccion(user.getId(), 1);
         }
-        TransaccionDB.AgregarProducto(user.getId(), pro.getId(), 1);
+        TransaccionDB.AgregarProducto(user.getId(),transaccionProducto.getProducto().getId(),transaccionProducto.getCantidad());
+        transaccionProducto.setProducto(null);
+        transaccionProducto.setCantidad(0);
         
     }
     

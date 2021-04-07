@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import org.primefaces.component.fileupload.FileUpload;
 import org.primefaces.model.file.UploadedFile;
 
@@ -28,16 +29,12 @@ public class beanProducto implements Serializable {
 private Producto producto=new Producto();
 
 private LinkedList<Producto> lista;
-private LinkedList<Producto> listaCodigo;
+
 private UploadedFile imagen;
 
-    public LinkedList<Producto> getListaCodigo() {
-        return llenarLista();
-    }
+  
 
-    public void setListaCodigo(LinkedList<Producto> listaCodigo) {
-        this.listaCodigo = listaCodigo;
-    }
+    
 
 
     public beanProducto() {
@@ -104,21 +101,15 @@ private UploadedFile imagen;
        public void nuevo(){
            this.setProducto(new Producto());
        }
-    public LinkedList llenarLista(){
-    
-     lista=new LinkedList(); 
-    lista.add(new Producto(0, "Salsa Inglesa", "Rica salsa para sasonar nuestras comidas", 2000, null, 5));
-    lista.add(new Producto(1, "Arroz", "Arroz blanco tio pelón en tarros de 3 kilogramos para toda la semana", 2000, null, 5));
-    lista.add(new Producto(2, "Pinto", "Gallo pinto constarricense con excelente sabor para que disfrute de sus mañanas con su familia", 2000, null, 5));
-    lista.add(new Producto(3, "Carne asada", "Rica Carne asada con barbacoa ", 2000, null, 5));
-     lista.add(new Producto(0, "Salsa Inglesa", "Rica salsa para sasonar nuestras comidas", 2000, null, 5));
-    lista.add(new Producto(1, "Arroz", "Arroz blanco tio pelón en tarros de 3 kilogramos para toda la semana", 2000, null, 5));
-    lista.add(new Producto(2, "Pinto", "Gallo pinto constarricense con excelente sabor para que disfrute de sus mañanas con su familia", 2000, null, 5));
-    lista.add(new Producto(3, "Carne asada", "Rica Carne asada con barbacoa ", 2000, null, 5));
-    
- 
-return lista;   
+       public LinkedList<SelectItem> listacmbProductos() throws SNMPExceptions{
+    LinkedList<Producto> listap=this.getLista();
+    LinkedList<SelectItem> productos=new LinkedList<>();
+           for (int i = 0; i < listap.size(); i++) {
+               productos.add(new SelectItem(listap.get(i), listap.get(i).getNombre()));
+           }
+           return productos;
 }
+ 
  public void editarProducto(Producto producto){
      this.setProducto(producto);
  }
