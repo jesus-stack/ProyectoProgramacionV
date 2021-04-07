@@ -2,10 +2,22 @@
     margin: 0px;
     background-image: none;
     background-color: #2F4F4F;
-    min-width: 150vh;
-    min-height: 500vh;
+   
+    min-height: 80%  !important;
+    max-height: 100% !important;
+        
+    
         
 }
+.direccion header{
+    align-content: center;
+}
+.dataT{
+    min-width: 5vw !important;
+    max-height: 5vw !important;
+    
+}
+
 .logleft{
     float: left;
 }
