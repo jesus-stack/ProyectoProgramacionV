@@ -7,6 +7,7 @@ package Model;
 
 import Model.Tipo.TipoUsuario;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Cliente extends Usuario {
     private long identificacion;
     private String nombre, SegundoNombre, apellido, SegundoApellido, correo;
     private int telefono;
-    private ArrayList<Direccion> ArrayDireccione=new ArrayList<Direccion>();
+    private LinkedList<Direccion> Direccione=new LinkedList<Direccion>();
    
   
     public Cliente(long id, String nombre, String sNombre, String apellido, String sApellido, String correo, int telefono,String clave,boolean estado,TipoUsuario tipo) {
@@ -58,14 +59,15 @@ public class Cliente extends Usuario {
         this.SegundoApellido = SegundoApellido;
     }
 
-    public ArrayList<Direccion> getArrayDireccione() {
-        return ArrayDireccione;
+    public LinkedList<Direccion> getDireccione() {
+        return Direccione;
     }
 
-    public void setArrayDireccione(ArrayList<Direccion> ArrayDireccione) {
-        this.ArrayDireccione = ArrayDireccione;
+    public void setDireccione(LinkedList<Direccion> Direccione) {
+        this.Direccione = Direccione;
     }
-    
+
+   
     
 
     public long getIdentificacion() {

@@ -60,25 +60,29 @@ codCanton numeric(2),
 codDistrito numeric(2),
 codbarrio numeric(4),
 Sennas Varchar(max),
-
-)
-
---creacion de tabla clienteDireccion)
-create table ClienteDireccion(
 idCliente bigint,
-idDireccion int,
 diaInicio int,
 diaFinal int,
 horaInicio time,
-horaFinal time,
-primary key (idCliente,idDireccion)
+horaFinal time
+
 )
+
+
 
 --creacion de tabla dias--
 create table dia(
 id int  primary key,
-descricion varchar(20)
+descripcion varchar(20)
 )
+
+insert into dia (id,descripcion) values(1,'Lunes')
+insert into dia (id,descripcion) values(2,'Martes')
+insert into dia (id,descripcion) values(3,'Miercoles')
+insert into dia (id,descripcion) values(4,'Jueves')
+insert into dia (id,descripcion) values(5,'Viernes')
+insert into dia (id,descripcion) values(6,'Sábado')
+insert into dia (id,descripcion) values(7,'Domingo')
 
 --creacion de tablas funcionarios--
 create table funcionario(
@@ -205,21 +209,11 @@ alter table Usuario
 add constraint FK_Usuario_tipoUsuario foreign key (tipoUsuario) references tipoUsuario(id);
 go
 
-alter table ClienteDireccion
-add constraint FK_clienteDirecccion_Direccion foreign key ( idDireccion)references direccion(id);
+alter table Direccion
+add constraint FK_clienteDirecccion_Direccion foreign key ( idCliente)references cliente(id);
 go
 
-alter table ClienteDireccion
-add constraint FK_clienteDirecccion_Cliente foreign key ( idCliente)references Cliente(id);
-go
 
-alter table ClienteDireccion
-add constraint FK_clienteDirecccion_DiaF foreign key ( diaFinal)references dia(id);
-go
-
-alter table ClienteDireccion
-add constraint FK_clienteDirecccion_DiaI foreign key ( diaFinal)references dia(id);
-go
 
 --Insert tipo Transaccion--
 insert into estadoTransaccion values (1,'Pendiente')
@@ -237,6 +231,7 @@ insert into tipoUsuario (id,descripcion) values(4,'Bodeguero')
 --insertar cliente--
 insert into usuario(id,contrasenna,estado,tipoUsuario) values (7777777,encryptbypassphrase('password','cli'),1,2)
 Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(7777777,'Lucia','Carolina','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
+
 
 --Insertar administrador
 insert into usuario(id,contrasenna,estado,tipoUsuario) values (155821845336,encryptbypassphrase('password','admin'),1,1)
@@ -311,6 +306,7 @@ end
 end
 go
 
+
 ---Store procedure Cliente
 --Insertar
 
@@ -334,6 +330,14 @@ values (@Id,@Nombre,@sNombre,@Apellido,@sApellido,@correo,@Telefono)
 end;
 go
 
+--Selecionar Tipos de usuario por id
+create procedure [dbo].[TraerTipoUsuarioPorId]
+@id int
+as
+begin 
+select *from TipoUsuario where id=@id
+end
+go
 
 
 --selecionar todos clientes
@@ -383,6 +387,7 @@ begin
 select *from ClienteDireccion where clienteDireccion.idCliente=@idCliente
 end
 go
+
 --selecionar Direccion Especifica del cliente
 create procedure [dbo].[SeleccionarDireccionEspecificaCliente]
 @idCliente bigint,
@@ -504,6 +509,67 @@ begin
 update TransaccionProducto set cantidad=cantidad+@cantidad  where idtransaccion=@idTransaccion and idproducto=@idProducto
 end
 go
+--Procedure direccion
+--Traer provincia por id
+create procedure [dbo].[SeleccionarProvinciaPorId]
+@idProvincia int
+as
+begin
+select Cod_provincia,DSC_Provincia from provincia where COD_provincia=@idProvincia
+end
+go
+--traer canton
+create procedure [dbo].[SeleccionarCantonPorId]
+@idProvincia int,
+@idCanton int
+as
+begin
+select * from canton where COD_provincia=@idProvincia and cod_canton=@idCanton
+end
+go
+
+--traer distrito
+create procedure [dbo].[SeleccionarDistritoPorId]
+@idProvincia int,
+@idCanton int,
+@idDistrito int
+as
+begin
+select * from Distrito where  COD_provincia=@idProvincia and cod_canton=@idCanton and cod_distrito=@idDistrito
+end
+go
+
+--traer Barrio
+create procedure [dbo].[SeleccionarBarrioPorId]
+@idProvincia int,
+@idCanton int,
+@idDistrito int,
+@idBarrio int
+as
+begin
+select * from Barrio where  COD_provincia=@idProvincia and cod_canton=@idCanton and cod_distrito=@idDistrito and cod_barrio=@idBarrio
+end
+go
+
+
+
+
+
+--Seleccionar todas las dirreciones del cliente 
+create procedure[dbo].[SeleccionarDirecCliente]
+@idCliente bigint
+as
+begin
+select *from direccion where idCliente=@idCliente
+
+end
+go
+
+
+
+
+
+
 
 --insert de provincia,cantones,distritos,barrios
 

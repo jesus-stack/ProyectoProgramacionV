@@ -25,7 +25,7 @@
                     </table></center>
  
                 <h:form>
-                    <p:commandButton class="btnconfirmarpedido" value="Confirmar Pedido">
+                    <p:commandButton class="btnconfirmarpedido" value="Confirmar Pedido" onclick="PF('direc').show()">
                     
                 </p:commandButton>
                     <center>
@@ -60,6 +60,53 @@
               </p:dataView>
                     </center>
                 </h:form>
+                
+                
+                
+                
+                
+                
+                
+                
+                   <p:dialog class="direccion" header="Seleccionar dirección" widgetVar="direc"  showEffect="fade" modal="true">
+                       <p:dataTable styleClass="tablamantenimiento"  widgetVar="tabla" value="#{beanTransaccion.pedido.cliente.direccione}" var="dire" >
+                  
+                    <p:column class="table" headerText="Provincia">
+                        <h:outputText value="#{dire.p.nombre}"></h:outputText>
+                </p:column>
+                 <p:column  class="table" headerText="Canton">
+                     <h:outputText value="#{dire.c.nombre}"></h:outputText>
+                </p:column>
+                 <p:column headerText="Distrito">
+                     <h:outputText value="#{dire.d.nombre}"></h:outputText>
+                </p:column >
+                    <p:column headerText="Barrio" >
+                        <h:outputText value="#{dire.b.nombre}"></h:outputText>
+                </p:column>
+                 <p:column headerText="Señas" >
+                     <h:outputText value="#{dire.sennas}"></h:outputText>
+                </p:column>
+                
+               
+                <p:column  style="width: 150px">
+                   
+                             <h:form>
+                                 <p:commandButton icon="fas fa-edit" value="Seleccionar" ajax="false"  styleClass="btnedit"></p:commandButton>
+                               
+                             </h:form>           
+                </p:column>
+                            <h:form>
+                                 <p:commandButton icon="fas fa-edit" value="Seleccionar" ajax="false"  styleClass="btnedit"></p:commandButton>
+                               
+                             </h:form>  
+                      
+                   
+              
+                    </p:dataTable>
+               
+            </p:dialog>
+                
+                
 
             </ui:define>
             <ui:define name="right">

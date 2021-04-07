@@ -7,27 +7,24 @@ package Model;
 
 /**
  *
- * @author Jesus
+ * @author Usuario
  */
-public class Barrio {
-   private int codigo;
-   private Provincia p;
-   private Canton c;
-   private Distrito d;
-   private String nombre;
-
-    public Barrio(int codigo, Provincia p, Canton c, Distrito d, String nombre) {
-        this.codigo = codigo;
-        this.p = p;
-        this.c = c;
-        this.d = d;
-        this.nombre = nombre;
- 
+public class Distrito {
+    private int codigo;
+    private Provincia p;
+    private Canton c;
+    private String nombre;
+    
+    
+    public Distrito(int distrito,Provincia p,Canton c,String nombre){
+    this.codigo=distrito;
+    this.p=p;
+    this.c=c;
+    this.nombre=nombre;
+    
     }
-    public Barrio(){
+    public Distrito(){
     }
-   
-   
 
     public int getCodigo() {
         return codigo;
@@ -53,14 +50,6 @@ public class Barrio {
         this.c = c;
     }
 
-    public Distrito getD() {
-        return d;
-    }
-
-    public void setD(Distrito d) {
-        this.d = d;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -68,23 +57,11 @@ public class Barrio {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
 }

@@ -1,7 +1,10 @@
-.log{
+.direccion{
     margin: 0px;
     background-image: none;
     background-color: #2F4F4F;
+    min-width: 150vh;
+    min-height: 500vh;
+        
 }
 .logleft{
     float: left;
@@ -20,12 +23,14 @@
 
 
 
-.producto{
+.direccion{
     border: solid 3px #41A1C9;
     min-height: 30vh;
-    padding: 2%;line-height: 5vh
+    padding: 2%;
+    line-height: 5vh;
+    min-width: 100vh    
 }
-.product-price{
+.direccion-1{
     font-size: 20px;color: goldenrod;float:left;
     font-weight: bold;
 }
