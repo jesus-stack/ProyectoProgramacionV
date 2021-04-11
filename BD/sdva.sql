@@ -241,6 +241,9 @@ Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) v
 Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(402400637,'Hannyer','Smykel','Pitterson','Martinez','hpitterson@est.utn.ac.cr',60117773)
 go
 
+--insert direccioness--
+insert into direccion (codProvincia,codCanton,codDistrito,codBarrio,Sennas,idCliente) values(4,10,1,105,'De la escuela 100 mtrs oeste ', 7777777)
+
 
 
 
@@ -365,6 +368,8 @@ end
 go
 
 
+
+
 ---Store cliente-Direccion
 --insertar Cliente-Direccion
 create procedure [dbo].[InsertarClienteDireccion]
@@ -412,6 +417,8 @@ begin
 insert into producto(nombre,descripcion,foto,precio,CantidadMinimaVenta) values (@nombre,@descripcion,@foto,@precio,@cantidadMinima)
 end
 go
+
+
 
 create procedure ActualizarProductos 
 @id int,

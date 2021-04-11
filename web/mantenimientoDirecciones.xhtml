@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -11,20 +12,29 @@
   
              <ui:define name="left">
               
-                 <h:form enctype="multipart/form-data" >
+                 <h:form >
                   
-                     <p:outputLabel class="label" for="name" value="Nombre"></p:outputLabel>
-                 <p:inputText id="name" value="#{beanProducto.producto.nombre}"></p:inputText>
-                  <p:outputLabel class="label" for="dsc" value="Descripcion"></p:outputLabel>
-                  <p:inputText id="dsc" value="#{beanProducto.producto.descripcion}"></p:inputText>
-                   <p:outputLabel class="label" for="price" value="Precio"></p:outputLabel>
-                   <p:inputNumber id="price" value="#{beanProducto.producto.precio}"></p:inputNumber>
-                   <p:outputLabel class="label" for="min" value="Minima Venta"></p:outputLabel>
-                   <p:inputNumber id="min" value="#{beanProducto.producto.cantidadMinimaVenta}"></p:inputNumber>
-                  <p:outputLabel class="label" for="img" value="Imagen"></p:outputLabel>
-                  <p:fileUpload skinSimple="true" mode="simple" id="img" label="Imagen" value="#{beanProducto.imagen}" immediate="true"></p:fileUpload>
-           
-                  <br/>
+                     <p:outputLabel class="label" for="provincia" value="Provincia"></p:outputLabel>
+                     <p:selectOneMenu value="#{beanDireccion.provincia}" id="provincia">
+                         <f:selectItems value="#{beanDireccion.provincias}"></f:selectItems>
+                         <p:ajax event="change" listener="#{beanDireccion.llenarCantones()}" update="canton"></p:ajax>
+                     </p:selectOneMenu>
+                  <p:outputLabel class="label" for="canton" value="Canton"></p:outputLabel>
+                  <p:selectOneMenu value="#{beanDireccion.canton}" id="canton">
+                      <p:ajax event="change" listener="#{beanDireccion.llenarDistritos()}" update="distrito"></p:ajax>
+                      <f:selectItems value="#{beanDireccion.cantones}"></f:selectItems>
+                  </p:selectOneMenu>
+                  <p:outputLabel class="label" for="distrito" value="Distrito"></p:outputLabel>
+                  <p:selectOneMenu value="#{beanDireccion.distrito}" id="distrito">
+                      <p:ajax event="change" listener="#{beanDireccion.llenarBarrios()}" update="barrio"></p:ajax>
+                       <f:selectItems value="#{beanDireccion.distritos}"></f:selectItems>
+                  </p:selectOneMenu>
+                  <p:outputLabel class="label" for="barrio" value="Barrio"></p:outputLabel>
+                  <p:selectOneMenu style="width: 15vw" value="#{beanDireccion.barrio}" id="barrio">
+                   
+                       <f:selectItems value="#{beanDireccion.barrios}"></f:selectItems>
+                  </p:selectOneMenu>
+        <br/>
                   <br/>
                   <br/>
                   <br/>
@@ -32,7 +42,7 @@
                   <br/>
            
                   <p:panelGrid columns="2" >
-                      <p:commandButton  value="Guardar" ajax="false" actionListener="#{beanProducto.AgregarProducto()}" styleClass="btn"  icon="fa fa-save ">
+                      <p:commandButton  value="Guardar" ajax="false" actionListener="#{beanDireccion.InsertarProvincia()}" styleClass="btn"  icon="fa fa-save ">
                       </p:commandButton>
                       <p:commandButton  value="Nuevo"  ajax="false" actionListener="#{beanProducto.nuevo()}" styleClass="btn new"  icon="fa fa-save ">
                       </p:commandButton>

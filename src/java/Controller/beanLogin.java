@@ -8,6 +8,8 @@ package Controller;
 import DAO.Conexion.AccesoDatos;
 import DAO.Conexion.SNMPExceptions;
 import DAO.UsuarioDLL;
+import Model.Cliente;
+import Model.Funcionario;
 import Model.Tipo.TipoUsuario;
 import Model.Usuario;
 import java.io.IOException;
@@ -126,7 +128,14 @@ private String nombre;
      
         try {
              Usuario usuario1=UsuarioDLL.UsuarioXidentificacion(this.getUsuario().getId());
-             this.nombre=UsuarioDLL.NombreUsuarioXidentificacion(this.getUsuario().getId());
+           if(usuario1.getTipo().getId()==2){
+               Cliente c=(Cliente) usuario1;
+               this.setNombre(c.getNombre()+"\n"+c.getApellido());
+           }
+           else{
+                Funcionario c=(Funcionario) usuario1;
+               this.setNombre(c.getNombre()+"\n"+c.getApellido());
+           }
             if(usuario1.isEstado()==true&&usuario1.getContrasenna().equals(this.getUsuario().getContrasenna())){
                 this.setUsuario(usuario1);
                 context.getExternalContext().getSessionMap().put("user", this.getUsuario());

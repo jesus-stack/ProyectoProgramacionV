@@ -77,7 +77,9 @@ return pedido;
         AccesoDatos datos=new AccesoDatos();
         if(existeProductoTransaccion(pedido.getId(), productoid)){
             store="ActualizarProductoCarrito";
+            cantidad=1;
         }
+       
          String insert="exec "+store+" "+pedido.getId()+","+productoid+","+cantidad;
         datos.ejecutaSQL(insert);
     }
@@ -89,4 +91,15 @@ return pedido;
         return rs.next();
         
     }
+  
+     public static void EliminarProducto(int trans,long pro) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+        String ejecucion="delete from transaccionProducto where idTransaccion="+trans+" and idProducto="+pro;
+       
+        AccesoDatos datos=new AccesoDatos();
+        datos.ejecutaSQL(ejecucion);
+     
+        
+    }
+    
+    
 }

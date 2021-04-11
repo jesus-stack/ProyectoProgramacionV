@@ -15,7 +15,7 @@
             
                 <h:form id="form" >
                   
-                    <p:dataView class="productos" var="product" value="#{beanProducto.lista}"  layout="grid"
+                    <p:dataView widgetVar="ped" class="productos" var="product" value="#{beanProducto.lista}"  layout="grid"
                     >
 
             <p:dataViewGridItem>
@@ -36,11 +36,14 @@
                     </div>
                     </center>
                     <div class="product-grid-item-bottom">
+                       
                
                         <h:outputText  value="₡ #{product.precio}" styleClass="product-price product-price-pedido">
                             <f:convertNumber currencySymbol="" type="currency"/>
                         </h:outputText>
-                   
+                        <p:commandButton class="btnAgregarpedido" value="Añadir al carrito" ajax="false"
+                                         icon="pi pi-shopping-cart" actionListener="#{beanTransaccion.AgregarProducto(product)}">
+                        </p:commandButton>
                        
                    
                     </div>
@@ -57,34 +60,7 @@
              
 
             </ui:define>
-            <ui:define name="left">
-                   <div style="position: absolute;left: 0px" >
-                    <h:form>
-                          <h:outputLabel class="label" value="Producto"></h:outputLabel>
-                           <br/>
-                           <p:selectOneMenu value="#{beanTransaccion.transaccionProducto.producto}">
-                               <f:selectItems value="#{beanProducto.listacmbProductos()}"></f:selectItems>
-                            
-                           </p:selectOneMenu>
-                          <br/>
-                          <br/>
-                          <br/>
-                          
-                        <h:outputLabel class="label" value="Cantidad"></h:outputLabel>
-                         <br/>
-                         <p:spinner min="#{beanTransaccion.transaccionProducto.producto.cantidadMinimaVenta}"></p:spinner>
-                        <br/>
-                        <br/>
-                        <br/>
-                         <p:commandButton  class="btnAgregarpedido" ajax="false" 
-                                            value="Añadir al Carrito"
-                                            icon="pi pi-shopping-cart">
-                                          
-                        </p:commandButton>
-                     
-                    </h:form>
-                </div>
-            </ui:define>
+         
     
 
         </ui:composition>

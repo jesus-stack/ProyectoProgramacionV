@@ -33,27 +33,15 @@ import javax.naming.NamingException;
 public class beanTransaccion implements Serializable {
 
  Pedido pedido=new Pedido();
-    TransaccionProducto transaccionProducto;
+  
 
-    public TransaccionProducto getTransaccionProducto() {
-        return transaccionProducto;
-    }
-
-    public void setTransaccionProducto(TransaccionProducto transaccionProducto) {
-        this.transaccionProducto = transaccionProducto;
-    }
-    
+  
 
     
  
 
     public Pedido getPedido() throws SNMPExceptions {
-         ExternalContext context=FacesContext.getCurrentInstance().getExternalContext();
-        Map<String,Object> sesion=context.getSessionMap();
-        Usuario user=(Usuario) sesion.get("user");
-        pedido.setCliente((Cliente) user);
-        pedido.getCliente().setDireccione(DireccionDLL.listaTodasDireccionCliente(user.getId()));
-        
+        cargarDirecciones();
         return pedido;
                 
     }
@@ -64,7 +52,7 @@ public class beanTransaccion implements Serializable {
  
     
     public beanTransaccion() {
-    transaccionProducto=new TransaccionProducto();
+  
     }
     
     public int cantidadProducto() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
@@ -83,19 +71,19 @@ public class beanTransaccion implements Serializable {
     
     }
     
-    public void AgregarProducto() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+    public void AgregarProducto(Producto pro) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
         ExternalContext context=FacesContext.getCurrentInstance().getExternalContext();
         Map<String,Object> sesion=context.getSessionMap();
         Usuario user=(Usuario) sesion.get("user");
-      
+      int cantidad=pro.getCantidadMinimaVenta();
         
         if(pedido.getProductos().isEmpty()){
             TransaccionDB.crearTransaccion(user.getId());
+         
             pedido=TransaccionDB.seleccionarTransaccion(user.getId(), 1);
         }
-        TransaccionDB.AgregarProducto(user.getId(),transaccionProducto.getProducto().getId(),transaccionProducto.getCantidad());
-        transaccionProducto.setProducto(null);
-        transaccionProducto.setCantidad(0);
+        TransaccionDB.AgregarProducto(user.getId(),pro.getId(),cantidad);
+        
         
     }
     
@@ -106,6 +94,15 @@ public class beanTransaccion implements Serializable {
    
     }
     
-    
-    
+    public void EliminarProducto(Producto pro) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+        TransaccionDB.EliminarProducto(pedido.getId(), pro.getId());
+    }
+       public void cargarDirecciones() throws SNMPExceptions{
+           ExternalContext context=FacesContext.getCurrentInstance().getExternalContext();
+        Map<String,Object> sesion=context.getSessionMap();
+        Usuario user=(Usuario) sesion.get("user");
+        pedido.setCliente((Cliente) user);
+        pedido.getCliente().setDireccione(DireccionDLL.listaTodasDireccionCliente(user.getId()));
+          
+        }
 }
