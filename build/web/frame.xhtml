@@ -114,11 +114,17 @@
                         <p:graphicImage class="icon"  library="img" name="pedido.png"></p:graphicImage>
                         <h:outputLabel class="itemlabel" value="Pedidos" ></h:outputLabel>
                     </p:menuitem> 
-                    <p:menuitem class="tabitemm" outcome="/Mantenimiento" rendered="#{beanLogin.mantenimiento}">
+                    <p:menuitem class="tabitemm" outcome="/mantenimientoDirecciones" >
                         <f:param name="i" value="3"/>
                         <p:graphicImage class="icon"  library="img" name="mantenimiento.png"></p:graphicImage>
-                        <h:outputLabel class="itemlabel" value="Mantenimiento"></h:outputLabel>
+                        <h:outputLabel class="itemlabel" value="Direcciones"></h:outputLabel>
                     </p:menuitem> 
+                      <p:menuitem class="tabitemm" outcome="/mantenimientoDirecciones" rendered="#{beanLogin.mantenimiento}">
+                        <f:param name="i" value="3"/>
+                        <p:graphicImage class="icon"  library="img" name="mantenimiento.png"></p:graphicImage>
+                        <h:outputLabel class="itemlabel" value="Direcciones"></h:outputLabel>
+                    </p:menuitem> 
+                    
                     <p:menuitem class="tabitem" rendered="#{beanLogin.facturacion}" outcome="/Facturar">
                         <f:param name="i" value="4"/>
                         <p:graphicImage class="icon"  library="img" name="facturacion.png"></p:graphicImage>
