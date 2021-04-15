@@ -21,18 +21,7 @@
     float: right;
     transform: translateY(-15%) !important;
 }
-.btnconfirmarpedido{
-   margin-left: 22vw;
-   font-size: 2vw;
-   width: 30vw;
-    height: 8vh;
-    
-}
-.btnconfirmarpedido:hover{
-    background-color: #7FB645 !important;
-    background-image: none !important;
-    color: black !important;
-}
+
 
 .carrito{
     width:50vw;

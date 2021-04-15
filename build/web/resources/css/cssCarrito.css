@@ -56,7 +56,8 @@
     transform: translateY(-15%) !important;
 }
 .btnconfirmarpedido{
-   margin-left: 22vw;
+   margin-top: 7vw;
+   margin-left: 0px;
    font-size: 2vw;
    width: 30vw;
     height: 8vh;

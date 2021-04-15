@@ -29,6 +29,8 @@ public class beanDireccion implements Serializable {
 
     LinkedList<SelectItem> provincias,cantones,distritos,barrios;
     int provincia,canton,distrito,barrio;
+    
+ 
     public beanDireccion() {
         provincias=new LinkedList<>();
         cantones=new LinkedList<>();
@@ -170,5 +172,7 @@ public class beanDireccion implements Serializable {
                 distritos=new LinkedList<>();
                 barrios=new LinkedList<>();
             }
+            
+       
 }
 

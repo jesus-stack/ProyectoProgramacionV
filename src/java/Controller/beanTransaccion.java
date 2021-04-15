@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.naming.NamingException;
 
 /**
@@ -41,7 +42,7 @@ public class beanTransaccion implements Serializable {
  
 
     public Pedido getPedido() throws SNMPExceptions {
-        cargarDirecciones();
+      //  cargarDirecciones();
         return pedido;
                 
     }
@@ -92,6 +93,20 @@ public class beanTransaccion implements Serializable {
     public LinkedList<Direccion> ListaDirecciones() throws SNMPExceptions{     
     return DireccionDLL.listaTodasDireccionCliente(pedido.getCliente().getId());
    
+    }
+     public LinkedList<SelectItem> cmbdirecciones() throws SNMPExceptions{    
+         cargarDirecciones();
+    LinkedList<Direccion> direc=pedido.getCliente().getDireccione();
+    LinkedList<SelectItem> lista=new LinkedList<>();
+         for (int i = 0; i < direc.size(); i++) {
+             Direccion d=direc.get(i);
+             lista.add(new SelectItem(d.getId(),d.getB().getP().getNombre()+
+                     "' "+d.getB().getC().getNombre()+
+                     ", "+d.getB().getD().getNombre()+
+                             ", "+d.getB().getNombre()+
+                     ", "+d.getSennas()));
+         }
+   return lista;
     }
     
     public void EliminarProducto(Producto pro) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
