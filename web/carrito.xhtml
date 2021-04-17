@@ -61,9 +61,9 @@
                     <div class="label" style="position: absolute;left: 65vw;top: 50vh">
                         <div style="margin-left: 5vw">
                          <p:outputLabel value="Fecha de entrega: "></p:outputLabel><br/>
-                         <p:datePicker></p:datePicker><br/><br/>
+                         <p:datePicker ></p:datePicker><br/><br/>
                          <p:outputLabel value="Hora de entrega:"></p:outputLabel><br/>
-                         <p:inputText></p:inputText><br/><br/>
+                         <p:datePicker id="timeonlyMinMax"  timeOnly="true" pattern="HH:mm" /><br/><br/>
                          <p:outputLabel value="tipo Envio: "></p:outputLabel><br/>
                          <p:selectOneMenu value="#{beanTransaccion.pedido.id}"  style="width:20vw">
                              <f:selectItems value="#{beanTransaccion.cmbdirecciones()}"></f:selectItems>

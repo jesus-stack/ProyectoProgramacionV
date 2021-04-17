@@ -100,7 +100,7 @@ public class beanTransaccion implements Serializable {
     LinkedList<SelectItem> lista=new LinkedList<>();
          for (int i = 0; i < direc.size(); i++) {
              Direccion d=direc.get(i);
-             lista.add(new SelectItem(d.getId(),d.getB().getP().getNombre()+
+             lista.add(new SelectItem(d,d.getB().getP().getNombre()+
                      "' "+d.getB().getC().getNombre()+
                      ", "+d.getB().getD().getNombre()+
                              ", "+d.getB().getNombre()+
