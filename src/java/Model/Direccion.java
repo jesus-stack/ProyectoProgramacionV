@@ -13,21 +13,13 @@ import java.sql.Time;
  */
 public class Direccion {
     private int id;
-    private Provincia p;
-    private Canton c;
-    private Distrito d;
     private Barrio b;
     private String sennas;
     private Cliente cliente;
-    private Dia diaInicio;
-    private Dia diaFinal;
-    private Time horaInicio,horaFinal;
 
-    public Direccion(int id, Provincia p, Canton c, Distrito d, Barrio b, Cliente cliente, String sennas) {
+    public Direccion(int id,  Barrio b, Cliente cliente, String sennas) {
         this.id = id;
-        this.p = p;
-        this.c = c;
-        this.d = d;
+     
         this.b = b;
         this.cliente = cliente;
         this.sennas=sennas;
@@ -35,9 +27,7 @@ public class Direccion {
 
     public Direccion() {
      this.id = 0;
-        this.p = null;
-        this.c = null;
-        this.d = null;
+    
         this.b = null;
         this.cliente = null;
         this.sennas="";
@@ -61,31 +51,7 @@ public class Direccion {
         this.id = id;
     }
 
-    public Provincia getP() {
-        return p;
-    }
-
-    public void setP(Provincia p) {
-        this.p = p;
-    }
-
-    public Canton getC() {
-        return c;
-    }
-
-    public void setC(Canton c) {
-        this.c = c;
-    }
-
-    public Distrito getD() {
-        return d;
-    }
-
-    public void setD(Distrito d) {
-        this.d = d;
-    }
-
-    public Barrio getB() {
+      public Barrio getB() {
         return b;
     }
 
@@ -101,38 +67,6 @@ public class Direccion {
         this.cliente = cliente;
     }
 
-    public Dia getDiaInicio() {
-        return diaInicio;
-    }
-
-    public void setDiaInicio(Dia diaInicio) {
-        this.diaInicio = diaInicio;
-    }
-
-    public Dia getDiaFinal() {
-        return diaFinal;
-    }
-
-    public void setDiaFinal(Dia diaFinal) {
-        this.diaFinal = diaFinal;
-    }
-
-    public Time getHoraInicio() {
-        return horaInicio;
-    }
-
-    public void setHoraInicio(Time horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    public Time getHoraFinal() {
-        return horaFinal;
-    }
-
-    public void setHoraFinal(Time horaFinal) {
-        this.horaFinal = horaFinal;
-    }
- 
     
 
     

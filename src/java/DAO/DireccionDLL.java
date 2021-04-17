@@ -52,9 +52,8 @@ public class DireccionDLL {
             while (rsPA.next()) {
                 Direccion d=new Direccion();
                 d.setId(rsPA.getInt("id"));
-                d.setP(TraerProvinciaPorId(rsPA.getInt("codProvincia")));
-                d.setC(TraerCantonPorId(rsPA.getInt("codProvincia"),rsPA.getInt("codCanton")));
-                d.setD(TraerDistritoPorId(rsPA.getInt("codProvincia"),rsPA.getInt("codCanton"),rsPA.getInt("codDistrito")));
+            
+        
                 d.setB(TraerBarrioPorId(rsPA.getInt("codProvincia"),rsPA.getInt("codCanton"),rsPA.getInt("codDistrito"),rsPA.getInt("codBarrio")));
                 d.setSennas(rsPA.getString("Sennas"));
                 d.setCliente((Cliente)UsuarioDLL.UsuarioXidentificacion(rsPA.getLong("idCliente")));
