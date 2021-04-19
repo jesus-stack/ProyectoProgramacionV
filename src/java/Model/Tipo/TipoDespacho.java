@@ -4,8 +4,10 @@ package Model.Tipo;
 
 public enum TipoDespacho {
     
- EntregaSinEnvio(1,"Entrega sin envio"),
- EntregaPorUnTercero(2,"Envio por un tercero");
+ EnvioDirecto(1,"Envio directo por personal de la empresa"),   
+ EntregaSinEnvio(2,"Entrega sin envio"),
+ EntregaPorUnTercero(3,"Envio por encomienda un tercero");
+
     
     
     

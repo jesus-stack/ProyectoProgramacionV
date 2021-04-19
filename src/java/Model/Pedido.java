@@ -6,6 +6,7 @@
  */
 package Model;
 
+import Model.Tipo.TipoDespacho;
 import Model.Tipo.TipoPago;
 import java.sql.Date;
 import java.sql.Time;
@@ -24,9 +25,10 @@ public class Pedido {
     private float costoEnvio;
     private TipoPago tipoPago;
     private float Descuento;
-    private String tipoDspacho;
+    private TipoDespacho tipoDspacho;
     private float subTotal;
     private float total;
+    private Direccion direccion;
     private LinkedList<TransaccionProducto> productos=new LinkedList<>();
     private String Estado;
 
@@ -100,13 +102,23 @@ public class Pedido {
         this.Descuento = Descuento;
     }
 
-    public String getTipoDspacho() {
+    public TipoDespacho getTipoDspacho() {
         return tipoDspacho;
     }
 
-    public void setTipoDspacho(String tipoDspacho) {
+    public void setTipoDspacho(TipoDespacho tipoDspacho) {
         this.tipoDspacho = tipoDspacho;
     }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+
+ 
 
     public float getSubTotal() {
         return subTotal;
