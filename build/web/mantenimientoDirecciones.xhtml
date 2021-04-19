@@ -35,6 +35,8 @@
                   
                        <f:selectItems value="#{beanDireccion.barrios}"></f:selectItems>
                   </p:selectOneMenu>
+                   <p:outputLabel class="label" for="senna" value="Barrio"></p:outputLabel>
+                   <p:inputText id="senna" value="#{beanDireccion.sennas}"></p:inputText>
         <br/>
                   <br/>
                   <br/>
@@ -93,7 +95,7 @@
                 <p:column  style="width: 80px">
                    
                              <h:form>
-                                 <p:commandButton icon="fas fa-edit" value="Editar" ajax="false"  styleClass="btnedit"></p:commandButton>
+                                 <p:commandButton icon="fas fa-edit" value="Editar" actionListener="#{beanDireccion.editar(dire)}" ajax="false"  styleClass="btnedit"></p:commandButton>
                                
                              </h:form>           
                 </p:column>

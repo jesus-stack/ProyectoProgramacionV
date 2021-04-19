@@ -32,12 +32,15 @@ public class beanDireccion implements Serializable {
 
     LinkedList<SelectItem> provincias,cantones,distritos,barrios;
     LinkedList<Direccion> direcciones;
-    int provincia,canton,distrito,barrio;
+    int provincia,canton,distrito,barrio,direccion;
+    String sennas;
     
  
     public beanDireccion() throws SNMPExceptions {
          
      llenarprovincias();
+       Usuario user=(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        direcciones=DireccionDLL.listaTodasDireccionCliente(user.getId());
         cantones=new LinkedList<>();
     }
 
@@ -62,6 +65,22 @@ public class beanDireccion implements Serializable {
 
     public LinkedList<SelectItem> getDistritos() {
         return distritos;
+    }
+
+    public int getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(int direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getSennas() {
+        return sennas;
+    }
+
+    public void setSennas(String sennas) {
+        this.sennas = sennas;
     }
 
     public void setDistritos(LinkedList<SelectItem> distritos) {
@@ -185,7 +204,7 @@ public class beanDireccion implements Serializable {
         barrios= lista;
     }
             public void InsertarProvincia() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
-                DireccionDLL.InsertarDireccion(provincia, canton, distrito, barrio, "funciona");
+                DireccionDLL.InsertarDireccion(provincia, canton, distrito, barrio,sennas);
                    Usuario user=(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
         direcciones=DireccionDLL.listaTodasDireccionCliente(user.getId());
                nuevo();
@@ -196,9 +215,22 @@ public class beanDireccion implements Serializable {
            canton=0;
            distrito=0;
            barrio=0;
+           sennas="";
              cantones=new LinkedList<>();
                 distritos=new LinkedList<>();
                 barrios=new LinkedList<>();
+       }
+       
+       public void editar(Direccion d) throws SNMPExceptions{
+           direccion=d.getId();
+           provincia=d.getB().getP().getCodigo();
+           canton=d.getB().getC().getCodigo();
+           distrito=d.getB().getD().getCodigo();
+           barrio=d.getB().getCodigo();
+           sennas=d.getSennas();
+           llenarCantones();
+           llenarDistritos();
+           llenarBarrios();
        }
 }
 
