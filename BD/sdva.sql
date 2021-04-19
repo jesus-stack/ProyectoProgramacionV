@@ -140,15 +140,9 @@ descripcion varchar(20)
 )
 
 
-create table tipoTransaccion(
-id int primary key,
-Descripcion nvarchar(30)
-)
 
 --creacion llaves foraneas--
-alter table transaccion
-add constraint FK_transaccion_TipoTransaccion  foreign key (TipoDespacho)references tipoTransaccion(id);
-go
+
 
 alter table transaccionProducto
 add constraint  FK_TRansaccion_Producto foreign key (idProducto)   references producto(id)    ;

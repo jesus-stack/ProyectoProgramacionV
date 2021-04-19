@@ -66,7 +66,7 @@
                          <p:datePicker id="timeonlyMinMax"  timeOnly="true" pattern="HH:mm" /><br/><br/>
                          <p:outputLabel value="tipo Envio: "></p:outputLabel><br/>
                          <p:selectOneMenu value="#{beanTransaccion.pedido.id}"  style="width:20vw">
-                             <f:selectItems value="#{beanTransaccion.cmbdirecciones()}"></f:selectItems>
+                             <f:selectItems value="#{beanTransaccion.cmbTipoEnvio()}"></f:selectItems>
                          </p:selectOneMenu>
                         </div>
                           <p:commandButton class="btnconfirmarpedido" value="Confirmar Pedido"  >

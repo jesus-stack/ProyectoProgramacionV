@@ -144,6 +144,38 @@ public class Pedido {
     
     
     
+    public double calcularSubTotal(){
+        double suma=0;
+        for (TransaccionProducto producto : productos) {
+            suma+=producto.getProducto().getPrecio();
+        }
+    
+    return suma;
+    }
+    
+    
+    public double calcularIva(){
+    
+    return calcularSubTotal()*0.13;
+    }
+    
+    public double calcularTotal(){
+    return calcularSubTotal()+calcularIva();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 }
