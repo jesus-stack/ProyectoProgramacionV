@@ -61,28 +61,9 @@ codDistrito numeric(2),
 codbarrio numeric(4),
 Sennas Varchar(max),
 idCliente bigint,
-diaInicio int,
-diaFinal int,
-horaInicio time,
-horaFinal time
+estado bit default(1)
 
 )
-
-
-
---creacion de tabla dias--
-create table dia(
-id int  primary key,
-descripcion varchar(20)
-)
-
-insert into dia (id,descripcion) values(1,'Lunes')
-insert into dia (id,descripcion) values(2,'Martes')
-insert into dia (id,descripcion) values(3,'Miercoles')
-insert into dia (id,descripcion) values(4,'Jueves')
-insert into dia (id,descripcion) values(5,'Viernes')
-insert into dia (id,descripcion) values(6,'Sábado')
-insert into dia (id,descripcion) values(7,'Domingo')
 
 --creacion de tablas funcionarios--
 create table funcionario(
@@ -128,11 +109,13 @@ idCliente bigint,
 idDireccion int,
 fechaSolicitada date,
 fechaEmitida date,
+horaEntrega time,
 envio float,
 tipoPago int,
 descuento float,
 tipoDespacho int,
 subtotal float,
+iva float,
 total float,
 estado int,
 primary key (id)
