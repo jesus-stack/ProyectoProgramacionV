@@ -12,6 +12,7 @@ import Model.Cliente;
 import Model.Direccion;
 import Model.Pedido;
 import Model.Producto;
+import Model.Tipo.TipoDespacho;
 import Model.TransaccionProducto;
 import Model.Usuario;
 import javax.inject.Named;
@@ -90,6 +91,7 @@ public class beanTransaccion implements Serializable {
     
     
     
+    
     public LinkedList<Direccion> ListaDirecciones() throws SNMPExceptions{     
     return DireccionDLL.listaTodasDireccionCliente(pedido.getCliente().getId());
    
@@ -98,16 +100,24 @@ public class beanTransaccion implements Serializable {
          cargarDirecciones();
     LinkedList<Direccion> direc=pedido.getCliente().getDireccione();
     LinkedList<SelectItem> lista=new LinkedList<>();
-         for (int i = 0; i < direc.size(); i++) {
-             Direccion d=direc.get(i);
-             lista.add(new SelectItem(d,d.getB().getP().getNombre()+
-                     "' "+d.getB().getC().getNombre()+
+    
+         for (Direccion d : pedido.getCliente().getDireccione()) {
+              lista.add(new SelectItem(d.getId(),d.getB().getP().getNombre()+
+                     ", "+d.getB().getC().getNombre()+
                      ", "+d.getB().getD().getNombre()+
                              ", "+d.getB().getNombre()+
-                     ", "+d.getSennas()));
-         }
+                     ", "+d.getSennas()));   
+         } 
    return lista;
     }
+     public LinkedList<SelectItem> cmbTipoEnvio(){
+     LinkedList<SelectItem> lista=new LinkedList<>();
+     
+         for (TipoDespacho s : TipoDespacho.values()) {
+             lista.add(new SelectItem(s.getNumero(),s.getDes()));
+         }
+      return lista;   
+     }
     
     public void EliminarProducto(Producto pro) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
         TransaccionDB.EliminarProducto(pedido.getId(), pro.getId());

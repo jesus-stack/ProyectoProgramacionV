@@ -21,8 +21,9 @@
                      </p:selectOneMenu>
                   <p:outputLabel class="label" for="canton" value="Canton"></p:outputLabel>
                   <p:selectOneMenu value="#{beanDireccion.canton}" id="canton">
-                      <p:ajax event="change" listener="#{beanDireccion.llenarDistritos()}" update="distrito"></p:ajax>
+                    
                       <f:selectItems value="#{beanDireccion.cantones}"></f:selectItems>
+                        <p:ajax event="change" listener="#{beanDireccion.llenarDistritos()}" update="distrito"></p:ajax>
                   </p:selectOneMenu>
                   <p:outputLabel class="label" for="distrito" value="Distrito"></p:outputLabel>
                   <p:selectOneMenu value="#{beanDireccion.distrito}" id="distrito">
@@ -31,7 +32,7 @@
                   </p:selectOneMenu>
                   <p:outputLabel class="label" for="barrio" value="Barrio"></p:outputLabel>
                   <p:selectOneMenu style="width: 15vw" value="#{beanDireccion.barrio}" id="barrio">
-                   
+                  
                        <f:selectItems value="#{beanDireccion.barrios}"></f:selectItems>
                   </p:selectOneMenu>
         <br/>
