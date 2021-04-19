@@ -12,7 +12,7 @@ import Model.Tipo.TipoUsuario;
  * @author Usuario
  */
 public class Usuario {
-    private long id;
+    public long id;
     private String contrasenna;
     private boolean estado;
     private TipoUsuario tipo;

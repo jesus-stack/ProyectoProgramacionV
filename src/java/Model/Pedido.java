@@ -159,11 +159,13 @@ public class Pedido {
     public double calcularSubTotal(){
         double suma=0;
         for (TransaccionProducto producto : productos) {
-            suma+=producto.getProducto().getPrecio();
+            suma+=producto.getProducto().getPrecio()*producto.getCantidad();
         }
     
     return suma;
     }
+    
+   
     
     
     public double calcularIva(){
@@ -172,9 +174,46 @@ public class Pedido {
     }
     
     public double calcularTotal(){
-    return calcularSubTotal()+calcularIva();
+    return calcularSubTotal()+calcularIva()+costoEnvio();
     }
     
+     public double descuento(int porcentaje){
+    
+    return (calcularTotal()*porcentaje)/100;
+    }
+     
+     public double costoEnvio(){
+     if(tipoDspacho!=null){
+     if(tipoDspacho.getNumero()==3){
+         
+     switch(direccion.getB().getP().getCodigo()){
+         case 1:
+             return 1700;
+             
+             
+             
+         case 2:
+             return 1200;
+             
+         case 3:
+             return 1300;
+         case 4:
+             return 1850;
+         case 5:
+             return 3000;
+         case 6:
+         case 7:
+             return 2100;
+         
+            
+                
+            
+     
+     }
+     }
+     }
+    return 0;
+     }
     
     
     

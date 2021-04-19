@@ -397,11 +397,13 @@ select * from producto
 end
 go
 
+
+
 create procedure SeleccionarProductoXid
 @id int
 as
 begin 
-select * from producto where producto.id=@id
+select * from producto where producto.id=@id and estado=1
 end
 go
 
@@ -415,11 +417,11 @@ end
 go
 
 create procedure seleccionarTransaccion
-@idcliente bigint,
+@idCliente bigint,
 @estado int
 as
 begin
-select * from Transaccion where idCliente=@idcliente and estado=@estado;
+select * from Transaccion where idCliente=@idCliente and estado=@estado;
 end 
 go
 

@@ -70,14 +70,72 @@
                          </p:selectOneMenu>
                          <br/>
                           <p:outputLabel value="Dirección: "></p:outputLabel><br/>
-                          <p:selectOneMenu value="#{beanTransaccion.tipoDespacho}"  style="width:20vw">
+                          <p:selectOneMenu value="#{beanTransaccion.direccion}"  style="width:20vw">
                               <f:selectItems value="#{beanTransaccion.cmbdirecciones()}"></f:selectItems>
                          </p:selectOneMenu>
+                          
+                          
+                          <br/>
+                          <br/>
+                       
                          
                         </div>
-                          <p:commandButton class="btnconfirmarpedido" value="Confirmar Pedido"  >
+                        
+                        
+                         <p:dialog class="ConsultarFactura" header="Detalle de compra" widgetVar="ConsultarFactura"  showEffect="fade" modal="true">
+                <div class="logleft">
+                    
+                </div>
+                <div class="conFactura">
+                    <h:form>
+                        <h:outputLabel value="SubTotal:    ₡  "/>
+                        <h:outputLabel value="#{beanTransaccion.pedido.calcularSubTotal()}"></h:outputLabel>
+                           <br></br>
+                       <br></br>
+                        <h:outputLabel value="Cobro por envio:    ₡  "/>
+                       
+                        <h:outputLabel value="#{beanTransaccion.pedido.costoEnvio()}"></h:outputLabel>
+                           <br></br>
+                       <br></br>
+                       <h:outputLabel value="IVA:    ₡  "/>
+                       
+                       <h:outputLabel value="#{beanTransaccion.pedido.calcularIva()}"></h:outputLabel>
+                           <br></br>
+                       <br></br>
+                        <h:outputLabel value="Descuento:    ₡  "/>
+                       
+                        <h:outputLabel value="#{beanTransaccion.pedido.calcularSubTotal()}"></h:outputLabel>
+                           <br></br>
+                       <br></br>
+                           <h:outputLabel value="Monto total:    ₡  "/>
+                           <h:outputText value="#{beanTransaccion.pedido.calcularTotal()}"/>
+                         
+                           <br/>
+                           <br/>
+                            <h:outputLabel value="Tipo despacho:    ₡  "/>
+                            <h:outputText value="#{beanTransaccion.tipoDespacho}"/>
+                         
+                           <br/>
+                           <br/>
+                           <h:outputLabel value="Id direccion:    ₡  "/>
+                           <h:outputText value="#{beanTransaccion.direccion}"/>
+                         
+                           <br/>
+                           <br/>
+                            <p:commandButton class="btnconfirmarpedido" value="Confirmar Pedido"  >
                        
                 </p:commandButton>
+                          
+                    </h:form>
+                </div>
+            </p:dialog>
+                        
+                        
+                        <p:commandButton class="btnconfirmarpedido" value="Consultar factura" onclick="PF('ConsultarFactura').show()" ajax="true"  >
+                       
+                </p:commandButton>
+                         
+                    
                     </div>
                   
             

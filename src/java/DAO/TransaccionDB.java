@@ -32,37 +32,41 @@ public class TransaccionDB {
         String select = "exec seleccionarTransaccion " + id + "," + estado;
         ResultSet rs = null;
         Pedido pedido = new Pedido();
-        LinkedList<TransaccionProducto> tp=new LinkedList<>();
+       
 
         AccesoDatos datos = new AccesoDatos();
 
         rs = datos.ejecutaSQLRetornaRS(select);
       while(rs.next()){
           pedido.setId(rs.getInt("id"));
-        rs=datos.ejecutaSQLRetornaRS("exec seleccionarProductosCarrito "+pedido.getId());
-        while (rs.next()) {
-            Producto pro = new Producto();
-            pro.setEstado(rs.getInt("estado") == 1);
-            pro.setId(rs.getInt("id"));
-            pro.setNombre(rs.getString("nombre"));
-            pro.setDescripcion(rs.getString("descripcion"));
-            pro.setFoto(rs.getString("foto"));
-            pro.setPrecio(rs.getFloat("precio"));
-            pro.setCantidadMinimaVenta(rs.getInt("cantidadMinimaVenta"));
-           TransaccionProducto transaccion=new TransaccionProducto();
-           transaccion.setProducto(pro);
-           transaccion.setCantidad(rs.getInt("cantidad"));
-           tp.add(transaccion);
-        }
-        pedido.setProductos(tp);
+      
+       
         
+         pedido.setProductos(transaccionP(rs.getInt("id")));
       }
+     
       
         
         
     
 return pedido;
     }
+    
+    public static LinkedList<TransaccionProducto> transaccionP(int id) throws SNMPExceptions, SQLException, ClassNotFoundException, NamingException{
+      ResultSet rs = null;
+      AccesoDatos datos = new AccesoDatos();
+      LinkedList <TransaccionProducto> tp=new LinkedList<>();  
+      rs=datos.ejecutaSQLRetornaRS("exec seleccionarProductosCarrito "+id);
+        
+         while (rs.next()) {
+            Producto pro = ProductoDB.traerProductoPorId(rs.getInt("id"));
+           TransaccionProducto transaccion=new TransaccionProducto();
+           transaccion.setProducto(pro);
+           transaccion.setCantidad(rs.getInt("cantidad"));
+           tp.add(transaccion);
+        }
+    return tp;
+    } 
 
     public static void AgregarProducto(long idcliente,int productoid,int cantidad) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
        

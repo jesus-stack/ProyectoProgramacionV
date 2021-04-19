@@ -21,6 +21,8 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -42,8 +44,10 @@ public class beanTransaccion implements Serializable {
     
  
 
-    public Pedido getPedido() throws SNMPExceptions {
+    public Pedido getPedido() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
       //  cargarDirecciones();
+        agregarPedidoCliente();
+        agregarTipoDespacho();
         return pedido;
                 
     }
@@ -172,6 +176,28 @@ public class beanTransaccion implements Serializable {
         }
            
        }
+       
+       
+       public void agregarPedidoCliente(){
+     try {
+         ExternalContext context=FacesContext.getCurrentInstance().getExternalContext();
+         Map<String,Object> sesion=context.getSessionMap();
+         Usuario user=(Usuario) sesion.get("user");
+         this.setPedido(TransaccionDB.seleccionarTransaccion(user.getId(), 1));
+     } catch (SNMPExceptions ex) {
+         Logger.getLogger(beanTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (SQLException ex) {
+         Logger.getLogger(beanTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (NamingException ex) {
+         Logger.getLogger(beanTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (ClassNotFoundException ex) {
+         Logger.getLogger(beanTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+     }
+       
+       
+       }
+       
+       
        
        public void agregarDireccion(){
      //  this.pedido.setDireccion(DireccionDLL.);
