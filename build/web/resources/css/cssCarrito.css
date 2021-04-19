@@ -1,0 +1,77 @@
+.direccion{
+    margin: 0px;
+    background-image: none;
+    background-color: #2F4F4F;
+   
+    min-height: 80%  !important;
+    max-height: 100% !important;
+        
+    
+        
+}
+.direccion header{
+    align-content: center;
+}
+.dataT{
+    min-width: 5vw !important;
+    max-height: 5vw !important;
+    
+}
+
+.logleft{
+    float: left;
+}
+.logright{
+    margin-left: 50px;
+    float: right;
+}
+.btnok{
+    background-image: none;
+    background-color: green;
+}
+.btncancel{
+    background-color: red;
+}
+
+
+
+.direccion{
+    border: solid 3px #41A1C9;
+    min-height: 30vh;
+    padding: 2%;
+    line-height: 5vh;
+    min-width: 100vh    
+}
+.direccion-1{
+    font-size: 20px;color: goldenrod;float:left;
+    font-weight: bold;
+}
+.product-price-pedido{
+    margin-top: 10vh;
+}
+.btnEliminar{
+    width: 150px;
+    font-size: 18px !important;
+    float: right;
+    transform: translateY(-15%) !important;
+}
+.btnconfirmarpedido{
+   margin-top: 7vw;
+   margin-left: 0px;
+   font-size: 2vw;
+   width: 30vw;
+    height: 8vh;
+    
+}
+.btnconfirmarpedido:hover{
+    background-color: #7FB645 !important;
+    background-image: none !important;
+    color: black !important;
+}
+
+.carrito{
+    width:50vw;
+}
+.carlabel{
+    font-size: 20px;
+}
