@@ -9,13 +9,16 @@ import DAO.Conexion.SNMPExceptions;
 import DAO.DireccionDLL;
 import Model.Barrio;
 import Model.Canton;
+import Model.Direccion;
 import Model.Distrito;
 import Model.Provincia;
+import Model.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.naming.NamingException;
 
@@ -28,17 +31,22 @@ import javax.naming.NamingException;
 public class beanDireccion implements Serializable {
 
     LinkedList<SelectItem> provincias,cantones,distritos,barrios;
-    int provincia,canton,distrito,barrio;
+    LinkedList<Direccion> direcciones;
+    int provincia,canton,distrito,barrio,direccion;
+    String sennas;
     
  
-    public beanDireccion() {
-        provincias=new LinkedList<>();
+    public beanDireccion() throws SNMPExceptions {
+         
+     llenarprovincias();
+       Usuario user=(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        direcciones=DireccionDLL.listaTodasDireccionCliente(user.getId());
         cantones=new LinkedList<>();
     }
 
     public LinkedList<SelectItem> getProvincias() throws SNMPExceptions {
-        llenarprovincias();
-        llenarBarrios();
+        
+  
         return provincias;
     }
 
@@ -57,6 +65,22 @@ public class beanDireccion implements Serializable {
 
     public LinkedList<SelectItem> getDistritos() {
         return distritos;
+    }
+
+    public int getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(int direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getSennas() {
+        return sennas;
+    }
+
+    public void setSennas(String sennas) {
+        this.sennas = sennas;
     }
 
     public void setDistritos(LinkedList<SelectItem> distritos) {
@@ -89,6 +113,15 @@ public class beanDireccion implements Serializable {
 
     public void setCanton(int canton) {
         this.canton = canton;
+    }
+
+    public LinkedList<Direccion> getDirecciones() throws SNMPExceptions {
+    
+        return direcciones;
+    }
+
+    public void setDirecciones(LinkedList<Direccion> direcciones) {
+        this.direcciones = direcciones;
     }
 
     public int getDistrito() {
@@ -171,12 +204,33 @@ public class beanDireccion implements Serializable {
         barrios= lista;
     }
             public void InsertarProvincia() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
-                DireccionDLL.InsertarDireccion(provincia, canton, distrito, barrio, "funciona");
-                cantones=new LinkedList<>();
-                distritos=new LinkedList<>();
-                barrios=new LinkedList<>();
+                DireccionDLL.InsertarDireccion(provincia, canton, distrito, barrio,sennas);
+                   Usuario user=(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        direcciones=DireccionDLL.listaTodasDireccionCliente(user.getId());
+               nuevo();
             }
             
+       public void nuevo(){
+           provincia=0;
+           canton=0;
+           distrito=0;
+           barrio=0;
+           sennas="";
+             cantones=new LinkedList<>();
+                distritos=new LinkedList<>();
+                barrios=new LinkedList<>();
+       }
        
+       public void editar(Direccion d) throws SNMPExceptions{
+           direccion=d.getId();
+           provincia=d.getB().getP().getCodigo();
+           canton=d.getB().getC().getCodigo();
+           distrito=d.getB().getD().getCodigo();
+           barrio=d.getB().getCodigo();
+           sennas=d.getSennas();
+           llenarCantones();
+           llenarDistritos();
+           llenarBarrios();
+       }
 }
 

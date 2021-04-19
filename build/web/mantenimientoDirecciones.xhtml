@@ -35,6 +35,8 @@
                   
                        <f:selectItems value="#{beanDireccion.barrios}"></f:selectItems>
                   </p:selectOneMenu>
+                   <p:outputLabel class="label" for="senna" value="Barrio"></p:outputLabel>
+                   <p:inputText id="senna" value="#{beanDireccion.sennas}"></p:inputText>
         <br/>
                   <br/>
                   <br/>
@@ -45,7 +47,7 @@
                   <p:panelGrid columns="2" >
                       <p:commandButton  value="Guardar" ajax="false" actionListener="#{beanDireccion.InsertarProvincia()}" styleClass="btn"  icon="fa fa-save ">
                       </p:commandButton>
-                      <p:commandButton  value="Nuevo"  ajax="false" actionListener="#{beanProducto.nuevo()}" styleClass="btn new"  icon="fa fa-save ">
+                      <p:commandButton  value="Nuevo"  ajax="false" actionListener="#{beanDireccion.nuevo()}" styleClass="btn new"  icon="fa fa-save ">
                       </p:commandButton>
                       <p:commandButton  value="Buscar"  styleClass="btn new"  icon="fas fa-search" />
                         <p:commandButton  value="Ayuda" styleClass="btn help"   icon="fas fa-question" />
@@ -72,34 +74,34 @@
                       
                     </table>
                 </center>
-                <p:dataTable styleClass="tablamantenimiento"  widgetVar="tabla" value="#{beanProducto.lista}" var="pro" >
+                <p:dataTable styleClass="tablamantenimiento"  widgetVar="tabla" value="#{beanDireccion.direcciones}" var="dire" >
                   
-                    <p:column class="table" headerText="Nombre">
-                    <h:outputText value="#{pro.nombre}"></h:outputText>
+                  <p:column class="table" headerText="Provincia">
+                        <h:outputText value="#{dire.b.p.nombre}"></h:outputText>
                 </p:column>
-                 <p:column  class="table" headerText="Descripcion">
-                     <h:outputText value="#{pro.descripcion}"></h:outputText>
+                 <p:column  class="table" headerText="Canton">
+                     <h:outputText value="#{dire.b.c.nombre}"></h:outputText>
                 </p:column>
-                 <p:column headerText="Precio">
-                     <h:outputText value="#{pro.precio}"></h:outputText>
+                 <p:column headerText="Distrito">
+                     <h:outputText value="#{dire.b.d.nombre}"></h:outputText>
                 </p:column >
-                    <p:column headerText="Minima Venta" style="width: 35px">
-                     <h:outputText value="#{pro.cantidadMinimaVenta}"></h:outputText>
+                    <p:column headerText="Barrio" >
+                        <h:outputText value="#{dire.b.nombre}"></h:outputText>
                 </p:column>
-                <p:column style="width: 150px" headerText="Imagen">
-                     <p:graphicImage library="img" class="imagen" name="#{pro.foto}"></p:graphicImage>
+                 <p:column headerText="Señas" >
+                     <h:outputText value="#{dire.sennas}"></h:outputText>
                 </p:column>
                
                 <p:column  style="width: 80px">
                    
                              <h:form>
-                                 <p:commandButton icon="fas fa-edit" value="Editar" ajax="false" actionListener="#{beanProducto.editarProducto(pro)}" styleClass="btnedit"></p:commandButton>
+                                 <p:commandButton icon="fas fa-edit" value="Editar" actionListener="#{beanDireccion.editar(dire)}" ajax="false"  styleClass="btnedit"></p:commandButton>
                                
                              </h:form>           
                 </p:column>
                 <p:column style="width: 85px">
                                 <h:form>
-                                    <p:commandButton icon="fas fa-trash-alt" ajax="false" actionListener="#{beanProducto.EliminarProducto(pro)}" value="Eliminar" styleClass="btndelete"></p:commandButton>
+                                    <p:commandButton icon="fas fa-trash-alt" ajax="false"  value="Eliminar" styleClass="btndelete"></p:commandButton>
                                 </h:form>
                             </p:column>     
                       
