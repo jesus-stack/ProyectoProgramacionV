@@ -242,7 +242,7 @@ Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) v
 go
 
 --insert direccioness--
-insert into direccion (codProvincia,codCanton,codDistrito,codBarrio,Sennas,idCliente) values(4,10,1,105,'De la escuela 100 mtrs oeste ', 7777777)
+
 
 
 
@@ -16013,7 +16013,7 @@ INSERT [dbo].[Barrio] ([Cod_Provincia], [Cod_Canton], [Cod_Distrito], [Cod_Barri
 INSERT [dbo].[Barrio] ([Cod_Provincia], [Cod_Canton], [Cod_Distrito], [Cod_Barrio], [Dsc_Barrio], [Log_Activo]) VALUES (CAST(7 AS Numeric(1, 0)), CAST(6 AS Numeric(2, 0)), CAST(5 AS Numeric(2, 0)), CAST(218 AS Numeric(4, 0)), N'San Francisco', CAST(1 AS Numeric(1, 0)))
 
 
-
+insert into direccion (codProvincia,codCanton,codDistrito,codBarrio,Sennas,idCliente) values(4,10,1,105,'De la escuela 100 mtrs oeste ', 7777777)
 
 
 
