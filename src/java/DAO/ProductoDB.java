@@ -8,6 +8,7 @@ package DAO;
 import DAO.Conexion.AccesoDatos;
 import DAO.Conexion.SNMPExceptions;
 import Model.Producto;
+import Model.Provincia;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -64,6 +65,41 @@ public class ProductoDB {
         }
     }
     
+    public static Producto traerProductoPorId(int id) throws SNMPExceptions{
+    
+   Producto pro=null;
+    String cadena="SeleccionarProductoXid "+id;
+    
+    try {
+            AccesoDatos accesoDatos = new AccesoDatos();
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(cadena);
+        
+            while (rsPA.next()) {
+               
+                 pro = new Producto();
+            pro.setEstado(rsPA.getInt("estado") == 1);
+            pro.setId(rsPA.getInt("id"));
+            pro.setNombre(rsPA.getString("nombre"));
+            pro.setDescripcion(rsPA.getString("descripcion"));
+            pro.setFoto(rsPA.getString("foto"));
+            pro.setPrecio(rsPA.getFloat("precio"));
+            pro.setCantidadMinimaVenta(rsPA.getInt("cantidadMinimaVenta"));
+                
+            }
+            rsPA.close();
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage());
+        }
+    
+    
+    
+    return pro;
+    
+    }    
     public static LinkedList<Producto> listaProductos() throws SNMPExceptions{
         String select = "exec SeleccionarProductos";
         LinkedList<Producto> listaProductos = new LinkedList<Producto>();
