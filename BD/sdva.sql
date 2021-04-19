@@ -60,12 +60,29 @@ codCanton numeric(2),
 codDistrito numeric(2),
 codbarrio numeric(4),
 Sennas Varchar(max),
-idCliente bigint
+idCliente bigint,
+diaInicio int,
+diaFinal int,
+horaInicio time,
+horaFinal time
 
 )
 
 
 
+--creacion de tabla dias--
+create table dia(
+id int  primary key,
+descripcion varchar(20)
+)
+
+insert into dia (id,descripcion) values(1,'Lunes')
+insert into dia (id,descripcion) values(2,'Martes')
+insert into dia (id,descripcion) values(3,'Miercoles')
+insert into dia (id,descripcion) values(4,'Jueves')
+insert into dia (id,descripcion) values(5,'Viernes')
+insert into dia (id,descripcion) values(6,'Sábado')
+insert into dia (id,descripcion) values(7,'Domingo')
 
 --creacion de tablas funcionarios--
 create table funcionario(
@@ -109,8 +126,8 @@ create table Transaccion(
 id int identity (1,1),
 idCliente bigint,
 idDireccion int,
-fechaEntrega date,
-HoraEntrega Time,
+fechaSolicitada date,
+fechaEmitida date,
 envio float,
 tipoPago int,
 descuento float,
@@ -222,13 +239,9 @@ insert into usuario(id,contrasenna,estado,tipoUsuario) values (402400637,encrypt
 
 Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(155821845336,'Jesus','Maria','Castilla','Quiroz','jcastilla@est.utn.ac.cr',64862101)
 Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(402400637,'Hannyer','Smykel','Pitterson','Martinez','hpitterson@est.utn.ac.cr',60117773)
---insert direccioness--
-<<<<<<< HEAD
-insert into direccion (codProvincia,codCanton,codDistrito,codBarrio,Sennas,idCliente) values(4,10,1,105,'De la escuela 100 mtrs oeste ', 7777777)
 go
 
-=======
->>>>>>> 9339de48409c2a998ff714c35dd18ef423e0a183
+--insert direccioness--
 
 
 
