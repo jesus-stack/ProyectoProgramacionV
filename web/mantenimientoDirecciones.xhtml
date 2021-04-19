@@ -19,23 +19,23 @@
                          <f:selectItems value="#{beanDireccion.provincias}"></f:selectItems>
                          <p:ajax event="change" listener="#{beanDireccion.llenarCantones()}" update="canton"></p:ajax>
                      </p:selectOneMenu>
-                  <p:outputLabel class="label" for="canton" value="Canton"></p:outputLabel>
+                  <p:outputLabel class="label" for="canton" value="Canton"></p:outputLabel><br/>
                   <p:selectOneMenu value="#{beanDireccion.canton}" id="canton">
                     
                       <f:selectItems value="#{beanDireccion.cantones}"></f:selectItems>
                         <p:ajax event="change" listener="#{beanDireccion.llenarDistritos()}" update="distrito"></p:ajax>
-                  </p:selectOneMenu>
-                  <p:outputLabel class="label" for="distrito" value="Distrito"></p:outputLabel>
+                  </p:selectOneMenu><br/>
+                  <p:outputLabel class="label" for="distrito" value="Distrito"></p:outputLabel><br/>
                   <p:selectOneMenu value="#{beanDireccion.distrito}" id="distrito">
                       <p:ajax event="change" listener="#{beanDireccion.llenarBarrios()}" update="barrio"></p:ajax>
                        <f:selectItems value="#{beanDireccion.distritos}"></f:selectItems>
-                  </p:selectOneMenu>
-                  <p:outputLabel class="label" for="barrio" value="Barrio"></p:outputLabel>
+                  </p:selectOneMenu><br/>
+                  <p:outputLabel class="label" for="barrio" value="Barrio"></p:outputLabel><br/>
                   <p:selectOneMenu style="width: 15vw" value="#{beanDireccion.barrio}" id="barrio">
                   
                        <f:selectItems value="#{beanDireccion.barrios}"></f:selectItems>
                   </p:selectOneMenu>
-                   <p:outputLabel class="label" for="senna" value="Barrio"></p:outputLabel>
+                   <p:outputLabel class="label" for="senna" value="Señas"></p:outputLabel>
                    <p:inputText id="senna" value="#{beanDireccion.sennas}"></p:inputText>
         <br/>
                   <br/>
@@ -77,7 +77,7 @@
                 <p:dataTable styleClass="tablamantenimiento"  widgetVar="tabla" value="#{beanDireccion.direcciones}" var="dire" >
                   
                   <p:column class="table" headerText="Provincia">
-                        <h:outputText value="#{dire.b.p.nombre}"></h:outputText>
+                      <h:outputText value="#{dire.b.p.nombre}"></h:outputText>
                 </p:column>
                  <p:column  class="table" headerText="Canton">
                      <h:outputText value="#{dire.b.c.nombre}"></h:outputText>
@@ -101,7 +101,7 @@
                 </p:column>
                 <p:column style="width: 85px">
                                 <h:form>
-                                    <p:commandButton icon="fas fa-trash-alt" ajax="false"  value="Eliminar" styleClass="btndelete"></p:commandButton>
+                                    <p:commandButton actionListener="#{beanDireccion.eliminar(dire)}" icon="fas fa-trash-alt" ajax="false"  value="Eliminar" styleClass="btndelete"></p:commandButton>
                                 </h:form>
                             </p:column>     
                       
@@ -111,21 +111,7 @@
                    
                
             </ui:define>
-                <ui:define name="right">
-                    <h:form>
-    <p:tieredMenu style="width: 300px">   
-            <p:menuitem class="mantenimiento" outcome="/MantenimientoUsuarios">
-                    <p:graphicImage class="icon"  library="img" name="usuario.png"></p:graphicImage>
-                    <h:outputLabel class="itemlabelM" value="Usuarios"></h:outputLabel>
-                  
-                </p:menuitem>
-        <p:menuitem class="mantenimiento" outcome="/mantenimientoProductos">
-                    <p:graphicImage class="icon"  library="img" name="producto.png"></p:graphicImage>
-                    <h:outputLabel class="itemlabelM" value="Productos"></h:outputLabel>
-                </p:menuitem>
-        </p:tieredMenu>
-    </h:form>
-                </ui:define>
+              
 
         </ui:composition>
 

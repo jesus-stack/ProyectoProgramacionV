@@ -75,7 +75,7 @@ private UploadedFile imagen;
         try{
           producto.setFoto(imagen.getFileName());
   ProductoDB.AgregarProducto(producto);
-      FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_INFO,"EXITO", "\nProducto registrado ");
+      FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_INFO,"EXITO", "\nRegistro almacenado Correctamente ");
           FacesContext.getCurrentInstance().addMessage("msg", message);
           producto=new Producto();
           

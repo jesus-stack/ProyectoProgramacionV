@@ -80,8 +80,8 @@ private String nombre;
     public boolean isPedidos() {
       boolean resultado=false;
         if(usuario.getTipo()!=null){
-         
-               resultado=true;
+         if(usuario.getTipo().getId()==2){
+               resultado=true;}
            
         }
             
@@ -138,18 +138,21 @@ private String nombre;
            }
             if(usuario1.isEstado()==true&&usuario1.getContrasenna().equals(this.getUsuario().getContrasenna())){
                 this.setUsuario(usuario1);
-                context.getExternalContext().getSessionMap().put("user", this.getUsuario());
-               context.addMessage(null, mensajeB);
+              
+               context.addMessage("msg", mensajeB);
+                FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR","Ha ocurrido un problema, intentelo mas tarde" );
+          FacesContext.getCurrentInstance().addMessage("msg", message);
+                 context.getExternalContext().getSessionMap().put("user", this.getUsuario());
              
               
             }
             else{
                   this.setUsuario(new Usuario());
-                context.addMessage(null, mensajeM);
+                context.addMessage("msg", mensajeM);
             }
             
         } catch (Exception e) {
-            context.addMessage(null, mensajeM);
+            context.addMessage("msg", mensajeM);
         }
         finally{
           
