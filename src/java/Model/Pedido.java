@@ -8,6 +8,7 @@ package Model;
 
 import Model.Tipo.TipoPago;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.LinkedList;
 
 /**
@@ -18,8 +19,8 @@ public class Pedido {
     
     private int id;
     private Cliente cliente;
-    private Date fechaSolicitada;
-    private Date fechaEmitida;
+    private Date FechaEntrega;
+    private Time horaSolicitada;
     private float costoEnvio;
     private TipoPago tipoPago;
     private float Descuento;
@@ -50,20 +51,30 @@ public class Pedido {
     }
 
     public Date getFechaSolicitada() {
-        return fechaSolicitada;
+        return FechaEntrega;
     }
 
     public void setFechaSolicitada(Date fechaSolicitada) {
-        this.fechaSolicitada = fechaSolicitada;
+        this.FechaEntrega = fechaSolicitada;
     }
 
-    public Date getFechaEmitida() {
-        return fechaEmitida;
+    public Date getFechaEntrega() {
+        return FechaEntrega;
     }
 
-    public void setFechaEmitida(Date fechaEmitida) {
-        this.fechaEmitida = fechaEmitida;
+    public void setFechaEntrega(Date FechaEntrega) {
+        this.FechaEntrega = FechaEntrega;
     }
+
+    public Time getHoraSolicitada() {
+        return horaSolicitada;
+    }
+
+    public void setHoraSolicitada(Time horaSolicitada) {
+        this.horaSolicitada = horaSolicitada;
+    }
+
+ 
 
     public float getCostoEnvio() {
         return costoEnvio;

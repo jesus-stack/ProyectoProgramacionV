@@ -127,6 +127,7 @@ public class beanDireccion implements Serializable {
         tempCantones=DireccionDLL.cantones(provincia);
        
         LinkedList<SelectItem> lista=new LinkedList<>();
+        lista.add(new SelectItem(0,"Seleccione un canton"));
         
         for (int i = 0; i < tempCantones.size(); i++) {
             
@@ -144,6 +145,7 @@ public class beanDireccion implements Serializable {
      
           
         LinkedList<SelectItem> lista=new LinkedList<>();
+        lista.add(new SelectItem(0,"Seleccione un distrito"));
         
         for (int i = 0; i < tempDistritos.size(); i++) {
             
@@ -159,9 +161,11 @@ public class beanDireccion implements Serializable {
         tempBarrios=DireccionDLL.Barrios(provincia,canton,distrito);
       
         LinkedList<SelectItem> lista=new LinkedList<>();
-        
+       
         for (int i = 0; i < tempBarrios.size(); i++) {
-            
+            if(lista.size()==0){
+             lista.add(new SelectItem(0,"Seleccione un barrio"));
+            }
             lista.add(new SelectItem(tempBarrios.get(i).getCodigo(), tempBarrios.get(i).getNombre()));
         }
         barrios= lista;

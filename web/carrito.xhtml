@@ -69,7 +69,7 @@
                              <f:selectItems value="#{beanTransaccion.cmbdirecciones()}"></f:selectItems>
                          </p:selectOneMenu>
                         </div>
-                          <p:commandButton class="btnconfirmarpedido" value="Confirmar Pedido"  onclick="PF('direc').show()">
+                          <p:commandButton class="btnconfirmarpedido" value="Confirmar Pedido"  >
                        
                 </p:commandButton>
                     </div>
@@ -84,54 +84,7 @@
                 
                 
                 
-                    <p:dialog blockScroll="true" width="100%" height="90% !important" class="direccion" header="Seleccionar dirección" widgetVar="direc"  showEffect="fade" modal="true">
-                        <center>
-                            <h:form>
-                        <p:datePicker></p:datePicker> <br/>
-                        <p:selectOneMenu></p:selectOneMenu><br/>
-                        <p:selectOneMenu></p:selectOneMenu><br/>
-                        
-                        </h:form>
-                        
-                        </center>
-                        <p:dataTable  rows="4" class="dataT" styleClass="tablamantenimiento"  widgetVar="tabla" value="#{beanTransaccion.pedido.cliente.direccione}" var="dire"  
-                                   >
                   
-                    <p:column class="table" headerText="Provincia">
-                        <h:outputText value="#{dire.b.p.nombre}"></h:outputText>
-                </p:column>
-                 <p:column  class="table" headerText="Canton">
-                     <h:outputText value="#{dire.b.c.nombre}"></h:outputText>
-                </p:column>
-                 <p:column headerText="Distrito">
-                     <h:outputText value="#{dire.b.d.nombre}"></h:outputText>
-                </p:column >
-                    <p:column headerText="Barrio" >
-                        <h:outputText value="#{dire.b.nombre}"></h:outputText>
-                </p:column>
-                 <p:column headerText="Señas" >
-                     <h:outputText value="#{dire.sennas}"></h:outputText>
-                </p:column>
-                
-               
-                <p:column  style="width: 150px">
-                   
-                             <h:form>
-                                 <p:commandButton icon="fas fa-edit" value="Seleccionar" ajax="false"  styleClass="btnedit"></p:commandButton>
-                               
-                             </h:form>           
-                </p:column>
-                           
-                      
-                   
-              
-                    </p:dataTable>
-                       <h:form>
-                           <center>  <p:commandButton style="position: relative" icon="fas fa-edit" value="Agregar nueva dirección"  ajax="false"  styleClass="btnedit"></p:commandButton></center>
-                               
-                             </h:form>  
-               
-            </p:dialog>
                 
                 
 </h:form>
