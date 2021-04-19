@@ -65,9 +65,15 @@
                          <p:outputLabel value="Hora de entrega:"></p:outputLabel><br/>
                          <p:datePicker id="timeonlyMinMax"  timeOnly="true" pattern="HH:mm" /><br/><br/>
                          <p:outputLabel value="tipo Envio: "></p:outputLabel><br/>
-                         <p:selectOneMenu value="#{beanTransaccion.pedido.id}"  style="width:20vw">
+                         <p:selectOneMenu value="#{beanTransaccion.tipoDespacho}"  style="width:20vw">
                              <f:selectItems value="#{beanTransaccion.cmbTipoEnvio()}"></f:selectItems>
                          </p:selectOneMenu>
+                         <br/>
+                          <p:outputLabel value="Dirección: "></p:outputLabel><br/>
+                          <p:selectOneMenu value="#{beanTransaccion.tipoDespacho}"  style="width:20vw">
+                              <f:selectItems value="#{beanTransaccion.cmbdirecciones()}"></f:selectItems>
+                         </p:selectOneMenu>
+                         
                         </div>
                           <p:commandButton class="btnconfirmarpedido" value="Confirmar Pedido"  >
                        

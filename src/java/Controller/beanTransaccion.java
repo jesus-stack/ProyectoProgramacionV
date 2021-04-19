@@ -35,8 +35,8 @@ import javax.naming.NamingException;
 public class beanTransaccion implements Serializable {
 
  Pedido pedido=new Pedido();
-  
-
+  int tipoDespacho;
+  int direccion;
   
 
     
@@ -48,6 +48,26 @@ public class beanTransaccion implements Serializable {
                 
     }
 
+    public int getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(int direccion) {
+        this.direccion = direccion;
+    }
+    
+    
+
+    public int getTipoDespacho() {
+        return tipoDespacho;
+    }
+
+    public void setTipoDespacho(int tipoDespacho) {
+        this.tipoDespacho = tipoDespacho;
+    }
+
+    
+    
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
@@ -113,8 +133,8 @@ public class beanTransaccion implements Serializable {
      public LinkedList<SelectItem> cmbTipoEnvio(){
      LinkedList<SelectItem> lista=new LinkedList<>();
      
-         for (TipoDespacho s : TipoDespacho.values()) {
-             lista.add(new SelectItem(s.getNumero(),s.getDes()));
+         for (TipoDespacho tipo : TipoDespacho.values()) {
+             lista.add(new SelectItem(tipo.getNumero(),tipo.getDes()));
          }
       return lista;   
      }
@@ -130,4 +150,34 @@ public class beanTransaccion implements Serializable {
         pedido.getCliente().setDireccione(DireccionDLL.listaTodasDireccionCliente(user.getId()));
           
         }
+       
+       
+       
+       
+       public void agregarTipoDespacho(){
+       
+          
+        switch(tipoDespacho){
+            case 1:
+                this.pedido.setTipoDspacho(TipoDespacho.EnvioDirecto);
+                break;
+            case 2:
+                this.pedido.setTipoDspacho(TipoDespacho.EntregaSinEnvio);
+                break;
+            case 3:
+                this.pedido.setTipoDspacho(TipoDespacho.EntregaPorUnTercero);
+                break;
+        
+        
+        }
+           
+       }
+       
+       public void agregarDireccion(){
+     //  this.pedido.setDireccion(DireccionDLL.);
+       
+       }
+       
+       
+       
 }
