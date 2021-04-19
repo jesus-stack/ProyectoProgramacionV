@@ -9,13 +9,16 @@ import DAO.Conexion.SNMPExceptions;
 import DAO.DireccionDLL;
 import Model.Barrio;
 import Model.Canton;
+import Model.Direccion;
 import Model.Distrito;
 import Model.Provincia;
+import Model.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.naming.NamingException;
 
@@ -28,6 +31,7 @@ import javax.naming.NamingException;
 public class beanDireccion implements Serializable {
 
     LinkedList<SelectItem> provincias,cantones,distritos,barrios;
+    LinkedList<Direccion> direcciones;
     int provincia,canton,distrito,barrio;
     
  
@@ -89,6 +93,16 @@ public class beanDireccion implements Serializable {
 
     public void setCanton(int canton) {
         this.canton = canton;
+    }
+
+    public LinkedList<Direccion> getDirecciones() throws SNMPExceptions {
+        Usuario user=(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        direcciones=DireccionDLL.listaTodasDireccionCliente(user.getId());
+        return direcciones;
+    }
+
+    public void setDirecciones(LinkedList<Direccion> direcciones) {
+        this.direcciones = direcciones;
     }
 
     public int getDistrito() {
