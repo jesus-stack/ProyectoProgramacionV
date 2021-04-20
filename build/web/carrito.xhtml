@@ -82,7 +82,20 @@
                         </div>
                         
                         
-                         <p:dialog class="ConsultarFactura" header="Detalle de compra" widgetVar="ConsultarFactura"  showEffect="fade" modal="true">
+                   
+                        
+                        
+                        <p:commandButton class="btnconfirmarpedido" value="Consultar factura" onclick="PF('ConsultarFactura').show()" ajax="false"  >
+                       
+                </p:commandButton>
+                         
+                    
+                    </div>
+                  
+            
+                </h:form>
+                
+                     
                 <div class="logleft">
                     
                 </div>
@@ -113,7 +126,7 @@
                            <br/>
                            <br/>
                             <h:outputLabel value="Tipo despacho:    ₡  "/>
-                            <h:outputText value="#{beanTransaccion.tipoDespacho}"/>
+                            <h:outputText value="#{beanTransaccion.pedido.tipoDspacho.des}"/>
                          
                            <br/>
                            <br/>
@@ -128,20 +141,7 @@
                           
                     </h:form>
                 </div>
-            </p:dialog>
-                        
-                        
-                        <p:commandButton class="btnconfirmarpedido" value="Consultar factura" onclick="PF('ConsultarFactura').show()" ajax="true"  >
-                       
-                </p:commandButton>
-                         
-                    
-                    </div>
-                  
-            
-                </h:form>
-                
-                
+        
                 
                 
                 

@@ -45,7 +45,7 @@ public class beanTransaccion implements Serializable {
  
 
     public Pedido getPedido() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
-      //  cargarDirecciones();
+ 
         agregarPedidoCliente();
         agregarTipoDespacho();
         return pedido;
@@ -78,7 +78,7 @@ public class beanTransaccion implements Serializable {
  
     
     public beanTransaccion() {
-  
+  tipoDespacho=-1;
     }
     
     public int cantidadProducto() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
@@ -136,9 +136,11 @@ public class beanTransaccion implements Serializable {
     }
      public LinkedList<SelectItem> cmbTipoEnvio(){
      LinkedList<SelectItem> lista=new LinkedList<>();
-     
+
          for (TipoDespacho tipo : TipoDespacho.values()) {
              lista.add(new SelectItem(tipo.getNumero(),tipo.getDes()));
+             
+       
          }
       return lista;   
      }
@@ -162,14 +164,14 @@ public class beanTransaccion implements Serializable {
        
           
         switch(tipoDespacho){
-            case 1:
+            case 0:
                 this.pedido.setTipoDspacho(TipoDespacho.EnvioDirecto);
                 break;
-            case 2:
+            case 1:
                 this.pedido.setTipoDspacho(TipoDespacho.EntregaSinEnvio);
                 break;
-            case 3:
-                this.pedido.setTipoDspacho(TipoDespacho.EntregaPorUnTercero);
+            case 2:
+                this.pedido.setTipoDspacho(TipoDespacho.EnioTercero);
                 break;
         
         

@@ -3,20 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
+            <file>file:/C:/Users/Jesus/Desktop/proyect/SDVAP/src/java/Model/Tipo/TipoDespacho.java</file>
             <file>file:/C:/Users/Jesus/Desktop/proyect/SDVAP/web/frame.xhtml</file>
-=======
-            <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/src/java/Model/Direccion.java</file>
-            <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/web/carrito.xhtml</file>
-            <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/src/java/DAO/TransaccionDB.java</file>
-            <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/src/java/Model/Pedido.java</file>
-            <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/web/frame.xhtml</file>
-            <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/src/java/Model/Usuario.java</file>
-            <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/src/java/Controller/beanTransaccion.java</file>
-            <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/src/java/DAO/ProductoDB.java</file>
-            <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/src/java/Model/Tipo/TipoDespacho.java</file>
-            <file>file:/C:/Users/Usuario/Desktop/Programación%20V/Project/web/Producto.xhtml</file>
->>>>>>> c1724d7ee211a75322bf31d0f71b7b974209fc72
+            <file>file:/C:/Users/Jesus/Desktop/proyect/SDVAP/src/java/Controller/beanTransaccion.java</file>
+            <file>file:/C:/Users/Jesus/Desktop/proyect/SDVAP/web/carrito.xhtml</file>
+            <file>file:/C:/Users/Jesus/Desktop/proyect/SDVAP/web/mantenimientoProductos.xhtml</file>
         </group>
     </open-files>
 </project-private>

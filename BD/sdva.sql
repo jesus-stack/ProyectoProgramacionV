@@ -301,7 +301,7 @@ create procedure [dbo].[SelecionarTodosClientes]
 as 
 begin 
 select *from Cliente inner join Usuario on cliente.id=usuario.id
-end;
+end
 go
 
 
@@ -323,29 +323,9 @@ go
 
 
 
----Store cliente-Direccion
---insertar Cliente-Direccion
-create procedure [dbo].[InsertarClienteDireccion]
-@idCliente bigint,
-@idDireccion int,
-@diaInicio int,
-@diaFinal int,
-@horaInicio time(7),
-@horaFinal time(7)
-as 
-begin 
-Insert into ClienteDireccion (idCliente,idDireccion,diaInicio,diaFinal,horaInicio,horaFinal) values (@idCliente,@idDireccion,@diaInicio,@diaFinal,@horaInicio,@horaFinal)
-end
 
---selecionar Direccion Especifica del cliente
-create procedure [dbo].[SeleccionarDireccionEspecificaCliente]
-@idCliente bigint,
-@Direccion int
-as
-begin 
-select *from ClienteDireccion where clienteDireccion.idCliente=@idCliente and clienteDireccion.idDireccion=@direccion
-end
-go
+
+
 
 
 
