@@ -39,9 +39,32 @@ public class beanTransaccion implements Serializable {
  Pedido pedido=new Pedido();
   int tipoDespacho;
   int direccion;
-  
+      boolean consultarFactura=true,confirmarpedido=false;
 
-    
+    public boolean isConsultarFactura() {
+        return consultarFactura;
+    }
+
+    public void setConsultarFactura(boolean consultarFactura) {
+        this.consultarFactura = consultarFactura;
+    }
+
+    public boolean isConfirmarpedido() {
+        return confirmarpedido;
+    }
+
+    public void setConfirmarpedido(boolean confirmarpedido) {
+        this.confirmarpedido = confirmarpedido;
+    }
+  
+public void consultar(){
+    consultarFactura=false;
+    confirmarpedido=true;
+}
+  public void confirmar(){
+    consultarFactura=true;
+    confirmarpedido=false;
+}  
  
 
     public Pedido getPedido() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
@@ -205,6 +228,7 @@ public class beanTransaccion implements Serializable {
      //  this.pedido.setDireccion(DireccionDLL.);
        
        }
+       
        
        
        

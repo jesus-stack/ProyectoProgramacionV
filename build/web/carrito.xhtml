@@ -59,11 +59,12 @@
               
               </p:dataView>
                     <div class="label" style="position: absolute;left: 65vw;top: 50vh">
+                        <h:form rendered="#{beanTransaccion.consultarFactura}" >
                         <div style="margin-left: 5vw">
                          <p:outputLabel value="Fecha de entrega: "></p:outputLabel><br/>
                          <p:datePicker ></p:datePicker><br/><br/>
                          <p:outputLabel value="Hora de entrega:"></p:outputLabel><br/>
-                         <p:datePicker id="timeonlyMinMax"  timeOnly="true" pattern="HH:mm" /><br/><br/>
+                         <p:datePicker id="timeonly"  timeOnly="true" pattern="HH:mm" /><br/><br/>
                          <p:outputLabel value="tipo Envio: "></p:outputLabel><br/>
                          <p:selectOneMenu value="#{beanTransaccion.tipoDespacho}"  style="width:20vw">
                              <f:selectItems value="#{beanTransaccion.cmbTipoEnvio()}"></f:selectItems>
@@ -85,22 +86,12 @@
                    
                         
                         
-                        <p:commandButton class="btnconfirmarpedido" value="Consultar factura" onclick="PF('ConsultarFactura').show()" ajax="false"  >
+                            <p:commandButton class="btnconfirmarpedido" actionListener="#{beanTransaccion.consultar()}" value="Consultar factura" onclick="PF('ConsultarFactura').show()" ajax="false"  >
                        
                 </p:commandButton>
-                         
-                    
-                    </div>
-                  
-            
-                </h:form>
-                
-                     
-                <div class="logleft">
-                    
-                </div>
-                <div class="conFactura">
-                    <h:form>
+                        </h:form>
+                       
+                    <h:form rendered="#{beanTransaccion.confirmarpedido}">
                         <h:outputLabel value="SubTotal:    ₡  "/>
                         <h:outputLabel value="#{beanTransaccion.pedido.calcularSubTotal()}"></h:outputLabel>
                            <br></br>
@@ -135,13 +126,21 @@
                          
                            <br/>
                            <br/>
-                            <p:commandButton class="btnconfirmarpedido" value="Confirmar Pedido"  >
+                           <p:commandButton class="btnconfirmarpedido" actionListener="#{beanTransaccion.confirmar()}" ajax="false" value="Confirmar Pedido"  >
                        
                 </p:commandButton>
                           
                     </h:form>
-                </div>
+                    
+                    </div>
+                   
         
+            
+                </h:form>
+                
+                     
+               
+              
                 
                 
                 
