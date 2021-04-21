@@ -8,7 +8,10 @@ package Model;
 import DAO.Conexion.SNMPExceptions;
 import DAO.DireccionDLL;
 import DAO.TransaccionDB;
+import Model.Tipo.TipoDespacho;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -81,8 +84,31 @@ public class Preba extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    Direccion d=DireccionDLL.traerDireccionClientePorId(1);
-        jTextArea1.setText(d.getB().getP().getNombre());
+  Pedido p=new Pedido();
+  p.setSubTotal(1);
+  p.setEstado(0);
+  p.setDireccion(new Direccion());
+  p.getDireccion().setId(1);
+  SimpleDateFormat sp=new SimpleDateFormat("yyyy-MM-dd");
+  p.setFechaEntrega(sp.format(new Date()));
+  p.setHoraEntrega("Guardar");
+  p.setCostoEnvio(0);
+ TipoDespacho t=TipoDespacho.EnvioDirecto;
+ p.setTipoDspacho(t);
+p.setEstado(1);
+
+        try {
+            TransaccionDB.ConfirmarPedido(p);
+        } catch (SNMPExceptions ex) {
+            Logger.getLogger(Preba.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Preba.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Preba.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Preba.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
         
         
     }//GEN-LAST:event_jButton1ActionPerformed

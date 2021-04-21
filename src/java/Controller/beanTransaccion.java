@@ -310,7 +310,7 @@ return aux;
     public void asignarFecha(){
        SimpleDateFormat sp=new SimpleDateFormat("yyyy-MM-dd");
         
-    this.pedido.setFechaEntrega(sp.format(this.fecha));
+    //this.pedido.setFechaEntrega(this.fecha);
     }
        
        public void despachar(int id) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{

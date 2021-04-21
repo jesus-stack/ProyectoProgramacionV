@@ -107,9 +107,9 @@ create table Transaccion(
 id int identity (1,1),
 idCliente bigint,
 idDireccion int,
-fechaSolicitada date,
+fechaSolicitada nvarchar(40),
 fechaEmitida date,
-fechaEntrega date
+fechaEntrega date,
 horaEntrega nvarchar(40),
 envio float,
 tipoPago int,
@@ -543,7 +543,33 @@ set @total=@pendiente+@facturado+@despachado;
 select @pendiente as pendiente,@facturado as facturado,@despachado as despachado,
 @total as total,@contado as contado,@credito as credito
 end
+go
 
+create procedure ReportesPorFecha
+
+@fechaInico date,
+@fechaFinal date
+as
+begin
+declare
+@pendiente int,
+@facturado int,
+@despachado int,
+@total int,
+@contado float,
+@credito float
+
+select @pendiente=COUNT(id) from Transaccion where estado=2 and fechaSolicitada>=@fechaInico and fechaSolicitada>=@fechaFinal;
+select @facturado=COUNT(id) from Transaccion where estado=3 and fechaSolicitada>=@fechaInico and fechaSolicitada>=@fechaFinal;
+select @despachado=COUNT(id) from Transaccion where estado=4 and fechaSolicitada>=@fechaInico and fechaSolicitada>=@fechaFinal;
+select @contado=sum(total) from Transaccion where tipoPago=1 and fechaSolicitada>=@fechaInico and fechaSolicitada>=@fechaFinal;
+select @credito=sum(total) from Transaccion where tipoPago=2 and fechaSolicitada>=@fechaInico and fechaSolicitada>=@fechaFinal;
+set @total=@pendiente+@facturado+@despachado;
+
+select @pendiente as pendiente,@facturado as facturado,@despachado as despachado,
+@total as total,@contado as contado,@credito as credito
+end
+go
 
 
 
@@ -564,19 +590,19 @@ insert into tipoUsuario (id,descripcion) values(4,'Bodeguero')
 
 --insertar cliente--
 insert into usuario(id,contrasenna,estado,tipoUsuario) values (7777777,encryptbypassphrase('password','cli'),1,2)
-Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(7777777,'Lucia','Carolina','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
+Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(7777777,'Lucia','Carolina','Castilla','Quiroz','castillajesusqu@gmail.com',71385759)
 
 insert into usuario(id,contrasenna,estado,tipoUsuario) values (6666666,encryptbypassphrase('password','cli'),1,2)
-Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(6666666,'Jarling','de los Angeles','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
+Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(6666666,'Jarling','de los Angeles','Castilla','Quiroz','castillajesusqu@gmail.com',71385759)
 
 insert into usuario(id,contrasenna,estado,tipoUsuario) values (5555555,encryptbypassphrase('password','cli'),1,2)
-Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(5555555,'Katia','yessenia','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
+Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(5555555,'Katia','yessenia','Castilla','Quiroz','castillajesusqu@gmail.com',71385759)
 
 insert into usuario(id,contrasenna,estado,tipoUsuario) values (4444444,encryptbypassphrase('password','cli'),0,2)
-Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(4444444,'Rene','Javier','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
+Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(4444444,'Rene','Javier','Castilla','Quiroz','castillajesusqu@gmail.com',71385759)
 
 insert into usuario(id,contrasenna,estado,tipoUsuario) values (3333333,encryptbypassphrase('password','cli'),0,2)
-Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(3333333,'Xinia','Mayela','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
+Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(3333333,'Xinia','Mayela','Castilla','Quiroz','castillajesusqu@gmail.com',71385759)
 
 --insert tipoPago--
 insert into tipoPago values(1,'Efectivo')

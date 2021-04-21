@@ -8,8 +8,8 @@ package Model;
 
 import Model.Tipo.TipoDespacho;
 import Model.Tipo.TipoPago;
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
+
 import java.util.LinkedList;
 
 /**
@@ -26,6 +26,7 @@ public class Pedido {
     private TipoPago tipoPago;
     private float Descuento;
     private TipoDespacho tipoDspacho;
+    private float iva;
     private float subTotal;
     private float total;
     private Direccion direccion;
@@ -35,6 +36,14 @@ public class Pedido {
 
     public Pedido() {
         
+    }
+
+    public float getIva() {
+        return iva;
+    }
+
+    public void setIva(float iva) {
+        this.iva = iva;
     }
 
     public int getId() {
