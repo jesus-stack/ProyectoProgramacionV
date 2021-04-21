@@ -15,6 +15,8 @@ import Model.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.naming.NamingException;
 
 /**
@@ -46,7 +48,11 @@ public class UsuarioDLL {
  
  
  AccesoDatos datos=new AccesoDatos();
+
    datos.ejecutaSQL(procedure);
+ 
+ 
+ 
 
  
  }
@@ -258,8 +264,31 @@ public class UsuarioDLL {
     } 
 
    
+       public static LinkedList<Cliente> peticionesClientes() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+           LinkedList<Cliente> clientes=new LinkedList<>();
+           String select="select * from usuario where tipoUsuario=2 and estado=0";
+           ResultSet rs;
+           Cliente cliente;
+           
+           AccesoDatos datos=new AccesoDatos();
+          rs= datos.ejecutaSQLRetornaRS(select);
+           while(rs.next()){
+               cliente=(Cliente) UsuarioXidentificacion(rs.getLong("id"));
+               clientes.add(cliente);
+           }
+       return clientes;
+       }
        
-       
+       public static void AceptarCliente(long id) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+           String update="update usuario set estado=1 where id="+id;
+           AccesoDatos datos=new AccesoDatos();
+           datos.ejecutaSQL(update);
+       }
+        public static void RechazarCliente(long id) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+           String delete="delete cliente where id="+id+" delete usuario where id="+id;
+           AccesoDatos datos=new AccesoDatos();
+           datos.ejecutaSQL(delete);
+       }
        
        }
        

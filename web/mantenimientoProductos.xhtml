@@ -31,13 +31,13 @@
                   <br/>
                   <br/>
            
-                  <p:panelGrid columns="2" >
+                  <p:panelGrid columns="1" >
                       <p:commandButton  value="Guardar" ajax="false" actionListener="#{beanProducto.AgregarProducto()}" styleClass="btn"  icon="fa fa-save ">
                       </p:commandButton>
-                      <p:commandButton  value="Nuevo"  ajax="false" actionListener="#{beanProducto.nuevo()}" styleClass="btn new"  icon="fa fa-save ">
+                      <p:commandButton  value="Nuevo"  ajax="false" actionListener="#{beanProducto.nuevo()}" styleClass="btn new"  icon="fa fa-file ">
                       </p:commandButton>
-                      <p:commandButton  value="Buscar"  styleClass="btn new"  icon="fas fa-search" />
-                        <p:commandButton  value="Ayuda" styleClass="btn help"   icon="fas fa-question" />
+                    
+                      <p:commandButton  value="Ayuda" styleClass="btn help"  onclick="PF('help').show()"  icon="fas fa-question" />
                   
                   </p:panelGrid>
                  
@@ -95,6 +95,10 @@
                    
               
                     </p:dataTable>
+                <p:dialog class="log" modal="true" showEffect="fade" header="AYUDA" widgetVar="help">
+                    <h:outputLabel class="fas fa-question fas-3x"></h:outputLabel><br/><br/>
+                    <h:outputLabel value="En esta Pantalla Podra manipular el \ncatalogo de ventas para su negocio"></h:outputLabel>
+                </p:dialog>
                    
                
             </ui:define>

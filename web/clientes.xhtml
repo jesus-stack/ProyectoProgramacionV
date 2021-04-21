@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./frame.xhtml">
+
+            <ui:define name="content">
+                 <center> <table border="0" cellspacing="36" cellpadding="15">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <h> Peticiones de aceptacion de clientes</h>
+                                
+                                </th>
+                            </tr>
+                        </thead>
+                      
+                    </table>
+                </center>
+                <p:dataTable styleClass="tablamantenimiento"  widgetVar="tabla" value="#{beanUsuario.clientes}" var="cli" >
+                  
+                  <p:column class="table" headerText="Nombre">
+                      <h:outputText value="#{cli.nombre}"></h:outputText>
+                </p:column>
+                 <p:column  class="table" headerText="cli Segundo Nombre">
+                     <h:outputText value="#{cli.segundoNombre}"></h:outputText>
+                </p:column>
+                 <p:column headerText="Apellido">
+                     <h:outputText value="#{cli.apellido}"></h:outputText>
+                </p:column >
+                    <p:column headerText="Segundo Apellido" >
+                        <h:outputText value="#{cli.segundoApellido}"></h:outputText>
+                </p:column>
+                 <p:column headerText="Telefono" >
+                     <h:outputText value="#{cli.telefono}"></h:outputText>
+                </p:column>
+               
+                <p:column  style="width: 100px">
+                   
+                             <h:form>
+                                 <p:commandButton icon="fas fa-user-check" value="Aceptar" actionListener="#{beanUsuario.aceptarCliente(cli)}" ajax="false"  styleClass="btnedit"></p:commandButton>
+                               
+                             </h:form>           
+                </p:column>
+                <p:column style="width: 100px">
+                                <h:form>
+                                    <p:commandButton onclick="PF('rechazar').show()" icon="fas fa-times-circle"  value="Rechazar" styleClass="btndelete"></p:commandButton>
+                                    <p:dialog class="log" header="Rechazar" showEffect="fade" modal="true" widgetVar="rechazar" width="300">
+                                        <center>
+                                            <p:outputLabel class="label" value="Por Favor digite el motivo del rechazo"></p:outputLabel>
+                                            <br/><br/><br/>
+                                        <p:inputTextarea value="#{beanUsuario.mensajerechazo}"></p:inputTextarea><br/><br/><br/>
+                                        <p:commandButton ajax="false" value="Confirmar" actionListener="#{beanUsuario.rechazarCliente(cli)}"></p:commandButton>
+                                        </center>
+                                    </p:dialog>
+                                </h:form>
+                            </p:column>     
+                      
+                   
+              
+                    </p:dataTable>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

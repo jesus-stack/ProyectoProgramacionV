@@ -205,7 +205,11 @@ public class beanDireccion implements Serializable {
         barrios= lista;
     }
             public void InsertarProvincia() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
-                
+                if(provincia==0||canton==0||distrito==0||barrio==0){
+                          FacesContext.getCurrentInstance().addMessage("msg",
+                         new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","NO se permiten campos nulos"));
+                return;
+                }
                 try{
                     if(direccion==0){
                 DireccionDLL.InsertarDireccion(provincia, canton, distrito, barrio,sennas);

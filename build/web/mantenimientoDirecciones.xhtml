@@ -36,7 +36,7 @@
                        <f:selectItems value="#{beanDireccion.barrios}"></f:selectItems>
                   </p:selectOneMenu>
                    <p:outputLabel class="label" for="senna" value="Señas"></p:outputLabel>
-                   <p:inputText id="senna" value="#{beanDireccion.sennas}" required="true" requiredMessage="Debe digitar akgunas Señas"></p:inputText>
+                   <p:inputText id="senna" value="#{beanDireccion.sennas}" required="true" requiredMessage="Debe digitar algunas Señas"></p:inputText>
         <br/>
                   <br/>
                   <br/>
@@ -44,12 +44,12 @@
                   <br/>
                   <br/>
            
-                  <p:panelGrid columns="2" >
+                  <p:panelGrid columns="1" >
                       <p:commandButton  value="Guardar" ajax="false" actionListener="#{beanDireccion.InsertarProvincia()}" styleClass="btn"  icon="fa fa-save ">
                       </p:commandButton>
-                      <p:commandButton  value="Nuevo"  ajax="false" actionListener="#{beanDireccion.nuevo()}" styleClass="btn new"  icon="fa fa-save ">
+                      <p:commandButton  value="Nuevo"  ajax="false" actionListener="#{beanDireccion.nuevo()}" styleClass="btn new"  icon="fa fa-file ">
                       </p:commandButton>
-                      <p:commandButton  value="Buscar"  styleClass="btn new"  icon="fas fa-search" />
+                     
                         <p:commandButton  value="Ayuda" styleClass="btn help"   icon="fas fa-question" />
                   
                   </p:panelGrid>
