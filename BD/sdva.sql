@@ -108,18 +108,22 @@ id int identity (1,1),
 idCliente bigint,
 idDireccion int,
 fechaSolicitada date,
-fechaEmitida datetime,
-horaEntrega time,
+fechaEmitida date,
+fechaEntrega date
+horaEntrega nvarchar(40),
 envio float,
 tipoPago int,
 descuento float,
-tipoDespacho int,
+tipoDespacho nvarchar(50),
 subtotal float,
 iva float,
 total float,
 estado int,
 primary key (id)
 )
+
+
+
 
 --creacion de esto de transacion--
 create table estadoTransaccion(
@@ -414,6 +418,24 @@ select producto.*,TransaccionProducto.cantidad from TransaccionProducto inner jo
 end
 GO
 
+create  procedure [dbo].[Insertartransaccion]
+@idDireccion int,
+@fSolicitada date,
+@hEntrega time,
+@costoEnvio float,
+@tipoDespacho nvarchar(50),
+@subTotal float,
+@Iva float,
+@total float,
+@estado int
+as
+begin 
+insert into transaccion(idDireccion,fechaSolicitada,horaEntrega,envio,tipoDespacho,subtotal,iva,total,estado) values(@idDireccion,@fsolicitada,@hEntrega,@costoEnvio,@tipoDespacho,@subTotal,@Iva,@total,@estado)
+end 
+go
+
+
+
 create Procedure AgregarProductoaCarrito
 @idTransaccion int,
 @idProducto int,
@@ -498,6 +520,7 @@ select *from direccion where idCliente=@idCliente and estado=1
 end
 go
 
+
 --Pocedimineto para reportes--
 create procedure Reportes
 as
@@ -529,6 +552,8 @@ insert into estadoTransaccion values (1,'Pendiente')
 insert into estadoTransaccion values (2,'Solicitado')
 insert into estadoTransaccion values (3,'Facturado')
 insert into estadoTransaccion values (4,'Procesado')
+
+
 
 
 ---Insert Tipos de usuarios

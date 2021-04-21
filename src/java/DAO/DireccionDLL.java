@@ -182,6 +182,29 @@ public class DireccionDLL {
         }
         return b;
       }
+             
+             
+     public static Direccion traerDireccionClientePorId(int id){
+     String select="select *from direccion where id="+id;
+     Direccion direccion=new Direccion();
+     
+         try {
+             AccesoDatos accesoDatos=new AccesoDatos();
+             ResultSet rsPA=accesoDatos.ejecutaSQLRetornaRS(select);
+             
+             while(rsPA.next()){
+             direccion.setB(TraerBarrioPorId(rsPA.getInt("codProvincia"), rsPA.getInt("codCanton"), rsPA.getInt("codDistrito"), rsPA.getInt("codBarrio")) );
+             direccion.setCliente((Cliente)UsuarioDLL.UsuarioXidentificacion(rsPA.getInt("idCliente")));
+             direccion.setSennas(rsPA.getString("Sennas"));
+             direccion.setId(rsPA.getInt("id"));
+             
+             
+             }
+             
+         } catch (Exception e) {
+         }
+     return direccion;
+     }        
       
     public static LinkedList<Provincia> Provincias() throws SNMPExceptions{
         String select = "select * from Provincia";

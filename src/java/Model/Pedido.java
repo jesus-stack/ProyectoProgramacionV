@@ -20,8 +20,8 @@ public class Pedido {
     
     private int id;
     private Cliente cliente;
-    private Date FechaEntrega;
-    private Time horaSolicitada;
+    private String FechaEntrega;
+    private String horaEntrega;
     private float costoEnvio;
     private TipoPago tipoPago;
     private float Descuento;
@@ -30,7 +30,7 @@ public class Pedido {
     private float total;
     private Direccion direccion;
     private LinkedList<TransaccionProducto> productos=new LinkedList<>();
-    private String Estado;
+    private int Estado;
     String listaProductos;
 
     public Pedido() {
@@ -53,31 +53,25 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public Date getFechaSolicitada() {
+    public String getFechaEntrega() {
         return FechaEntrega;
     }
 
-    public void setFechaSolicitada(Date fechaSolicitada) {
-        this.FechaEntrega = fechaSolicitada;
-    }
-
-    public Date getFechaEntrega() {
-        return FechaEntrega;
-    }
-
-    public void setFechaEntrega(Date FechaEntrega) {
+    public void setFechaEntrega(String FechaEntrega) {
         this.FechaEntrega = FechaEntrega;
     }
 
-    public Time getHoraSolicitada() {
-        return horaSolicitada;
+
+
+    public String getHoraEntrega() {
+        return horaEntrega;
     }
 
-    public void setHoraSolicitada(Time horaSolicitada) {
-        this.horaSolicitada = horaSolicitada;
+    public void setHoraEntrega(String horaEntrega) {
+        this.horaEntrega = horaEntrega;
     }
 
- 
+  
 
     public float getCostoEnvio() {
         return costoEnvio;
@@ -145,11 +139,11 @@ public class Pedido {
         this.productos = productos;
     }
 
-    public String getEstado() {
+    public int getEstado() {
         return Estado;
     }
 
-    public void setEstado(String Estado) {
+    public void setEstado(int Estado) {
         this.Estado = Estado;
     }
     
@@ -193,38 +187,32 @@ public class Pedido {
     return (calcularTotal()*porcentaje)/100;
     }
      
-     public double costoEnvio(){
-     if(tipoDspacho!=null){
-     if(tipoDspacho.getNumero()==2){
-         
-     switch(direccion.getB().getP().getCodigo()){
-         case 1:
-             return 1700;
-             
-             
-             
-         case 2:
-             return 1200;
-             
-         case 3:
-             return 1300;
-         case 4:
-             return 1850;
-         case 5:
-             return 3000;
-         case 6:
-         case 7:
-             return 2100;
-         
-            
-                
-            
-     
-     }
-     }
-     }
-    return 0;
-     }
+    public double costoEnvio() {
+        if (tipoDspacho != null) {
+            if (tipoDspacho.getNumero() == 2) {
+
+                switch (direccion.getB().getP().getCodigo()) {
+                    case 1:
+                        return 1700;
+
+                    case 2:
+                        return 1200;
+
+                    case 3:
+                        return 1300;
+                    case 4:
+                        return 1850;
+                    case 5:
+                        return 3000;
+                    case 6:
+                    case 7:
+                        return 2100;
+
+                }
+            }
+        }
+        return 0;
+    }
     
     
     
