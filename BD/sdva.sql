@@ -107,7 +107,7 @@ create table Transaccion(
 id int identity (1,1),
 idCliente bigint,
 idDireccion int,
-fechaSolicitada nvarchar(40),
+fechaSolicitada date,
 fechaEmitida date,
 fechaEntrega date,
 horaEntrega nvarchar(40),
@@ -421,7 +421,8 @@ GO
 create  procedure [dbo].[Insertartransaccion]
 @idDireccion int,
 @fSolicitada date,
-@hEntrega time,
+@fechaEntrega date,
+@hEntrega nvarchar(40),
 @costoEnvio float,
 @tipoDespacho nvarchar(50),
 @subTotal float,
@@ -430,9 +431,10 @@ create  procedure [dbo].[Insertartransaccion]
 @estado int
 as
 begin 
-insert into transaccion(idDireccion,fechaSolicitada,horaEntrega,envio,tipoDespacho,subtotal,iva,total,estado) values(@idDireccion,@fsolicitada,@hEntrega,@costoEnvio,@tipoDespacho,@subTotal,@Iva,@total,@estado)
+insert into transaccion(idDireccion,fechaSolicitada,fechaEntrega,horaEntrega,envio,tipoDespacho,subtotal,iva,total,estado) values(@idDireccion,@fsolicitada,@fechaEntrega,@hEntrega,@costoEnvio,@tipoDespacho,@subTotal,@Iva,@total,@estado)
 end 
 go
+
 
 
 

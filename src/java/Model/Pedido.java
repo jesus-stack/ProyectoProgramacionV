@@ -20,7 +20,7 @@ public class Pedido {
     
     private int id;
     private Cliente cliente;
-    private String FechaEntrega;
+    private Date FechaEntrega;
     private String horaEntrega;
     private float costoEnvio;
     private TipoPago tipoPago;
@@ -62,11 +62,11 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public String getFechaEntrega() {
+    public Date getFechaEntrega() {
         return FechaEntrega;
     }
 
-    public void setFechaEntrega(String FechaEntrega) {
+    public void setFechaEntrega(Date FechaEntrega) {
         this.FechaEntrega = FechaEntrega;
     }
 

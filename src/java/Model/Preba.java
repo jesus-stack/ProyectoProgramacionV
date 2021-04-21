@@ -90,7 +90,7 @@ public class Preba extends javax.swing.JFrame {
   p.setDireccion(new Direccion());
   p.getDireccion().setId(1);
   SimpleDateFormat sp=new SimpleDateFormat("yyyy-MM-dd");
-  p.setFechaEntrega(sp.format(new Date()));
+  //p.setFechaEntrega(sp.format(new Date()));
   p.setHoraEntrega("Guardar");
   p.setCostoEnvio(0);
  TipoDespacho t=TipoDespacho.EnvioDirecto;
