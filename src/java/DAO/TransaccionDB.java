@@ -145,13 +145,14 @@ return pedidos;
         
          public static int ConfirmarPedido(Pedido pedido) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
              
- String procedure1="insert into transaccion(idDireccion,fechaSolicitada,fechaEntrega,horaEntrega,envio,tipoDespacho,subtotal,iva,total,estado) values("+pedido.getId()
-         +",GETDATE(),'"+pedido.getFechaEntrega()+"', '"+pedido.getHoraEntrega()+"',"+pedido.costoEnvio()+", '"+pedido.getTipoDspacho().getDes()
-         +"' ,"+pedido.calcularSubTotal()+","+pedido.calcularIva()+","+pedido.calcularTotal()+",'"+pedido.getEstado()+"')";
+//String procedure1="update transaccion(idDireccion,fechaSolicitada,envio,tipoDespacho,subtotal,iva,total,estado) values("+pedido.getDireccion().getId()
+        // +",GETDATE(),"+pedido.costoEnvio()+
+       //  ","+pedido.calcularSubTotal()+","+pedido.calcularIva()+","+pedido.calcularTotal()+","+pedido.getEstado()+") where id="+pedido.getId();
+ String update="update transaccion set estado=2 where id="+pedido.getId();
  
  
      AccesoDatos datos=new AccesoDatos();
-     return datos.ejecutaSQL(procedure1);
+     return datos.ejecutaSQL(update);
  
  
  }

@@ -23,8 +23,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -321,7 +323,13 @@ return aux;
        
        public void confirmarTransaccion() throws SNMPExceptions, NamingException, SQLException, ClassNotFoundException{
            pedido.setEstado(2);
-       TransaccionDB.ConfirmarPedido(pedido);
+           try{
+                 TransaccionDB.ConfirmarPedido(this.getPedido());
+           }
+           catch(Exception e){
+               FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(e.getMessage()));
+           }
+     
        }
        
        
