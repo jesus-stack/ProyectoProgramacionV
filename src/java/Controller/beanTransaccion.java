@@ -13,7 +13,6 @@ import Model.Direccion;
 import Model.Pedido;
 import Model.Producto;
 import Model.Tipo.TipoDespacho;
-import Model.TransaccionProducto;
 import Model.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -28,7 +27,6 @@ import java.util.logging.Logger;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-import javax.mail.internet.MailDateFormat;
 import javax.naming.NamingException;
 
 
@@ -46,8 +44,21 @@ public class beanTransaccion implements Serializable {
   int direccion;
   Date fecha=new Date();
 LinkedList<Pedido> pedidosDespachar;
+LinkedList<Pedido> pedidosFacturar;
   boolean consultarFactura=true,confirmarpedido=false;
   String hor;
+
+    public LinkedList<Pedido> getPedidosFacturar() throws SNMPExceptions, NamingException, SQLException, ClassNotFoundException {
+        pedidosFacturar=TransaccionDB.seleccionarPendienteFacturar();
+        return pedidosFacturar;
+    }
+
+    public void setPedidosFacturar(LinkedList<Pedido> pedidosFacturar) {
+        this.pedidosFacturar = pedidosFacturar;
+    }
+  
+  
+  
 
     public String getHor() {
         return hor;
@@ -147,6 +158,7 @@ public void consultar(){
     public beanTransaccion() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
   tipoDespacho=-1;
   pedidosDespachar=TransaccionDB.seleccionarPendienteDespachar();
+  pedidosFacturar=TransaccionDB.seleccionarPendienteFacturar();
     }
     
     public int cantidadProducto() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
@@ -182,7 +194,7 @@ public void consultar(){
     }
     
     
-    
+   
     
     public LinkedList<Direccion> ListaDirecciones() throws SNMPExceptions{     
     return DireccionDLL.listaTodasDireccionCliente(pedido.getCliente().getId());
@@ -317,6 +329,14 @@ return aux;
            TransaccionDB.despachar(id);
            pedidosDespachar=TransaccionDB.seleccionarPendienteDespachar();
       }
+        public void Facturar(int id) throws SNMPExceptions, NamingException, SQLException, SQLException, SQLException, SQLException, ClassNotFoundException{
+            
+    
+           TransaccionDB.Facturar(id);
+           pedidosFacturar=TransaccionDB.seleccionarPendienteFacturar();
+    
+        }
+    
        
        
        public void confirmarTransaccion() throws SNMPExceptions, NamingException, SQLException, ClassNotFoundException{
