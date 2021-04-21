@@ -256,7 +256,8 @@ public class UsuarioDLL {
         }
         return tipo;
     } 
-       
+
+   
        
        
        

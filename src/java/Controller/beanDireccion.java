@@ -18,6 +18,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.naming.NamingException;
@@ -204,10 +205,22 @@ public class beanDireccion implements Serializable {
         barrios= lista;
     }
             public void InsertarProvincia() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+                
+                try{
+                    if(direccion==0){
                 DireccionDLL.InsertarDireccion(provincia, canton, distrito, barrio,sennas);
-                   Usuario user=(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+                }else{
+                    DireccionDLL.Editar(direccion, provincia, canton, distrito, barrio, sennas);
+                }
+                Usuario user=(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
         direcciones=DireccionDLL.listaTodasDireccionCliente(user.getId());
+         FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_INFO,"EXITO", "\nRegistro almacenado Correctamente ");
+          FacesContext.getCurrentInstance().addMessage("msg", message);
                nuevo();
+                }catch(Exception e){
+                     FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR","Ha ocurrido un problema, intentelo mas tarde" );
+          FacesContext.getCurrentInstance().addMessage("msg", message);
+                }
             }
             
        public void nuevo(){
@@ -232,5 +245,17 @@ public class beanDireccion implements Serializable {
            llenarDistritos();
            llenarBarrios();
        }
+public void eliminar(Direccion d) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+try{
+    DireccionDLL.Eliminar(d.getId());
+     FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_INFO,"EXITO", "\nDireccion Eliminada ");
+          FacesContext.getCurrentInstance().addMessage("msg", message);
+ Usuario user=(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        direcciones=DireccionDLL.listaTodasDireccionCliente(user.getId());
+}catch(Exception e){
+      FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR","Ha ocurrido un problema, intentelo mas tarde" );
+          FacesContext.getCurrentInstance().addMessage("msg", message);
+}
+}
 }
 

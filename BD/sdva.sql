@@ -108,7 +108,7 @@ id int identity (1,1),
 idCliente bigint,
 idDireccion int,
 fechaSolicitada date,
-fechaEmitida date,
+fechaEmitida datetime,
 horaEntrega time,
 envio float,
 tipoPago int,
@@ -192,30 +192,6 @@ go
 
 
 
---Insert tipo Transaccion--
-insert into estadoTransaccion values (1,'Pendiente')
-insert into estadoTransaccion values (2,'Solicitado')
-insert into estadoTransaccion values (3,'Facturado')
-insert into estadoTransaccion values (4,'Procesado')
-
-
----Insert Tipos de usuarios
-insert into tipoUsuario (id,descripcion) values(1,'Administrador')
-insert into tipoUsuario (id,descripcion) values(2,'Cliente')
-insert into tipoUsuario (id,descripcion) values(3,'Cajero')
-insert into tipoUsuario (id,descripcion) values(4,'Bodeguero')
-
---insertar cliente--
-insert into usuario(id,contrasenna,estado,tipoUsuario) values (7777777,encryptbypassphrase('password','cli'),1,2)
-Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(7777777,'Lucia','Carolina','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
-
-
---Insertar administrador
-insert into usuario(id,contrasenna,estado,tipoUsuario) values (155821845336,encryptbypassphrase('password','admin'),1,1)
-insert into usuario(id,contrasenna,estado,tipoUsuario) values (402400637,encryptbypassphrase('password','admin'),1,1)
-
-Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(155821845336,'Jesus','Maria','Castilla','Quiroz','jcastilla@est.utn.ac.cr',64862101)
-Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(402400637,'Hannyer','Smykel','Pitterson','Martinez','hpitterson@est.utn.ac.cr',60117773)
 go
 
 --insert direccioness--
@@ -325,7 +301,7 @@ create procedure [dbo].[SelecionarTodosClientes]
 as 
 begin 
 select *from Cliente inner join Usuario on cliente.id=usuario.id
-end;
+end
 go
 
 
@@ -347,38 +323,9 @@ go
 
 
 
----Store cliente-Direccion
---insertar Cliente-Direccion
-create procedure [dbo].[InsertarClienteDireccion]
-@idCliente bigint,
-@idDireccion int,
-@diaInicio int,
-@diaFinal int,
-@horaInicio time(7),
-@horaFinal time(7)
-as 
-begin 
-Insert into ClienteDireccion (idCliente,idDireccion,diaInicio,diaFinal,horaInicio,horaFinal) values (@idCliente,@idDireccion,@diaInicio,@diaFinal,@horaInicio,@horaFinal)
-end
-go
---seleccionar direcciones de cliente
-create procedure [dbo].[SeleccionarDireccionesCliente]
-@idCliente bigint
-as
-begin 
-select *from ClienteDireccion where clienteDireccion.idCliente=@idCliente
-end
-go
 
---selecionar Direccion Especifica del cliente
-create procedure [dbo].[SeleccionarDireccionEspecificaCliente]
-@idCliente bigint,
-@Direccion int
-as
-begin 
-select *from ClienteDireccion where clienteDireccion.idCliente=@idCliente and clienteDireccion.idDireccion=@direccion
-end
-go
+
+
 
 
 
@@ -436,7 +383,7 @@ create procedure SeleccionarProductoXid
 @id int
 as
 begin 
-select * from producto where producto.id=@id and estado=1
+select * from producto where producto.id=@id
 end
 go
 
@@ -546,16 +493,89 @@ create procedure[dbo].[SeleccionarDirecCliente]
 @idCliente bigint
 as
 begin
-select *from direccion where idCliente=@idCliente
+select *from direccion where idCliente=@idCliente and estado=1
 
 end
 go
 
+--Pocedimineto para reportes--
+create procedure Reportes
+as
+begin
+declare
+@pendiente int,
+@facturado int,
+@despachado int,
+@total int,
+@contado float,
+@credito float
+
+select @pendiente=COUNT(id) from Transaccion where estado=2;
+select @facturado=COUNT(id) from Transaccion where estado=3;
+select @despachado=COUNT(id) from Transaccion where estado=4;
+select @contado=sum(total) from Transaccion where tipoPago=1;
+select @credito=sum(total) from Transaccion where tipoPago=2;
+set @total=@pendiente+@facturado+@despachado;
+
+select @pendiente as pendiente,@facturado as facturado,@despachado as despachado,
+@total as total,@contado as contado,@credito as credito
+end
 
 
 
 
+--Insert tipo Transaccion--
+insert into estadoTransaccion values (1,'Pendiente')
+insert into estadoTransaccion values (2,'Solicitado')
+insert into estadoTransaccion values (3,'Facturado')
+insert into estadoTransaccion values (4,'Procesado')
 
+
+---Insert Tipos de usuarios
+insert into tipoUsuario (id,descripcion) values(1,'Administrador')
+insert into tipoUsuario (id,descripcion) values(2,'Cliente')
+insert into tipoUsuario (id,descripcion) values(3,'Cajero')
+insert into tipoUsuario (id,descripcion) values(4,'Bodeguero')
+
+--insertar cliente--
+insert into usuario(id,contrasenna,estado,tipoUsuario) values (7777777,encryptbypassphrase('password','cli'),1,2)
+Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(7777777,'Lucia','Carolina','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
+
+insert into usuario(id,contrasenna,estado,tipoUsuario) values (6666666,encryptbypassphrase('password','cli'),1,2)
+Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(6666666,'Jarling','de los Angeles','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
+
+insert into usuario(id,contrasenna,estado,tipoUsuario) values (5555555,encryptbypassphrase('password','cli'),1,2)
+Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(5555555,'Katia','yessenia','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
+
+insert into usuario(id,contrasenna,estado,tipoUsuario) values (4444444,encryptbypassphrase('password','cli'),0,2)
+Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(4444444,'Rene','Javier','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
+
+insert into usuario(id,contrasenna,estado,tipoUsuario) values (3333333,encryptbypassphrase('password','cli'),0,2)
+Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(3333333,'Xinia','Mayela','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
+
+--insert tipoPago--
+insert into tipoPago values(1,'Efectivo')
+insert into tipoPago values(2,'Credito')
+
+
+
+--Insertar administrador
+insert into usuario(id,contrasenna,estado,tipoUsuario) values (155821845336,encryptbypassphrase('password','admin'),1,1)
+insert into usuario(id,contrasenna,estado,tipoUsuario) values (402400637,encryptbypassphrase('password','admin'),1,1)
+
+Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(155821845336,'Jesus','Maria','Castilla','Quiroz','jcastilla@est.utn.ac.cr',64862101)
+Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(402400637,'Hannyer','Smykel','Pitterson','Martinez','hpitterson@est.utn.ac.cr',60117773)
+--Insertar bodeguero
+insert into usuario(id,contrasenna,estado,tipoUsuario) values (1111111,encryptbypassphrase('password','bod'),1,4)
+
+
+Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(1111111,'Sebastian','Jose','Castro','Castilla','hpitterson@est.utn.ac.cr',60117773)
+
+--insert cajero
+insert into usuario(id,contrasenna,estado,tipoUsuario) values (2222222,encryptbypassphrase('password','caj'),1,3)
+
+
+Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(2222222,'Jose','Julian','Castro','Castilla','hpitterson@est.utn.ac.cr',60117773)
 
 --insert de provincia,cantones,distritos,barrios
 
@@ -15993,6 +16013,11 @@ INSERT [dbo].[Barrio] ([Cod_Provincia], [Cod_Canton], [Cod_Distrito], [Cod_Barri
 
 
 insert into direccion (codProvincia,codCanton,codDistrito,codBarrio,Sennas,idCliente) values(4,10,1,105,'De la escuela 100 mtrs oeste ', 7777777)
+
+insert into direccion (codProvincia,codCanton,codDistrito,codBarrio,Sennas,idCliente) values(4,10,1,105,'De la escuela 100 mtrs oeste ', 6666666)
+insert into direccion (codProvincia,codCanton,codDistrito,codBarrio,Sennas,idCliente) values(4,10,1,105,'De la escuela 100 mtrs oeste ', 5555555)
+insert into direccion (codProvincia,codCanton,codDistrito,codBarrio,Sennas,idCliente) values(4,10,1,105,'De la escuela 100 mtrs oeste ', 4444444)
+insert into direccion (codProvincia,codCanton,codDistrito,codBarrio,Sennas,idCliente) values(4,10,1,105,'De la escuela 100 mtrs oeste ', 3333333)
 
 
 

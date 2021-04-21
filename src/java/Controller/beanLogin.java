@@ -27,7 +27,7 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class beanLogin implements Serializable {
 private  Usuario usuario=new Usuario();
-private boolean mantenimiento,facturacion,pedidos,reportes;
+private boolean mantenimiento,facturacion,pedidos,reportes,despachar;
 private String nombre;
 
 
@@ -60,6 +60,22 @@ private String nombre;
         this.mantenimiento = mantenimiento;
     }
 
+    public boolean isDespachar() {
+       boolean resultado=false;
+        if(usuario.getTipo()!=null){
+          if(usuario.getTipo().getId()==1||usuario.getTipo().getId()==4){
+               resultado=true;
+           }
+        }
+            
+        
+        return resultado;
+    }
+
+    public void setDespachar(boolean despachar) {
+        this.despachar = despachar;
+    }
+
     public boolean isFacturacion() {
    
         boolean resultado=false;
@@ -80,8 +96,8 @@ private String nombre;
     public boolean isPedidos() {
       boolean resultado=false;
         if(usuario.getTipo()!=null){
-         
-               resultado=true;
+         if(usuario.getTipo().getId()==2){
+               resultado=true;}
            
         }
             
@@ -138,18 +154,21 @@ private String nombre;
            }
             if(usuario1.isEstado()==true&&usuario1.getContrasenna().equals(this.getUsuario().getContrasenna())){
                 this.setUsuario(usuario1);
-                context.getExternalContext().getSessionMap().put("user", this.getUsuario());
-               context.addMessage(null, mensajeB);
+              
+               context.addMessage("msg", mensajeB);
+                FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR","Ha ocurrido un problema, intentelo mas tarde" );
+          FacesContext.getCurrentInstance().addMessage("msg", message);
+                 context.getExternalContext().getSessionMap().put("user", this.getUsuario());
              
               
             }
             else{
                   this.setUsuario(new Usuario());
-                context.addMessage(null, mensajeM);
+                context.addMessage("msg", mensajeM);
             }
             
         } catch (Exception e) {
-            context.addMessage(null, mensajeM);
+            context.addMessage("msg", mensajeM);
         }
         finally{
           

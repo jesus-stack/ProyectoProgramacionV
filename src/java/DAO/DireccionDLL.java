@@ -305,6 +305,18 @@ public class DireccionDLL {
                datos.ejecutaSQL(Insert);
              
            }
+           public static void Editar(int direccion,int Provincia,int canton,int distrito,int barrio,String sennas) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+               String insert="update Direccion set codProvincia="+Provincia+
+                       ",codCanton="+canton+",codDistrito="+distrito+",codbarrio="+barrio+
+                       ",Sennas='"+sennas+"' where id="+direccion;
+               AccesoDatos datos=new AccesoDatos();
+               datos.ejecutaSQL(insert);
+           }
+           public static void Eliminar(int direccion) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+               String delete=" update Direccion set estado=0 where id="+direccion;
+                 AccesoDatos datos=new AccesoDatos();
+               datos.ejecutaSQL(delete);
+           }
       
       
       

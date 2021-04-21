@@ -84,6 +84,9 @@
    
        
     }
+    .icon-log *{
+        color: brown;
+    }
 .log-container{
     align-items:center;
     position: absolute !important;
@@ -118,5 +121,11 @@
    font-weight: bold;
    font-size: 25px;
    margin-bottom: 10px;
+}
+.ui-growl{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    z-index: 9999;
 }
 

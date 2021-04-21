@@ -72,10 +72,16 @@ private UploadedFile imagen;
     }
     
     public void AgregarProducto() throws IOException, SNMPExceptions{
+          if(imagen.getFileName()==null){
+                 FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR", "\ndebe elegir una foto ");
+          FacesContext.getCurrentInstance().addMessage("msg", message);
+          return;
+            }
         try{
+         
           producto.setFoto(imagen.getFileName());
   ProductoDB.AgregarProducto(producto);
-      FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_INFO,"EXITO", "\nProducto registrado ");
+      FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_INFO,"EXITO", "\nRegistro almacenado Correctamente ");
           FacesContext.getCurrentInstance().addMessage("msg", message);
           producto=new Producto();
           
@@ -110,8 +116,9 @@ private UploadedFile imagen;
            return productos;
 }
  
- public void editarProducto(Producto producto){
+ public void editarProducto(Producto producto) throws Exception{
      this.setProducto(producto);
+    
  }
 
 }

@@ -22,7 +22,7 @@
          
          
  
-        <title>Sistema</title>
+        <title>S D V A</title>
         <h:outputStylesheet library="css" name="menu.css"/>
     </h:head>
 
@@ -114,30 +114,30 @@
                         <p:graphicImage class="icon"  library="img" name="pedido.png"></p:graphicImage>
                         <h:outputLabel class="itemlabel" value="Pedidos" ></h:outputLabel>
                     </p:menuitem> 
-                    <p:menuitem class="tabitemm" outcome="/mantenimientoDirecciones" >
+                    <p:menuitem class="tabitemm" outcome="/mantenimientoDirecciones" rendered="#{beanLogin.pedidos}">
                         <f:param name="i" value="3"/>
                         <p:graphicImage class="icon"  library="img" name="mantenimiento.png"></p:graphicImage>
                         <h:outputLabel class="itemlabel" value="Direcciones"></h:outputLabel>
                     </p:menuitem> 
-                      <p:menuitem class="tabitemm" outcome="/mantenimientoDirecciones" rendered="#{beanLogin.mantenimiento}">
-                        <f:param name="i" value="3"/>
+                      <p:menuitem class="tabitemm" outcome="/mantenimientoProductos" rendered="#{beanLogin.mantenimiento}">
+                        <f:param name="i" value="2"/>
                         <p:graphicImage class="icon"  library="img" name="mantenimiento.png"></p:graphicImage>
-                        <h:outputLabel class="itemlabel" value="Direcciones"></h:outputLabel>
+                        <h:outputLabel class="itemlabel" value="Catalogo Venta"></h:outputLabel>
                     </p:menuitem> 
                     
                     <p:menuitem class="tabitem" rendered="#{beanLogin.facturacion}" outcome="/Facturar">
-                        <f:param name="i" value="4"/>
+                        <f:param name="i" value="3"/>
                         <p:graphicImage class="icon"  library="img" name="facturacion.png"></p:graphicImage>
                         <h:outputLabel class="itemlabel" value="Facturar"></h:outputLabel>
                     </p:menuitem> 
-                     <p:menuitem class="tabitem" rendered="#{beanLogin.facturacion}" outcome="/Despacho">
-                        <f:param name="i" value="5"/>
+                    <p:menuitem class="tabitem" rendered="#{beanLogin.despachar}" outcome="/Despacho">
+                        <f:param name="i" value="4"/>
                         <p:graphicImage class="icon" url="https://image.flaticon.com/icons/png/512/99/99020.png"
                                         ></p:graphicImage>
                         <h:outputLabel class="itemlabel" value="Despachar"></h:outputLabel>
                     </p:menuitem> 
                     <p:menuitem class="tabitem" outcome="/Reportes" rendered="#{beanLogin.reportes}">
-                        <f:param name="i" value="6"/>
+                        <f:param name="i" value="5"/>
                         <p:graphicImage class="icon"  library="img" name="reporte.png"></p:graphicImage>
                         <h:outputLabel class="itemlabel" value="Reportes"></h:outputLabel>
                     </p:menuitem> 
@@ -160,7 +160,7 @@
                 </p:tabMenu>
                 <p:panel rendered="#{beanLogin.usuario.tipo!=null}" class="log-container">
            
-                    <h:outputLabel class="icon-log fas fa-user fa-2x "></h:outputLabel>
+                    <h:outputLabel  class="icon-log fas fa-user fa-2x "><h:outputLabel value=""></h:outputLabel></h:outputLabel>
                    
                   
                     <div class="log-subcontainer">

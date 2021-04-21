@@ -31,6 +31,7 @@ public class Pedido {
     private Direccion direccion;
     private LinkedList<TransaccionProducto> productos=new LinkedList<>();
     private String Estado;
+    String listaProductos;
 
     public Pedido() {
         
@@ -164,10 +165,20 @@ public class Pedido {
     
     return suma;
     }
+
+
+    public void setListaProductos(String listaProductos) {
+        this.listaProductos = listaProductos;
+    }
     
    
-    
-    
+    public String getListaProductos(){
+        String lista="";
+        for (int i = 0; i < productos.size(); i++) {
+            lista+=" "+productos.get(i).getProducto().getNombre()+",";
+        }
+        return lista;
+    }
     public double calcularIva(){
     
     return calcularSubTotal()*0.13;
@@ -184,7 +195,7 @@ public class Pedido {
      
      public double costoEnvio(){
      if(tipoDspacho!=null){
-     if(tipoDspacho.getNumero()==3){
+     if(tipoDspacho.getNumero()==2){
          
      switch(direccion.getB().getP().getCodigo()){
          case 1:

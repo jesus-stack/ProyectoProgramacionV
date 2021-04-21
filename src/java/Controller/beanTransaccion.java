@@ -38,17 +38,52 @@ import javax.naming.NamingException;
 @SessionScoped
 public class beanTransaccion implements Serializable {
 
+<<<<<<< HEAD
  Pedido pedido;
   int tipoDespacho;
   int direccion;
   Date fecha;
+=======
+ Pedido pedido=new Pedido();
+    LinkedList<Pedido> pedidosDespachar;
+  int tipoDespacho;
+  int direccion;
+      boolean consultarFactura=true,confirmarpedido=false;
+>>>>>>> 4ac9aa129d6bd90a6d88f3f5160f008b1b18cefc
 
-    
+    public boolean isConsultarFactura() {
+        return consultarFactura;
+    }
+
+    public void setConsultarFactura(boolean consultarFactura) {
+        this.consultarFactura = consultarFactura;
+    }
+
+    public boolean isConfirmarpedido() {
+        return confirmarpedido;
+    }
+
+    public void setConfirmarpedido(boolean confirmarpedido) {
+        this.confirmarpedido = confirmarpedido;
+    }
+  
+public void consultar(){
+    consultarFactura=false;
+    confirmarpedido=true;
+}
+  public void confirmar(){
+    consultarFactura=true;
+    confirmarpedido=false;
+}  
  
 
     public Pedido getPedido() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
+<<<<<<< HEAD
       //  cargarDirecciones();
       pedido=new Pedido();
+=======
+ 
+>>>>>>> 4ac9aa129d6bd90a6d88f3f5160f008b1b18cefc
         agregarPedidoCliente();
         agregarTipoDespacho();
         return pedido;
@@ -89,10 +124,19 @@ public class beanTransaccion implements Serializable {
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
+
+    public LinkedList<Pedido> getPedidosDespachar() {
+        return pedidosDespachar;
+    }
+
+    public void setPedidosDespachar(LinkedList<Pedido> pedidosDespachar) {
+        this.pedidosDespachar = pedidosDespachar;
+    }
  
     
-    public beanTransaccion() {
-  
+    public beanTransaccion() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
+  tipoDespacho=-1;
+  pedidosDespachar=TransaccionDB.seleccionarPendienteDespachar();
     }
     
     public int cantidadProducto() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
@@ -150,9 +194,11 @@ public class beanTransaccion implements Serializable {
     }
      public LinkedList<SelectItem> cmbTipoEnvio(){
      LinkedList<SelectItem> lista=new LinkedList<>();
-     
+
          for (TipoDespacho tipo : TipoDespacho.values()) {
              lista.add(new SelectItem(tipo.getNumero(),tipo.getDes()));
+             
+       
          }
       return lista;   
      }
@@ -176,14 +222,14 @@ public class beanTransaccion implements Serializable {
        
           
         switch(tipoDespacho){
-            case 1:
+            case 0:
                 this.pedido.setTipoDspacho(TipoDespacho.EnvioDirecto);
                 break;
-            case 2:
+            case 1:
                 this.pedido.setTipoDspacho(TipoDespacho.EntregaSinEnvio);
                 break;
-            case 3:
-                this.pedido.setTipoDspacho(TipoDespacho.EntregaPorUnTercero);
+            case 2:
+                this.pedido.setTipoDspacho(TipoDespacho.EnioTercero);
                 break;
         
         
@@ -214,10 +260,14 @@ public class beanTransaccion implements Serializable {
        
        
        public void agregarDireccion(){
-     //  this.pedido.setDireccion(DireccionDLL.);
+     // this.pedido.setDireccion(DireccionDLL.);
        
        }
        
+       public void despachar(int id) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+           TransaccionDB.despachar(id);
+           pedidosDespachar=TransaccionDB.seleccionarPendienteDespachar();
+       }
        
        
 }

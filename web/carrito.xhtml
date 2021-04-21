@@ -58,36 +58,57 @@
             </p:dataViewListItem>
               
               </p:dataView>
-                    <div class="label" style="position: absolute;left: 65vw;top: 50vh">
+                    <div class="label" style="position: absolute;left: 65vw;top: 35vh">
+                        <h:form rendered="#{beanTransaccion.consultarFactura}" >
                         <div style="margin-left: 5vw">
                          <p:outputLabel value="Fecha de entrega: "></p:outputLabel><br/>
                          <p:datePicker value="#{beanTransaccion.fecha}"></p:datePicker><br/><br/>
                          <p:outputLabel value="Hora de entrega:"></p:outputLabel><br/>
+<<<<<<< HEAD
                          <p:datePicker id="timeonlyMinMax" value="#{beanTransaccion.pedido.horaSolicitada}" timeOnly="true" pattern="HH:mm" /><br/><br/>
+=======
+                         <p:selectOneMenu>
+                         
+                               <f:selectItem itemValue="9:00" itemLabel="9:00 am"></f:selectItem>
+                                <f:selectItem itemValue="10:00" itemLabel="10:00 am"></f:selectItem>
+                                 <f:selectItem itemValue="11:00" itemLabel="11:00 am"></f:selectItem>
+                                  <f:selectItem itemValue="12:00" itemLabel="12:00 pm"></f:selectItem>
+                                   <f:selectItem itemValue="13:00" itemLabel="1:00 pm"></f:selectItem>
+                                    <f:selectItem itemValue="14:00" itemLabel="2:00 pm"></f:selectItem>
+                                     <f:selectItem itemValue="15:00" itemLabel="3:00 pm"></f:selectItem>
+                                      <f:selectItem itemValue="16:00" itemLabel="4:00 pm"></f:selectItem>
+                                       <f:selectItem itemValue="17:00" itemLabel="5:00 pm"></f:selectItem>
+                                        <f:selectItem itemValue="18:00" itemLabel="6:00 pm"></f:selectItem>
+                                         <f:selectItem itemValue="19:00" itemLabel="7:00 pm"></f:selectItem>
+                                          <f:selectItem itemValue="20:00" itemLabel="8:00 pm"></f:selectItem>
+                                  
+                             
+                         </p:selectOneMenu><br/><b/>
+>>>>>>> 4ac9aa129d6bd90a6d88f3f5160f008b1b18cefc
                          <p:outputLabel value="tipo Envio: "></p:outputLabel><br/>
                          <p:selectOneMenu value="#{beanTransaccion.tipoDespacho}"  style="width:20vw">
                              <f:selectItems value="#{beanTransaccion.cmbTipoEnvio()}"></f:selectItems>
                          </p:selectOneMenu>
-                         <br/>
+                         <br/><br/>
                           <p:outputLabel value="Dirección: "></p:outputLabel><br/>
                           <p:selectOneMenu value="#{beanTransaccion.direccion}"  style="width:20vw">
                               <f:selectItems value="#{beanTransaccion.cmbdirecciones()}"></f:selectItems>
                          </p:selectOneMenu>
                           
                           
-                          <br/>
-                          <br/>
-                       
                          
                         </div>
                         
                         
-                         <p:dialog class="ConsultarFactura" header="Detalle de compra" widgetVar="ConsultarFactura"  showEffect="fade" modal="true">
-                <div class="logleft">
-                    
-                </div>
-                <div class="conFactura">
-                    <h:form>
+                   
+                        
+                        
+                            <p:commandButton class="btnconfirmarpedido" actionListener="#{beanTransaccion.consultar()}" value="Consultar factura" onclick="PF('ConsultarFactura').show()" ajax="false"  >
+                       
+                </p:commandButton>
+                        </h:form>
+                       
+                    <h:form rendered="#{beanTransaccion.confirmarpedido}">
                         <h:outputLabel value="SubTotal:    ₡  "/>
                         <h:outputLabel value="#{beanTransaccion.pedido.calcularSubTotal()}"></h:outputLabel>
                            <br></br>
@@ -113,7 +134,7 @@
                            <br/>
                            <br/>
                             <h:outputLabel value="Tipo despacho:    ₡  "/>
-                            <h:outputText value="#{beanTransaccion.tipoDespacho}"/>
+                            <h:outputText value="#{beanTransaccion.pedido.tipoDspacho.des}"/>
                          
                            <br/>
                            <br/>
@@ -121,7 +142,9 @@
                            <h:outputText value="#{beanTransaccion.direccion}"/>
                          
                            <br/>
+                           <p:commandButton ajax="false" style="float: right" value="Cancelar" actionListener="#{beanTransaccion.confirmar()}"></p:commandButton>
                            <br/>
+<<<<<<< HEAD
                            <h:outputLabel value="Id direccion:    ₡  "/>
                            <h:outputText value="#{beanTransaccion.pedido.fechaSolicitada}"/>
                          
@@ -133,25 +156,23 @@
                            <br/>
                            <br/>
                             <p:commandButton class="btnconfirmarpedido" value="Confirmar Pedido"  >
+=======
+                           <p:commandButton class="btnconfirmarpedido" actionListener="#{beanTransaccion.confirmar()}" ajax="false" value="Confirmar Pedido"  >
+>>>>>>> 4ac9aa129d6bd90a6d88f3f5160f008b1b18cefc
                        
                 </p:commandButton>
                           
                     </h:form>
-                </div>
-            </p:dialog>
-                        
-                        
-                        <p:commandButton class="btnconfirmarpedido" value="Consultar factura" onclick="PF('ConsultarFactura').show()" ajax="true"  >
-                       
-                </p:commandButton>
-                         
                     
                     </div>
-                  
+                   
+        
             
                 </h:form>
                 
-                
+                     
+               
+              
                 
                 
                 

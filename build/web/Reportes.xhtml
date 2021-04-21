@@ -45,25 +45,25 @@
                 <div class="logleft">
                     <h>Pedidos Realizados</h>
                     <br/>
-                <h:outputLabel class="label" value="146">
+                    <h:outputLabel class="label" value="#{beanReportes.reporte.total}">
                     <br/>
                     <br/>
                 </h:outputLabel>
           <p:chart type="pie"
                  responsive="true"
                 
-                 model="#{beanReportes.model}" style="width: 400px;background-image: none" />
+                 model="#{beanReportes.model}" style="width: 500px;height: 500px;margin-bottom: 30vh;background-image: none" />
                 </div>
                 <div class="logright">
                     <h>Ventas Efectuadas </h>
                     <br/>
           
-          <h:outputLabel class="label" value="108 000"></h:outputLabel>
+                    <h:outputLabel class="label" value="#{beanReportes.reporte.ventaEfectivo+beanReportes.reporte.ventaCredito}"></h:outputLabel>
                     <br/>
                     <br/>
            <p:chart type="pie"
                  responsive="true"
-                 model="#{beanReportes.model1}" style="width: 400px" />
+                 model="#{beanReportes.model1}" style="width: 500px;height: 500px;margin-bottom: 30vh" />
           
                 </div>
                     <h:form>

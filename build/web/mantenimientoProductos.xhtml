@@ -14,13 +14,13 @@
                  <h:form enctype="multipart/form-data" >
                   
                      <p:outputLabel class="label" for="name" value="Nombre"></p:outputLabel>
-                 <p:inputText id="name" value="#{beanProducto.producto.nombre}"></p:inputText>
+                     <p:inputText id="name" value="#{beanProducto.producto.nombre}" required="true" requiredMessage="Debe digitar un nombre"></p:inputText>
                   <p:outputLabel class="label" for="dsc" value="Descripcion"></p:outputLabel>
-                  <p:inputText id="dsc" value="#{beanProducto.producto.descripcion}"></p:inputText>
+                  <p:inputText id="dsc" value="#{beanProducto.producto.descripcion}" required="true" requiredMessage="Debe digitar una descripcion"></p:inputText>
                    <p:outputLabel class="label" for="price" value="Precio"></p:outputLabel>
-                   <p:inputNumber id="price" value="#{beanProducto.producto.precio}"></p:inputNumber>
+                   <p:inputNumber id="price" value="#{beanProducto.producto.precio}" required="true" requiredMessage="Debe digitar un precio para el producto" ></p:inputNumber>
                    <p:outputLabel class="label" for="min" value="Minima Venta"></p:outputLabel>
-                   <p:inputNumber id="min" value="#{beanProducto.producto.cantidadMinimaVenta}"></p:inputNumber>
+                   <p:inputNumber id="min" value="#{beanProducto.producto.cantidadMinimaVenta}" required="true" requiredMessage="Debe digitar la cantidad minima para la venta"></p:inputNumber>
                   <p:outputLabel class="label" for="img" value="Imagen"></p:outputLabel>
                   <p:fileUpload skinSimple="true" mode="simple" id="img" label="Imagen" value="#{beanProducto.imagen}" immediate="true"></p:fileUpload>
            
@@ -98,21 +98,7 @@
                    
                
             </ui:define>
-                <ui:define name="right">
-                    <h:form>
-    <p:tieredMenu style="width: 300px">   
-            <p:menuitem class="mantenimiento" outcome="/MantenimientoUsuarios">
-                    <p:graphicImage class="icon"  library="img" name="usuario.png"></p:graphicImage>
-                    <h:outputLabel class="itemlabelM" value="Usuarios"></h:outputLabel>
-                  
-                </p:menuitem>
-        <p:menuitem class="mantenimiento" outcome="/mantenimientoProductos">
-                    <p:graphicImage class="icon"  library="img" name="producto.png"></p:graphicImage>
-                    <h:outputLabel class="itemlabelM" value="Productos"></h:outputLabel>
-                </p:menuitem>
-        </p:tieredMenu>
-    </h:form>
-                </ui:define>
+              
 
         </ui:composition>
 
