@@ -285,7 +285,7 @@ public class UsuarioDLL {
            datos.ejecutaSQL(update);
        }
         public static void RechazarCliente(long id) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
-           String delete="delete cliente where id="+id+" delete usuario where id="+id;
+           String delete="delete cliente where id="+id+"  delete usuario where id="+id;
            AccesoDatos datos=new AccesoDatos();
            datos.ejecutaSQL(delete);
        }
