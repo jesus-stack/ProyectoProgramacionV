@@ -74,8 +74,17 @@ public class BeanCliente implements Serializable {
        
             
              try {
-                 
-               UsuarioDLL.insertarCliente(cliente);
+                 Usuario user=UsuarioDLL.UsuarioXidentificacion(cliente.getIdentificacion());
+                 if(user==null){
+                         UsuarioDLL.insertarCliente(cliente); 
+                               FacesContext.getCurrentInstance().addMessage("msg",
+                         new FacesMessage(FacesMessage.SEVERITY_INFO,"Exito","Registro Exitoso"));
+                 }else{
+                         
+                             FacesContext.getCurrentInstance().addMessage("msg",
+                         new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Identificacion YA Registrada"));
+                 }
+      
                // mensaje="login.xhtml";
         } catch (Exception e) {
                  FacesContext.getCurrentInstance().addMessage(null,

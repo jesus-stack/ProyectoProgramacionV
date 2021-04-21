@@ -6,6 +6,8 @@
 package Controller;
 
 import DAO.UsuarioDLL;
+import Model.Cliente;
+import Model.Logica;
 import Model.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -22,25 +24,57 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class beanUsuario implements Serializable {
 
-    private LinkedList<Usuario> usuarios;
+    private LinkedList<Cliente> clientes;
+    private String mensajerechazo;
     
     public beanUsuario() {
     }
 
-    public LinkedList<Usuario> getUsuarios() {
+    public LinkedList<Cliente> getClientes() {
         llenarLista();
-        return usuarios;
+        return clientes;
     }
 
-    public void setUsuarios(LinkedList<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setClientes(LinkedList<Cliente> usuarios) {
+        this.clientes = usuarios;
+        
+        
+    }
+
+    public String getMensajerechazo() {
+        return mensajerechazo;
+    }
+
+    public void setMensajerechazo(String mensajerechazo) {
+        this.mensajerechazo = mensajerechazo;
     }
     public void llenarLista(){
         try{
-            usuarios=UsuarioDLL.listaUsuarios();
+            clientes=UsuarioDLL.peticionesClientes();
         }catch(Exception e){
             FacesMessage m=new FacesMessage(e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, m);
         }
     }
+    public void aceptarCliente(Cliente c){
+        try{
+        Logica.aceptar(c);
+         FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO,"Exito","Registro Guardado Correctamente"));
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Ha ocurrido un error","Intentelo ms tarde"));
+        }
+    }
+      public void rechazarCliente(Cliente c){
+        try{
+        Logica.rechazar(mensajerechazo, c);
+        mensajerechazo="";
+         FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO,"Exito","Registro Guardado Correctamente"));
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Ha ocurrido un error","Intentelo ms tarde"));
+        }
+    }
+        
+    
 }

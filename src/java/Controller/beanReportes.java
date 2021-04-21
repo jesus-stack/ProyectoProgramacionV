@@ -5,12 +5,16 @@
  */
 package Controller;
 
+import DAO.Conexion.SNMPExceptions;
 import DAO.ReportesBD;
 import Model.Reporte;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.Date;
 import javax.annotation.PostConstruct;
+import javax.naming.NamingException;
 import org.primefaces.model.chart.PieChartModel;
 
 /**
@@ -24,11 +28,14 @@ public class beanReportes implements Serializable {
   
     private PieChartModel model,model1;
     private Reporte reporte;
+    private Date fechaInicio,fechaFinal;
  
 
  
     @PostConstruct 
         void init(){
+            fechaInicio=new Date();
+            fechaFinal=new Date();
             try{
   reporte=ReportesBD.reportes();
             }catch(Exception e){
@@ -80,6 +87,24 @@ public class beanReportes implements Serializable {
       model1.setSeriesColors("aaf,afa,faa,ffa,aff,faf,ddd");
   }
 
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Date getFechaFinal() {
+        return fechaFinal;
+    }
+
+    public void setFechaFinal(Date fechaFinal) {
+        this.fechaFinal = fechaFinal;
+    }
+        
+        
+
     public Reporte getReporte() {
         return reporte;
     }
@@ -96,6 +121,10 @@ public class beanReportes implements Serializable {
   } /**
      * Creates a new instance of beanReportes
      */
+   
+   public void Filtrar() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+       reporte=ReportesBD.ReportesPorFecha(fechaInicio, fechaFinal);
+   }
    
     
 }

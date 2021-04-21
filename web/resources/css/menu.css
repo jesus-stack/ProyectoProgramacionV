@@ -128,4 +128,12 @@
     left: 50%;
     z-index: 9999;
 }
-
+.report{
+    position: absolute !important;
+    left: 35%;
+    margin-left: -50px !important;
+    margin-top: -10px !important;
+    
+    
+    
+}

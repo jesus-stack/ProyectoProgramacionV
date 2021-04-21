@@ -25,12 +25,18 @@
                                 <td>
                                      <h:outputLabel class="label" value="Desde"></h:outputLabel> 
                                      <br/>
-                                       <p:datePicker></p:datePicker>
+                                     <p:datePicker   value="#{beanReportes.fechaInicio}"></p:datePicker>
                                 </td>
+                                <td>
+                                    <center>
+                                        <p:commandButton class="report btnconfirmarpedido" value="Filtrar" ajax="false"></p:commandButton>
+                                    </center>
+                                </td>
+                           
                                 <td>
                                       <h:outputLabel class="label" value="Hasta"></h:outputLabel>
                                       <br/>
-                                       <p:datePicker></p:datePicker>
+                                      <p:datePicker  value="#{beanReportes.fechaFinal}"></p:datePicker>
                                 </td>
                             </tr>
                           

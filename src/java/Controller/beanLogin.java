@@ -156,8 +156,7 @@ private String nombre;
                 this.setUsuario(usuario1);
               
                context.addMessage("msg", mensajeB);
-                FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR","Ha ocurrido un problema, intentelo mas tarde" );
-          FacesContext.getCurrentInstance().addMessage("msg", message);
+                
                  context.getExternalContext().getSessionMap().put("user", this.getUsuario());
              
               
