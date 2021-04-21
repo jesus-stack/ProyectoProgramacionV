@@ -185,16 +185,16 @@ return pedidos;
         
          public static int ConfirmarPedido(Pedido pedido) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
              
-<<<<<<< HEAD
+
 //String procedure1="update transaccion(idDireccion,fechaSolicitada,envio,tipoDespacho,subtotal,iva,total,estado) values("+pedido.getDireccion().getId()
         // +",GETDATE(),"+pedido.costoEnvio()+
        //  ","+pedido.calcularSubTotal()+","+pedido.calcularIva()+","+pedido.calcularTotal()+","+pedido.getEstado()+") where id="+pedido.getId();
  String update="update transaccion set estado=2 where id="+pedido.getId();
-=======
- String procedure1="update transaccion(idDireccion,fechaSolicitada,fechaEntrega,horaEntrega,envio,tipoDespacho,subtotal,iva,total,estado) values("+pedido.getDireccion().getId()
-         +",GETDATE(),'"+pedido.getFechaEntrega()+"', '"+pedido.getHoraEntrega()+"',"+pedido.costoEnvio()+", '"+pedido.getTipoDspacho().getDes()
-         +"' ,"+pedido.calcularSubTotal()+","+pedido.calcularIva()+","+pedido.calcularTotal()+",'"+pedido.getEstado()+"') where id="+pedido.getId();
->>>>>>> 7878d06d479b4324a912e204dad21bd4b4bc5e58
+
+ //String procedure1="update transaccion(idDireccion,fechaSolicitada,fechaEntrega,horaEntrega,envio,tipoDespacho,subtotal,iva,total,estado) values("+pedido.getDireccion().getId()
+      //   +",GETDATE(),'"+pedido.getFechaEntrega()+"', '"+pedido.getHoraEntrega()+"',"+pedido.costoEnvio()+", '"+pedido.getTipoDspacho().getDes()
+       //  +"' ,"+pedido.calcularSubTotal()+","+pedido.calcularIva()+","+pedido.calcularTotal()+",'"+pedido.getEstado()+"') where id="+pedido.getId();
+
  
  
      AccesoDatos datos=new AccesoDatos();
