@@ -19,6 +19,8 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.logging.Level;
@@ -26,7 +28,9 @@ import java.util.logging.Logger;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.mail.internet.MailDateFormat;
 import javax.naming.NamingException;
+
 
 /**
  *
@@ -36,11 +40,24 @@ import javax.naming.NamingException;
 @SessionScoped
 public class beanTransaccion implements Serializable {
 
- Pedido pedido=new Pedido();
-    LinkedList<Pedido> pedidosDespachar;
+
+ Pedido pedido;
   int tipoDespacho;
   int direccion;
-      boolean consultarFactura=true,confirmarpedido=false;
+  Date fecha=new Date();
+LinkedList<Pedido> pedidosDespachar;
+  boolean consultarFactura=true,confirmarpedido=false;
+  String hor;
+
+    public String getHor() {
+        return hor;
+    }
+
+    public void setHor(String hor) {
+        this.hor = hor;
+    }
+  
+
 
     public boolean isConsultarFactura() {
         return consultarFactura;
@@ -69,12 +86,30 @@ public void consultar(){
  
 
     public Pedido getPedido() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
- 
+
+      //  cargarDirecciones();
+      pedido=new Pedido();
+
+
         agregarPedidoCliente();
         agregarTipoDespacho();
+        agregarDireccion();
+        asignarHora();
+        asignarFecha();
         return pedido;
                 
     }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+    
+    
+    
 
     public int getDireccion() {
         return direccion;
@@ -153,31 +188,56 @@ public void consultar(){
     return DireccionDLL.listaTodasDireccionCliente(pedido.getCliente().getId());
    
     }
-     public LinkedList<SelectItem> cmbdirecciones() throws SNMPExceptions{    
-         cargarDirecciones();
-    LinkedList<Direccion> direc=pedido.getCliente().getDireccione();
-    LinkedList<SelectItem> lista=new LinkedList<>();
-    
-         for (Direccion d : pedido.getCliente().getDireccione()) {
-              lista.add(new SelectItem(d.getId(),d.getB().getP().getNombre()+
-                     ", "+d.getB().getC().getNombre()+
-                     ", "+d.getB().getD().getNombre()+
-                             ", "+d.getB().getNombre()+
-                     ", "+d.getSennas()));   
-         } 
-   return lista;
-    }
-     public LinkedList<SelectItem> cmbTipoEnvio(){
-     LinkedList<SelectItem> lista=new LinkedList<>();
 
-         for (TipoDespacho tipo : TipoDespacho.values()) {
-             lista.add(new SelectItem(tipo.getNumero(),tipo.getDes()));
-             
-       
-         }
-      return lista;   
-     }
+    public LinkedList<SelectItem> cmbHoras(){
     
+    LinkedList <SelectItem> aux=new LinkedList<>();
+    aux.add(new SelectItem("09:00","09:00"));
+    aux.add(new SelectItem("10:00","10:00"));
+    aux.add(new SelectItem("11:00","11:00"));
+    aux.add(new SelectItem("12:00","12:00"));
+    aux.add(new SelectItem("13:00","13:00"));
+    aux.add(new SelectItem("14:00","14:00"));
+    aux.add(new SelectItem("15:00","15:00"));
+    aux.add(new SelectItem("16:00","16:00"));
+    aux.add(new SelectItem("17:00","17:00"));
+    aux.add(new SelectItem("18:00","18:00"));
+    aux.add(new SelectItem("19:00","19:00"));
+    aux.add(new SelectItem("20:00","20:00"));
+    aux.add(new SelectItem("21:00","21:00"));
+    aux.add(new SelectItem("22:00","22:00"));
+    
+    
+
+return aux;
+
+}
+    
+    public LinkedList<SelectItem> cmbdirecciones() throws SNMPExceptions {
+        cargarDirecciones();
+        LinkedList<Direccion> direc = pedido.getCliente().getDireccione();
+        LinkedList<SelectItem> lista = new LinkedList<>();
+
+        for (Direccion d : pedido.getCliente().getDireccione()) {
+            lista.add(new SelectItem(d.getId(), d.getB().getP().getNombre()
+                    + ", " + d.getB().getC().getNombre()
+                    + ", " + d.getB().getD().getNombre()
+                    + ", " + d.getB().getNombre()
+                    + ", " + d.getSennas()));
+        }
+        return lista;
+    }
+
+    public LinkedList<SelectItem> cmbTipoEnvio() {
+        LinkedList<SelectItem> lista = new LinkedList<>();
+
+        for (TipoDespacho tipo : TipoDespacho.values()) {
+            lista.add(new SelectItem(tipo.getNumero(), tipo.getDes()));
+
+        }
+        return lista;
+    }
+
     public void EliminarProducto(Producto pro) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
         TransaccionDB.EliminarProducto(pedido.getId(), pro.getId());
     }
@@ -212,6 +272,15 @@ public void consultar(){
            
        }
        
+       public void agregarDireccion(){
+       
+       this.pedido.setDireccion(DireccionDLL.traerDireccionClientePorId(direccion));
+       
+       }
+       
+       
+       
+       
        
        public void agregarPedidoCliente(){
      try {
@@ -232,16 +301,27 @@ public void consultar(){
        
        }
        
-       
-       
-       public void agregarDireccion(){
-     // this.pedido.setDireccion(DireccionDLL.);
-       
+       public void asignarHora(){
+           
+        this.pedido.setHoraEntrega(hor);
+           
+           
        }
+    public void asignarFecha(){
+       SimpleDateFormat sp=new SimpleDateFormat("yyyy-MM-dd");
+        
+    this.pedido.setFechaEntrega(sp.format(this.fecha));
+    }
        
        public void despachar(int id) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
            TransaccionDB.despachar(id);
            pedidosDespachar=TransaccionDB.seleccionarPendienteDespachar();
+      }
+       
+       
+       public void confirmarTransaccion() throws SNMPExceptions, NamingException, SQLException, ClassNotFoundException{
+           pedido.setEstado(2);
+       TransaccionDB.ConfirmarPedido(pedido);
        }
        
        

@@ -141,4 +141,14 @@ return pedidos;
             AccesoDatos datos=new AccesoDatos();
             datos.ejecutaSQL(update);
         }
+        
+        
+         public static int ConfirmarPedido(Pedido pedido) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+ String procedure1="exec Insertartransaccion "+pedido.getDireccion().getId()+","+pedido.getFechaEntrega()+","+pedido.getHoraEntrega()+","+pedido.getCostoEnvio()+", '"+pedido.getTipoDspacho().getDes()+"',"+pedido.calcularSubTotal()+","+pedido.calcularIva()+","+pedido.calcularTotal()+","+pedido.getEstado() ;
+     AccesoDatos datos=new AccesoDatos();
+     return datos.ejecutaSQL(procedure1);
+ 
+ 
+ }
+        
 }

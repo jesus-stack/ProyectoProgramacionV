@@ -6,6 +6,7 @@
 package Model;
 
 import DAO.Conexion.SNMPExceptions;
+import DAO.DireccionDLL;
 import DAO.TransaccionDB;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -80,28 +81,10 @@ public class Preba extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            LinkedList <TransaccionProducto> tipo=TransaccionDB.transaccionP(1);
-            Pedido p=TransaccionDB.seleccionarTransaccion(7777777,1);
-            jTextArea1.setText(String.valueOf(p.calcularSubTotal())+"\n"+p.getProductos().size());
-           // jTextArea1.setText(String.valueOf(p.getId()));
-//            String l="";
-//            for (TransaccionProducto p : tipo) {
-//                l+=p.getProducto().getDescripcion()+"\n";
-//                jTextArea1.setText(l);
-//            }
-            
-            
-            
-        } catch (SNMPExceptions ex) {
-            Logger.getLogger(Preba.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Preba.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(Preba.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Preba.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    Direccion d=DireccionDLL.traerDireccionClientePorId(1);
+        jTextArea1.setText(d.getB().getP().getNombre());
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
