@@ -107,8 +107,9 @@ return pedido;
      
         
     }
-    
-        public static LinkedList<Pedido> seleccionarPendienteDespachar() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
+     
+     
+          public static LinkedList<Pedido> seleccionarPendienteDespachar() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
         String select = "select * from transaccion where estado=3 ";
         ResultSet rs = null;
        LinkedList<Pedido> pedidos = new LinkedList<>();
@@ -135,9 +136,48 @@ return pedido;
     
 return pedidos;
     }
+    
+        public static LinkedList<Pedido> seleccionarPendienteFacturar() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
+        String select = "select * from transaccion where estado=2 ";
+        ResultSet rs = null;
+       LinkedList<Pedido> pedidos = new LinkedList<>();
+       Pedido pedido;
+       
+
+        AccesoDatos datos = new AccesoDatos();
+
+        rs = datos.ejecutaSQLRetornaRS(select);
+      while(rs.next()){
+          pedido=new Pedido();
+          pedido.setId(rs.getInt("id"));
+          pedido.setCliente((Cliente)UsuarioDLL.UsuarioXidentificacion(rs.getLong("idCliente")));
+          pedido.setTotal(rs.getFloat("total"));
+      
+       
+        
+         pedido.setProductos(transaccionP(rs.getInt("id")));
+         pedidos.add(pedido);
+      }
+     
+      
+        
+        
+    
+return pedidos;
+    }
+        
+        
+        
+        
         public static void despachar(int idtransaccion) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
             
             String update="update Transaccion set estado=4,fechaEmitida=GETDATE() where id="+idtransaccion;
+            AccesoDatos datos=new AccesoDatos();
+            datos.ejecutaSQL(update);
+        }
+         public static void Facturar(int idtransaccion) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+            
+            String update="update Transaccion set estado=3 where id="+idtransaccion;
             AccesoDatos datos=new AccesoDatos();
             datos.ejecutaSQL(update);
         }
@@ -145,10 +185,16 @@ return pedidos;
         
          public static int ConfirmarPedido(Pedido pedido) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
              
+<<<<<<< HEAD
 //String procedure1="update transaccion(idDireccion,fechaSolicitada,envio,tipoDespacho,subtotal,iva,total,estado) values("+pedido.getDireccion().getId()
         // +",GETDATE(),"+pedido.costoEnvio()+
        //  ","+pedido.calcularSubTotal()+","+pedido.calcularIva()+","+pedido.calcularTotal()+","+pedido.getEstado()+") where id="+pedido.getId();
  String update="update transaccion set estado=2 where id="+pedido.getId();
+=======
+ String procedure1="update transaccion(idDireccion,fechaSolicitada,fechaEntrega,horaEntrega,envio,tipoDespacho,subtotal,iva,total,estado) values("+pedido.getDireccion().getId()
+         +",GETDATE(),'"+pedido.getFechaEntrega()+"', '"+pedido.getHoraEntrega()+"',"+pedido.costoEnvio()+", '"+pedido.getTipoDspacho().getDes()
+         +"' ,"+pedido.calcularSubTotal()+","+pedido.calcularIva()+","+pedido.calcularTotal()+",'"+pedido.getEstado()+"') where id="+pedido.getId();
+>>>>>>> 7878d06d479b4324a912e204dad21bd4b4bc5e58
  
  
      AccesoDatos datos=new AccesoDatos();
