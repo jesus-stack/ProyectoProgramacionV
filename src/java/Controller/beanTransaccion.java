@@ -19,6 +19,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.logging.Level;
@@ -28,6 +29,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.naming.NamingException;
 
+
 /**
  *
  * @author Usuario
@@ -36,21 +38,33 @@ import javax.naming.NamingException;
 @SessionScoped
 public class beanTransaccion implements Serializable {
 
- Pedido pedido=new Pedido();
+ Pedido pedido;
   int tipoDespacho;
   int direccion;
-  
+  Date fecha;
 
     
  
 
     public Pedido getPedido() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
       //  cargarDirecciones();
+      pedido=new Pedido();
         agregarPedidoCliente();
         agregarTipoDespacho();
         return pedido;
                 
     }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+    
+    
+    
 
     public int getDireccion() {
         return direccion;

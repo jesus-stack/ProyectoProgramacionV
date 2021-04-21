@@ -61,9 +61,9 @@
                     <div class="label" style="position: absolute;left: 65vw;top: 50vh">
                         <div style="margin-left: 5vw">
                          <p:outputLabel value="Fecha de entrega: "></p:outputLabel><br/>
-                         <p:datePicker ></p:datePicker><br/><br/>
+                         <p:datePicker value="#{beanTransaccion.fecha}"></p:datePicker><br/><br/>
                          <p:outputLabel value="Hora de entrega:"></p:outputLabel><br/>
-                         <p:datePicker id="timeonlyMinMax"  timeOnly="true" pattern="HH:mm" /><br/><br/>
+                         <p:datePicker id="timeonlyMinMax" value="#{beanTransaccion.pedido.horaSolicitada}" timeOnly="true" pattern="HH:mm" /><br/><br/>
                          <p:outputLabel value="tipo Envio: "></p:outputLabel><br/>
                          <p:selectOneMenu value="#{beanTransaccion.tipoDespacho}"  style="width:20vw">
                              <f:selectItems value="#{beanTransaccion.cmbTipoEnvio()}"></f:selectItems>
@@ -119,6 +119,16 @@
                            <br/>
                            <h:outputLabel value="Id direccion:    ₡  "/>
                            <h:outputText value="#{beanTransaccion.direccion}"/>
+                         
+                           <br/>
+                           <br/>
+                           <h:outputLabel value="Id direccion:    ₡  "/>
+                           <h:outputText value="#{beanTransaccion.pedido.fechaSolicitada}"/>
+                         
+                           <br/>
+                           <br/>
+                           <h:outputLabel value="Id direccion:    ₡  "/>
+                           <h:outputText value="#{beanTransaccion.fecha}"/>
                          
                            <br/>
                            <br/>
