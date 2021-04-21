@@ -37,6 +37,7 @@ import javax.naming.NamingException;
 public class beanTransaccion implements Serializable {
 
  Pedido pedido=new Pedido();
+    LinkedList<Pedido> pedidosDespachar;
   int tipoDespacho;
   int direccion;
       boolean consultarFactura=true,confirmarpedido=false;
@@ -98,10 +99,19 @@ public void consultar(){
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
+
+    public LinkedList<Pedido> getPedidosDespachar() {
+        return pedidosDespachar;
+    }
+
+    public void setPedidosDespachar(LinkedList<Pedido> pedidosDespachar) {
+        this.pedidosDespachar = pedidosDespachar;
+    }
  
     
-    public beanTransaccion() {
+    public beanTransaccion() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
   tipoDespacho=-1;
+  pedidosDespachar=TransaccionDB.seleccionarPendienteDespachar();
     }
     
     public int cantidadProducto() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
@@ -225,11 +235,14 @@ public void consultar(){
        
        
        public void agregarDireccion(){
-     //  this.pedido.setDireccion(DireccionDLL.);
+     // this.pedido.setDireccion(DireccionDLL.);
        
        }
        
-       
+       public void despachar(int id) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+           TransaccionDB.despachar(id);
+           pedidosDespachar=TransaccionDB.seleccionarPendienteDespachar();
+       }
        
        
 }

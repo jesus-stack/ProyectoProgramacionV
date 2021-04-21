@@ -23,6 +23,7 @@ import javax.faces.context.FacesContext;
 public class beanUsuario implements Serializable {
 
     private LinkedList<Usuario> usuarios;
+    
     public beanUsuario() {
     }
 

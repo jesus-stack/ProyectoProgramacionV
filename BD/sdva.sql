@@ -108,7 +108,7 @@ id int identity (1,1),
 idCliente bigint,
 idDireccion int,
 fechaSolicitada date,
-fechaEmitida date,
+fechaEmitida datetime,
 horaEntrega time,
 envio float,
 tipoPago int,
@@ -383,7 +383,7 @@ create procedure SeleccionarProductoXid
 @id int
 as
 begin 
-select * from producto where producto.id=@id and estado=1
+select * from producto where producto.id=@id
 end
 go
 
@@ -498,6 +498,28 @@ select *from direccion where idCliente=@idCliente and estado=1
 end
 go
 
+--Pocedimineto para reportes--
+create procedure Reportes
+as
+begin
+declare
+@pendiente int,
+@facturado int,
+@despachado int,
+@total int,
+@contado float,
+@credito float
+
+select @pendiente=COUNT(id) from Transaccion where estado=2;
+select @facturado=COUNT(id) from Transaccion where estado=3;
+select @despachado=COUNT(id) from Transaccion where estado=4;
+select @contado=sum(total) from Transaccion where tipoPago=1;
+select @credito=sum(total) from Transaccion where tipoPago=2;
+set @total=@pendiente+@facturado+@despachado;
+
+select @pendiente as pendiente,@facturado as facturado,@despachado as despachado,
+@total as total,@contado as contado,@credito as credito
+end
 
 
 
@@ -531,7 +553,9 @@ Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) value
 insert into usuario(id,contrasenna,estado,tipoUsuario) values (3333333,encryptbypassphrase('password','cli'),0,2)
 Insert into cliente (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(3333333,'Xinia','Mayela','Castilla','Quiroz','karol.casty@hotmail.com',71385759)
 
---insert productos--
+--insert tipoPago--
+insert into tipoPago values(1,'Efectivo')
+insert into tipoPago values(2,'Credito')
 
 
 

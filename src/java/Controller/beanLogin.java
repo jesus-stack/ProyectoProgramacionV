@@ -27,7 +27,7 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class beanLogin implements Serializable {
 private  Usuario usuario=new Usuario();
-private boolean mantenimiento,facturacion,pedidos,reportes;
+private boolean mantenimiento,facturacion,pedidos,reportes,despachar;
 private String nombre;
 
 
@@ -58,6 +58,22 @@ private String nombre;
 
     public void setMantenimiento(boolean mantenimiento) {
         this.mantenimiento = mantenimiento;
+    }
+
+    public boolean isDespachar() {
+       boolean resultado=false;
+        if(usuario.getTipo()!=null){
+          if(usuario.getTipo().getId()==1||usuario.getTipo().getId()==4){
+               resultado=true;
+           }
+        }
+            
+        
+        return resultado;
+    }
+
+    public void setDespachar(boolean despachar) {
+        this.despachar = despachar;
     }
 
     public boolean isFacturacion() {

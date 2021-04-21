@@ -21,42 +21,25 @@
                         </thead>
                       
                     </table></center>
-                <p:dataTable  value="#{beanProducto.lista}" var="pro" >
+                <p:dataTable styleClass="tablamantenimiento"  widgetVar="tabla" value="#{beanTransaccion.pedidosDespachar}" var="trans" >
                   
-                <p:column headerText="Número de pedido">
-                    <h:outputText value="#{pro.nombre}"></h:outputText>
+                    <p:column class="table" headerText="Cliente">
+                        <h:outputText value="#{trans.cliente.nombre}  #{trans.cliente.apellido}"></h:outputText>
                 </p:column>
-                 <p:column  headerText="Cliente">
-                     <h:outputText value="#{pro.descripcion}"></h:outputText>
+                     <p:column class="table" headerText="Productos">
+                         <h:outputText value="#{trans.listaProductos}"></h:outputText>
                 </p:column>
-                        <p:column style="width: 120px"  headerText="Productos">
-                         <h:form>
-                         <p:selectBooleanCheckbox disabled="true"></p:selectBooleanCheckbox>
-                         </h:form>
-                </p:column>
-                        <p:column style="width: 120px"  headerText="Total pedido">
-                         <h:form>
-                         <p:selectBooleanCheckbox disabled="true"></p:selectBooleanCheckbox>
-                         </h:form>
-                </p:column>
-                 
-                 
-                    <p:column style="width: 70px"  headerText="Estado">
-                         <h:form>
-                         <p:selectBooleanCheckbox disabled="true"></p:selectBooleanCheckbox>
-                         </h:form>
-                </p:column>
-                 
-                    <p:column headerText="Despachar"  style="width: 100px">
-                             <h:form>
-                 <p:menuitem class="Despa" >
-                    <p:graphicImage class="icon"  library="img" name="editar.png"></p:graphicImage>
-                    <h:outputLabel class=" itemlabelM itemlabelMIE" value="Editar"></h:outputLabel>
-                    
-                </p:menuitem>
-                                   </h:form>
-                              </p:column>
+              
                
+                <p:column  style="width: 100px">
+                   
+                             <h:form>
+                                 <p:commandButton icon="fas fa-paper-plane" value="Depachar" ajax="false" actionListener="#{beanTransaccion.despachar(trans.id)}" styleClass="btnedit"></p:commandButton>
+                               
+                             </h:form>           
+                </p:column>
+               
+                      
                    
               
                     </p:dataTable>

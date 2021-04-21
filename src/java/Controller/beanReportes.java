@@ -5,33 +5,39 @@
  */
 package Controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import DAO.ReportesBD;
+import Model.Reporte;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
-import org.primefaces.model.chart.PieChartModel;
+import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import org.primefaces.model.chart.BarChartModel;
-import org.primefaces.model.charts.ChartData;
-import org.primefaces.model.charts.bar.BarChartDataSet;
+import org.primefaces.model.chart.PieChartModel;
 
 /**
  *
  * @author Jesus
  */
 @Named(value = "beanReportes")
-@RequestScoped
-public class beanReportes {
- private PieChartModel model,model1;
+@SessionScoped
+public class beanReportes implements Serializable {
+
+  
+    private PieChartModel model,model1;
+    private Reporte reporte;
  
 
-  @PostConstruct
-  public void init() {
+ 
+    @PostConstruct 
+        void init(){
+            try{
+  reporte=ReportesBD.reportes();
+            }catch(Exception e){
+                
+            }
       model = new PieChartModel();
-      model.set("Pedidos Pendientes", 62);//jobs in thousands
-      model.set("Pedidos en proceso", 46);
-      model.set("Pedidos Finalizados", 38);
+      model.set("Pedidos Pendientes", reporte.getPedidoPendiente());//jobs in thousands
+      model.set("Pedidos en proceso", reporte.getPedidoFacturado());
+      model.set("Pedidos Finalizados", reporte.getPedidoDespachado());
     
 
       //followings are some optional customizations:
@@ -52,8 +58,8 @@ public class beanReportes {
       
       
        model1 = new PieChartModel();
-      model1.set(" Ventas al Contado", 62000);//jobs in thousands
-      model1.set("Ventas a Credito", 46000);
+      model1.set(" Ventas al Contado", reporte.getVentaEfectivo());//jobs in thousands
+      model1.set("Ventas a Credito", reporte.getVentaCredito());
       
     
 
@@ -74,10 +80,22 @@ public class beanReportes {
       model1.setSeriesColors("aaf,afa,faa,ffa,aff,faf,ddd");
   }
 
+    public Reporte getReporte() {
+        return reporte;
+    }
+
+    public void setReporte(Reporte reporte) {
+        this.reporte = reporte;
+    }
+
   public PieChartModel getModel() {
       return model;
   }
    public PieChartModel getModel1() {
       return model1;
-  }
+  } /**
+     * Creates a new instance of beanReportes
+     */
+   
+    
 }

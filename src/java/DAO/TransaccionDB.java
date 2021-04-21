@@ -7,11 +7,14 @@ package DAO;
 
 import DAO.Conexion.AccesoDatos;
 import DAO.Conexion.SNMPExceptions;
+import Model.Cliente;
 import Model.Pedido;
 import Model.Producto;
 import Model.TransaccionProducto;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import javax.naming.NamingException;
 
@@ -105,5 +108,37 @@ return pedido;
         
     }
     
+        public static LinkedList<Pedido> seleccionarPendienteDespachar() throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
+        String select = "select * from transaccion where estado=3 ";
+        ResultSet rs = null;
+       LinkedList<Pedido> pedidos = new LinkedList<>();
+       Pedido pedido;
+       
+
+        AccesoDatos datos = new AccesoDatos();
+
+        rs = datos.ejecutaSQLRetornaRS(select);
+      while(rs.next()){
+          pedido=new Pedido();
+          pedido.setId(rs.getInt("id"));
+          pedido.setCliente((Cliente)UsuarioDLL.UsuarioXidentificacion(rs.getLong("idCliente")));
+      
+       
+        
+         pedido.setProductos(transaccionP(rs.getInt("id")));
+         pedidos.add(pedido);
+      }
+     
+      
+        
+        
     
+return pedidos;
+    }
+        public static void despachar(int idtransaccion) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException{
+            
+            String update="update Transaccion set estado=4,fechaEmitida=GETDATE() where id="+idtransaccion;
+            AccesoDatos datos=new AccesoDatos();
+            datos.ejecutaSQL(update);
+        }
 }
